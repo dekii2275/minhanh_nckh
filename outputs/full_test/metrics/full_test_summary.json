@@ -1,0 +1,29 @@
+{
+  "total_test_sequences": 1068,
+  "total_test_frames": 76298,
+  "frames_with_detection": 75286,
+  "frames_without_detection": 1012,
+  "frame_detection_rate": 0.9867362185116255,
+  "total_valid_gt_keypoints": 700772,
+  "total_missing_predictions": 6225,
+  "keypoint_coverage_rate": 0.9911169396037512,
+  "mean_torso_scale_px": 64.1480812271924,
+  "direct_mapping": {
+    "mean_error_px": 53.41612457740196,
+    "median_error_px": 35.296656241951176,
+    "std_error_px": 54.609263837108344,
+    "p90_error_px": 120.04714301470125,
+    "pck_20px": 0.22666002637091665,
+    "pck_torso_010": 0.008650459778644124,
+    "pck_torso_020": 0.026917456747701105
+  },
+  "diagnostic_swapped_mapping": {
+    "mean_error_px": 27.280436688685842,
+    "median_error_px": 8.270391093606197,
+    "std_error_px": 52.927188947105236,
+    "p90_error_px": 78.73598691338769,
+    "pck_20px": 0.7648279326228787,
+    "pck_torso_010": 0.20637240072377322,
+    "pck_torso_020": 0.3589526978817647
+  }
+}
