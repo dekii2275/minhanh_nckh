@@ -56,6 +56,7 @@ minhanh_nckh/
 |       |-- confusion_matrix_*.png
 |       |-- training_curves.png
 |-- reports/
+|   |-- COMPREHENSIVE_RESEARCH_REPORT.md
 |   |-- PENN_ACTION_YOLO_PILOT.md
 |   |-- PENN_ACTION_EVALUATION_AUDIT.md
 |   |-- PENN_ACTION_FULL_TEST_EVALUATION.md
@@ -101,6 +102,7 @@ python src/run_action_experiments.py
 ```
 
 ## 3. Các báo cáo nghiên cứu
+* 🌟 **[Báo cáo Tổng hợp Toàn diện Đề tài Nghiên cứu](reports/COMPREHENSIVE_RESEARCH_REPORT.md)** (Tổng hợp bài toán, I/O, dữ liệu, kiểm toán, calibration, nhận diện hành động & khuyến nghị)
 * [Báo cáo Thử nghiệm Pilot (142 frames)](reports/PENN_ACTION_YOLO_PILOT.md)
 * [Báo cáo Kiểm toán Sai số & Quy ước Nhãn Giải phẫu](reports/PENN_ACTION_EVALUATION_AUDIT.md)
 * [Báo cáo Đánh giá Toàn diện 100% Tập Test (76.298 frames)](reports/PENN_ACTION_FULL_TEST_EVALUATION.md)
