@@ -1,0 +1,60 @@
+{
+  "total_sequences": 3,
+  "total_frames": 142,
+  "frames_with_detection": 142,
+  "frames_without_detection": 0,
+  "valid_gt_keypoints": 1574,
+  "invalid_gt_keypoints": 130,
+  "predicted_keypoints": 1574,
+  "missing_predictions": 0,
+  "coverage_rate": 1.0,
+  "mean_error_px": 45.06433156811675,
+  "median_error_px": 39.712447502145125,
+  "std_error_px": 30.273948847030688,
+  "p90_error_px": 85.94225413657169,
+  "pck_20px": 0.21092757306226176,
+  "pck_torso_010": 0.009529860228716646,
+  "pck_torso_020": 0.029224904701397714,
+  "mean_torso_scale_px": 63.66867694305634,
+  "invalid_torso_scale_frames": 12,
+  "max_error_joint": "left_elbow",
+  "max_error_joint_val_px": 72.34852162551728,
+  "high_conf_large_error_count": 1143,
+  "confidence_analysis": [
+    {
+      "bin": "[0.0, 0.3)",
+      "count": 18,
+      "mean_error_px": 46.32321607094309,
+      "median_error_px": 45.28363949948498,
+      "pct_error_gt_20px": 100.0
+    },
+    {
+      "bin": "[0.3, 0.5)",
+      "count": 59,
+      "mean_error_px": 49.404207089701664,
+      "median_error_px": 47.42750965737217,
+      "pct_error_gt_20px": 81.35593220338984
+    },
+    {
+      "bin": "[0.5, 0.7)",
+      "count": 47,
+      "mean_error_px": 55.130073007357886,
+      "median_error_px": 69.00885587858026,
+      "pct_error_gt_20px": 70.2127659574468
+    },
+    {
+      "bin": "[0.7, 0.9)",
+      "count": 77,
+      "mean_error_px": 39.70119700233742,
+      "median_error_px": 32.384095562131385,
+      "pct_error_gt_20px": 71.42857142857143
+    },
+    {
+      "bin": "[0.9, 1.0)",
+      "count": 1373,
+      "mean_error_px": 44.817542738616595,
+      "median_error_px": 39.30662590235751,
+      "pct_error_gt_20px": 79.24253459577567
+    }
+  ]
+}

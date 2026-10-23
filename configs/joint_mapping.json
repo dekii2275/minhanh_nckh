@@ -1,0 +1,97 @@
+{
+  "description": "Mapping between Penn Action (13 joints) and COCO-17 (used by YOLO11n-Pose) for 12 corresponding anatomical joints",
+  "excluded_joints": [
+    {
+      "penn_index_1based": 1,
+      "penn_index_0based": 0,
+      "penn_joint_name": "head",
+      "reason": "COCO-17 has nose/eyes/ears rather than a single head center joint; anatomical definition differs."
+    }
+  ],
+  "joint_pairs": [
+    {
+      "penn_index_1based": 2,
+      "penn_index_0based": 1,
+      "penn_joint_name": "left_shoulder",
+      "coco_index": 5,
+      "coco_joint_name": "left_shoulder"
+    },
+    {
+      "penn_index_1based": 3,
+      "penn_index_0based": 2,
+      "penn_joint_name": "right_shoulder",
+      "coco_index": 6,
+      "coco_joint_name": "right_shoulder"
+    },
+    {
+      "penn_index_1based": 4,
+      "penn_index_0based": 3,
+      "penn_joint_name": "left_elbow",
+      "coco_index": 7,
+      "coco_joint_name": "left_elbow"
+    },
+    {
+      "penn_index_1based": 5,
+      "penn_index_0based": 4,
+      "penn_joint_name": "right_elbow",
+      "coco_index": 8,
+      "coco_joint_name": "right_elbow"
+    },
+    {
+      "penn_index_1based": 6,
+      "penn_index_0based": 5,
+      "penn_joint_name": "left_wrist",
+      "coco_index": 9,
+      "coco_joint_name": "left_wrist"
+    },
+    {
+      "penn_index_1based": 7,
+      "penn_index_0based": 6,
+      "penn_joint_name": "right_wrist",
+      "coco_index": 10,
+      "coco_joint_name": "right_wrist"
+    },
+    {
+      "penn_index_1based": 8,
+      "penn_index_0based": 7,
+      "penn_joint_name": "left_hip",
+      "coco_index": 11,
+      "coco_joint_name": "left_hip"
+    },
+    {
+      "penn_index_1based": 9,
+      "penn_index_0based": 8,
+      "penn_joint_name": "right_hip",
+      "coco_index": 12,
+      "coco_joint_name": "right_hip"
+    },
+    {
+      "penn_index_1based": 10,
+      "penn_index_0based": 9,
+      "penn_joint_name": "left_knee",
+      "coco_index": 13,
+      "coco_joint_name": "left_knee"
+    },
+    {
+      "penn_index_1based": 11,
+      "penn_index_0based": 10,
+      "penn_joint_name": "right_knee",
+      "coco_index": 14,
+      "coco_joint_name": "right_knee"
+    },
+    {
+      "penn_index_1based": 12,
+      "penn_index_0based": 11,
+      "penn_joint_name": "left_ankle",
+      "coco_index": 15,
+      "coco_joint_name": "left_ankle"
+    },
+    {
+      "penn_index_1based": 13,
+      "penn_index_0based": 12,
+      "penn_joint_name": "right_ankle",
+      "coco_index": 16,
+      "coco_joint_name": "right_ankle"
+    }
+  ]
+}

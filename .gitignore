@@ -218,3 +218,16 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Project-specific: Raw datasets, large binaries & checkpoints
+data/
+*.tar.gz
+*.mat
+*.pkl
+*.pt
+*.pth
+models/
+
+# Exclude large evaluation prediction tables (>50MB)
+outputs/full_test/predictions/
+outputs/**/predictions/yolo_predictions_test.csv

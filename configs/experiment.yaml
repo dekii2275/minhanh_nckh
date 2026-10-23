@@ -1,0 +1,40 @@
+# Configuration for Penn Action - YOLO11n-Pose Evaluation Pilot
+experiment:
+  name: "penn_action_yolo11n_pose_pilot"
+  date: "2026-10-22"
+  device: "cuda:0"  # Will fallback to cpu if cuda unavailable
+
+model:
+  name: "yolo11n-pose.pt"
+  imgsz: 640
+  conf: 0.25
+  batch_size: 16
+  person_selection_rule: "highest_det_conf"  # Rule when multiple persons detected
+
+dataset:
+  name: "PennAction"
+  official_url: "https://www.cis.upenn.edu/~kostas/Penn_Action.tar.gz"
+  raw_archive: "data/raw/Penn_Action.tar.gz"
+  extracted_dir: "data/raw/Penn_Action"
+  frames_dir: "data/raw/Penn_Action/frames"
+  labels_dir: "data/raw/Penn_Action/labels"
+  target_sequences: 3
+  frames_per_sequence: 50
+  selected_frames_file: "data/processed/selected_frames.csv"
+
+metrics:
+  pck_pixel_threshold: 20.0
+  pck_torso_ratios: [0.10, 0.20]
+  confidence_bins:
+    - [0.0, 0.3]
+    - [0.3, 0.5]
+    - [0.5, 0.7]
+    - [0.7, 0.9]
+    - [0.9, 1.0]
+
+outputs:
+  predictions: "outputs/predictions"
+  metrics: "outputs/metrics"
+  figures: "outputs/figures"
+  demo: "outputs/demo"
+  report: "reports/PENN_ACTION_YOLO_PILOT.md"
