@@ -220,13 +220,13 @@ __marimo__/
 .streamlit/secrets.toml
 
 # Project-specific: Raw datasets, large binaries & checkpoints
-data/
+/data/
 *.tar.gz
 *.mat
 *.pkl
 *.pt
 *.pth
-models/
+/models/
 
 # Exclude large evaluation prediction tables (>50MB)
 outputs/full_test/predictions/

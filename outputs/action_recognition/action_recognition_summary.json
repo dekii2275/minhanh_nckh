@@ -1,0 +1,27 @@
+{
+  "epochs": 50,
+  "best_epoch": 23,
+  "train_time_seconds": 108.44611477851868,
+  "ground_truth_test": {
+    "top1_acc": 92.97752808988764,
+    "top3_acc": 97.84644194756554,
+    "macro_f1": 92.71731556650448,
+    "weighted_f1": 92.99039157799811
+  },
+  "raw_yolo_test": {
+    "top1_acc": 45.50561797752809,
+    "top3_acc": 66.85393258426966,
+    "macro_f1": 39.81726092751402,
+    "weighted_f1": 43.04081877934657
+  },
+  "calibrated_yolo_test": {
+    "top1_acc": 67.22846441947566,
+    "top3_acc": 81.27340823970037,
+    "macro_f1": 66.30786517732558,
+    "weighted_f1": 65.74888612359203
+  },
+  "calibration_gain": {
+    "top1_acc_gain": 21.722846441947567,
+    "macro_f1_gain": 26.49060424981156
+  }
+}

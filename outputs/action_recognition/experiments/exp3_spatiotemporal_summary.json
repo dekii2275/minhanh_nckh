@@ -1,0 +1,20 @@
+{
+  "experiment": "exp3_spatiotemporal",
+  "epochs": 50,
+  "train_time_seconds": 209.7345838546753,
+  "ground_truth_test": {
+    "top1_acc": 94.3820224719101,
+    "top3_acc": 98.50187265917603,
+    "macro_f1": 94.01591515475026
+  },
+  "raw_yolo_test": {
+    "top1_acc": 47.09737827715356,
+    "top3_acc": 70.31835205992509,
+    "macro_f1": 39.49147687703922
+  },
+  "calibrated_yolo_test": {
+    "top1_acc": 67.32209737827716,
+    "top3_acc": 81.83520599250936,
+    "macro_f1": 64.35021410571848
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "experiment": "exp2_augmentation",
+  "epochs": 50,
+  "train_time_seconds": 91.09140515327454,
+  "ground_truth_test": {
+    "top1_acc": 94.5692883895131,
+    "top3_acc": 99.25093632958801,
+    "macro_f1": 94.1990338850562
+  },
+  "raw_yolo_test": {
+    "top1_acc": 49.157303370786515,
+    "top3_acc": 73.78277153558052,
+    "macro_f1": 45.155332449596955
+  },
+  "calibrated_yolo_test": {
+    "top1_acc": 68.53932584269663,
+    "top3_acc": 83.14606741573034,
+    "macro_f1": 67.56027038950221
+  }
+}
