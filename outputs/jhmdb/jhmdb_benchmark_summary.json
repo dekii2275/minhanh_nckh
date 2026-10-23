@@ -1,0 +1,41 @@
+{
+    "dataset": "J-HMDB",
+    "num_classes": 21,
+    "split": 1,
+    "train_videos": 660,
+    "test_videos": 268,
+    "pose_and_calibration_metrics": {
+        "raw_mean_error_px": 36.87080861109639,
+        "calib_mean_error_px": 34.1532800568625,
+        "error_reduction_pct": 7.3704067163204146,
+        "raw_pck20": 67.4053984951421,
+        "calib_pck20": 68.07107896851487,
+        "pck20_gain_abs": 0.6656804733727811,
+        "raw_torso_pck10": 31.537183139747242,
+        "calib_torso_pck10": 30.53272700708598,
+        "raw_torso_pck20": 58.72141865731609,
+        "calib_torso_pck20": 58.49495945649792,
+        "raw_jitter_px_per_frame": 11.440808296203613,
+        "calib_jitter_px_per_frame": 5.215054035186768,
+        "jitter_reduction_pct": 54.417083740234375,
+        "raw_bone_std_px": 6.492860317230225,
+        "calib_bone_std_px": 5.107541084289551,
+        "bone_std_reduction_pct": 21.336040496826172
+    },
+    "action_recognition_gt_trained": {
+        "gt_top1_acc": 62.31343283582089,
+        "gt_top5_acc": 90.67164179104478,
+        "raw_top1_acc": 40.298507462686565,
+        "raw_top5_acc": 79.1044776119403,
+        "calib_top1_acc": 37.6865671641791,
+        "calib_top5_acc": 76.86567164179104
+    },
+    "action_recognition_domain_matched": {
+        "gt_top1_acc": 37.3134328358209,
+        "gt_top5_acc": 72.76119402985076,
+        "raw_top1_acc": 46.26865671641791,
+        "raw_top5_acc": 79.47761194029852,
+        "calib_top1_acc": 44.02985074626866,
+        "calib_top5_acc": 79.47761194029852
+    }
+}

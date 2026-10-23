@@ -388,12 +388,47 @@ class FullCalibrationPipeline:
         self.stage1_interp = KinematicInterpolationCalibrator(conf_threshold, max_gap)
         self.stage2_bone = AnthropometricBoneConstraintCalibrator(min_bone_ratio, max_bone_ratio)
         self.stage3_smooth = OneEuroSmoothingCalibrator(freq, min_cutoff, beta, d_cutoff)
-        self.stage4_lr = LeftRightContinuityCalibrator(mode=lr_mode)
+        self.stage4_lr = LeftRightContinuityCalibrator(mode=lr_mode) if lr_mode else None
 
     def calibrate_sequence(self, df_seq):
         df_cur = df_seq.copy()
         df_cur = self.stage1_interp.calibrate_sequence(df_cur)
         df_cur = self.stage2_bone.calibrate_sequence(df_cur)
         df_cur = self.stage3_smooth.calibrate_sequence(df_cur)
-        df_cur = self.stage4_lr.calibrate_sequence(df_cur)
+        if self.stage4_lr is not None:
+            df_cur = self.stage4_lr.calibrate_sequence(df_cur)
         return df_cur
+
+    def calibrate_array(self, raw_kps, raw_confs):
+        """
+        Calibrate directly from numpy arrays:
+          raw_kps: (T, 12, 2)
+          raw_confs: (T, 12)
+        Returns:
+          calib_kps: (T, 12, 2)
+        """
+        T = raw_kps.shape[0]
+        if T <= 2:
+            return raw_kps.copy()
+
+        kpt_list = [
+            "left_shoulder", "right_shoulder", "left_elbow", "right_elbow",
+            "left_wrist", "right_wrist", "left_hip", "right_hip",
+            "left_knee", "right_knee", "left_ankle", "right_ankle"
+        ] if raw_kps.shape[1] == 12 else COCO_KEYPOINTS
+
+        import pandas as pd
+        data = {"frame_index": np.arange(T)}
+        for i, kpt in enumerate(kpt_list):
+            data[f"pred_{kpt}_x"] = raw_kps[:, i, 0]
+            data[f"pred_{kpt}_y"] = raw_kps[:, i, 1]
+            data[f"pred_{kpt}_conf"] = raw_confs[:, i]
+
+        df = pd.DataFrame(data)
+        df_calib = self.calibrate_sequence(df)
+
+        calib_kps = np.zeros_like(raw_kps)
+        for i, kpt in enumerate(kpt_list):
+            calib_kps[:, i, 0] = df_calib[f"pred_{kpt}_x"].values
+            calib_kps[:, i, 1] = df_calib[f"pred_{kpt}_y"].values
+        return calib_kps

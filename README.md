@@ -38,6 +38,8 @@ minhanh_nckh/
 |   |   |-- spatiotemporal_attention.py
 |   |-- train_action_recognition.py
 |   |-- run_action_experiments.py
+|   |-- download_jhmdb.py
+|   |-- run_jhmdb_pipeline.py
 |-- outputs/
 |   |-- predictions/
 |   |-- metrics/
@@ -52,11 +54,14 @@ minhanh_nckh/
 |   |   |-- figures/
 |   |   |-- ablation_summary.csv
 |   |-- action_recognition/
-|       |-- experiments/
-|       |-- confusion_matrix_*.png
-|       |-- training_curves.png
+|   |   |-- experiments/
+|   |   |-- confusion_matrix_*.png
+|   |   |-- training_curves.png
+|   |-- jhmdb/
+|       |-- jhmdb_benchmark_summary.json
 |-- reports/
 |   |-- COMPREHENSIVE_RESEARCH_REPORT.md
+|   |-- JHMDB_EVALUATION_REPORT.md
 |   |-- PENN_ACTION_YOLO_PILOT.md
 |   |-- PENN_ACTION_EVALUATION_AUDIT.md
 |   |-- PENN_ACTION_FULL_TEST_EVALUATION.md
@@ -101,8 +106,18 @@ python src/train_action_recognition.py
 python src/run_action_experiments.py
 ```
 
+### Bước 4: Đánh giá Đa Tập Dữ Liệu trên J-HMDB (Cross-Dataset Generalization)
+```bash
+# Tải và giải nén J-HMDB (928 videos, 21 classes)
+python src/download_jhmdb.py
+
+# Chạy toàn bộ pipeline pose evaluation, calibration và nhận diện hành động trên J-HMDB
+python src/run_jhmdb_pipeline.py
+```
+
 ## 3. Các báo cáo nghiên cứu
 * 🌟 **[Báo cáo Tổng hợp Toàn diện Đề tài Nghiên cứu](reports/COMPREHENSIVE_RESEARCH_REPORT.md)** (Tổng hợp bài toán, I/O, dữ liệu, kiểm toán, calibration, nhận diện hành động & khuyến nghị)
+* 🚀 **[Báo cáo Thực nghiệm Đối chuẩn Tập Dữ liệu J-HMDB](reports/JHMDB_EVALUATION_REPORT.md)** (Đánh giá tính tổng quát hóa đa tập dữ liệu, 21 hành động, đối sánh Penn Action vs J-HMDB)
 * [Báo cáo Thử nghiệm Pilot (142 frames)](reports/PENN_ACTION_YOLO_PILOT.md)
 * [Báo cáo Kiểm toán Sai số & Quy ước Nhãn Giải phẫu](reports/PENN_ACTION_EVALUATION_AUDIT.md)
 * [Báo cáo Đánh giá Toàn diện 100% Tập Test (76.298 frames)](reports/PENN_ACTION_FULL_TEST_EVALUATION.md)
