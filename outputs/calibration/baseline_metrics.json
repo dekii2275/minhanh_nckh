@@ -1,0 +1,13 @@
+{
+  "module": "baseline",
+  "calib_time_seconds": 0.0,
+  "temporal_jitter_px": 19.718905707304277,
+  "bone_length_std_px": 7.321109721305188,
+  "mean_error_px": 53.41612457740196,
+  "median_error_px": 35.296656241951176,
+  "std_error_px": 54.609263837108344,
+  "p90_error_px": 120.04714301470125,
+  "pck_20px": 0.22869150683827014,
+  "pck_torso_010": 0.008727991050281695,
+  "pck_torso_020": 0.027158709201825074
+}

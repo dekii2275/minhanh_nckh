@@ -1,0 +1,13 @@
+{
+  "module": "module1_one_euro",
+  "calib_time_seconds": 8.600550889968872,
+  "temporal_jitter_px": 11.740408259379793,
+  "bone_length_std_px": 7.0205237355718335,
+  "mean_error_px": 53.02369484542594,
+  "median_error_px": 35.220697333972716,
+  "std_error_px": 53.71844650557329,
+  "p90_error_px": 118.11381280493542,
+  "pck_20px": 0.22754831566474262,
+  "pck_torso_010": 0.006614383187890812,
+  "pck_torso_020": 0.024470626177926044
+}

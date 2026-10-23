@@ -1,0 +1,13 @@
+{
+  "module": "module2_interpolation",
+  "calib_time_seconds": 7.144722938537598,
+  "temporal_jitter_px": 16.765287353580803,
+  "bone_length_std_px": 8.5066917130376,
+  "mean_error_px": 52.710476443075535,
+  "median_error_px": 35.167741496984256,
+  "std_error_px": 53.4679471966294,
+  "p90_error_px": 117.16664705658616,
+  "pck_20px": 0.229493468404586,
+  "pck_torso_010": 0.008745268498748104,
+  "pck_torso_020": 0.02724797601890153
+}

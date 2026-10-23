@@ -1,0 +1,13 @@
+{
+  "module": "module3_bone_constraint",
+  "calib_time_seconds": 2.213941812515259,
+  "temporal_jitter_px": 19.28372455189938,
+  "bone_length_std_px": 5.7460922660634495,
+  "mean_error_px": 53.51220200042396,
+  "median_error_px": 35.464612488953776,
+  "std_error_px": 54.49197806297315,
+  "p90_error_px": 119.82418863203395,
+  "pck_20px": 0.22488902838828762,
+  "pck_torso_010": 0.008465949748541136,
+  "pck_torso_020": 0.02650792530959028
+}
