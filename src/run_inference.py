@@ -5,8 +5,9 @@ Purpose: Run official YOLO11n-Pose on selected Penn Action frames.
          (highest person detection confidence, strictly NO GT used).
 """
 
-import os
 import json
+import os
+
 import numpy as np
 import pandas as pd
 from tqdm import tqdm
@@ -14,11 +15,25 @@ from ultralytics import YOLO
 
 # COCO 17 Keypoints names
 COCO_KEYPOINTS = [
-    "nose", "left_eye", "right_eye", "left_ear", "right_ear",
-    "left_shoulder", "right_shoulder", "left_elbow", "right_elbow",
-    "left_wrist", "right_wrist", "left_hip", "right_hip",
-    "left_knee", "right_knee", "left_ankle", "right_ankle"
+    "nose",
+    "left_eye",
+    "right_eye",
+    "left_ear",
+    "right_ear",
+    "left_shoulder",
+    "right_shoulder",
+    "left_elbow",
+    "right_elbow",
+    "left_wrist",
+    "right_wrist",
+    "left_hip",
+    "right_hip",
+    "left_knee",
+    "right_knee",
+    "left_ankle",
+    "right_ankle",
 ]
+
 
 def run_yolo_pose_inference(
     frames_csv="data/processed/selected_frames.csv",
@@ -27,7 +42,7 @@ def run_yolo_pose_inference(
     output_raw_json="outputs/predictions/yolo_predictions_raw.json",
     imgsz=640,
     conf=0.25,
-    device="cuda:0"
+    device="cuda:0",
 ):
     """
     Run YOLO11n-Pose inference frame-by-frame.
@@ -45,15 +60,15 @@ def run_yolo_pose_inference(
 
     print(f"Loading YOLO model from {model_path} on {device}...")
     model = YOLO(model_path)
-    
+
     raw_predictions = []
     selected_records = []
 
     for _, row in tqdm(df_frames.iterrows(), total=len(df_frames), desc="YOLO Pose Inference"):
-        img_path = row['image_path']
-        seq_id = str(row['sequence_id'])
-        action = row['action']
-        frame_idx = int(row['frame_index'])
+        img_path = row["image_path"]
+        seq_id = str(row["sequence_id"])
+        action = row["action"]
+        frame_idx = int(row["frame_index"])
 
         if not os.path.exists(img_path):
             print(f"Warning: Image file not found {img_path}")
@@ -61,11 +76,7 @@ def run_yolo_pose_inference(
 
         # Run model inference
         results = model.predict(
-            source=img_path,
-            imgsz=imgsz,
-            conf=conf,
-            device=device,
-            verbose=False
+            source=img_path, imgsz=imgsz, conf=conf, device=device, verbose=False
         )[0]
 
         num_persons = 0
@@ -78,46 +89,54 @@ def run_yolo_pose_inference(
             for i in range(num_persons):
                 box_xyxy = boxes.xyxy[i].cpu().numpy().tolist()
                 box_conf = float(boxes.conf[i].cpu().item())
-                kpts_xy = keypoints.xy[i].cpu().numpy().tolist() # (17, 2)
-                kpts_conf = keypoints.conf[i].cpu().numpy().tolist() if keypoints.conf is not None else [1.0]*17
-                frame_raw_dets.append({
-                    'det_idx': i,
-                    'box_xyxy': box_xyxy,
-                    'box_conf': box_conf,
-                    'keypoints_xy': kpts_xy,
-                    'keypoints_conf': kpts_conf
-                })
+                kpts_xy = keypoints.xy[i].cpu().numpy().tolist()  # (17, 2)
+                kpts_conf = (
+                    keypoints.conf[i].cpu().numpy().tolist()
+                    if keypoints.conf is not None
+                    else [1.0] * 17
+                )
+                frame_raw_dets.append(
+                    {
+                        "det_idx": i,
+                        "box_xyxy": box_xyxy,
+                        "box_conf": box_conf,
+                        "keypoints_xy": kpts_xy,
+                        "keypoints_conf": kpts_conf,
+                    }
+                )
 
-        raw_predictions.append({
-            'sequence_id': seq_id,
-            'action': action,
-            'frame_index': frame_idx,
-            'image_path': img_path,
-            'num_persons_detected': num_persons,
-            'detections': frame_raw_dets
-        })
+        raw_predictions.append(
+            {
+                "sequence_id": seq_id,
+                "action": action,
+                "frame_index": frame_idx,
+                "image_path": img_path,
+                "num_persons_detected": num_persons,
+                "detections": frame_raw_dets,
+            }
+        )
 
         # Selection rule: Highest person box confidence
         if num_persons > 0:
-            best_det = max(frame_raw_dets, key=lambda d: d['box_conf'])
-            b_xyxy = best_det['box_xyxy']
-            b_conf = best_det['box_conf']
-            k_xy = np.array(best_det['keypoints_xy']) # (17, 2)
-            k_conf = np.array(best_det['keypoints_conf']) # (17,)
+            best_det = max(frame_raw_dets, key=lambda d: d["box_conf"])
+            b_xyxy = best_det["box_xyxy"]
+            b_conf = best_det["box_conf"]
+            k_xy = np.array(best_det["keypoints_xy"])  # (17, 2)
+            k_conf = np.array(best_det["keypoints_conf"])  # (17,)
 
             rec = {
-                'sequence_id': seq_id,
-                'action': action,
-                'frame_index': frame_idx,
-                'image_path': img_path,
-                'annotation_path': row['annotation_path'],
-                'has_detection': True,
-                'num_persons_detected': num_persons,
-                'det_confidence': b_conf,
-                'bbox_x1': b_xyxy[0],
-                'bbox_y1': b_xyxy[1],
-                'bbox_x2': b_xyxy[2],
-                'bbox_y2': b_xyxy[3]
+                "sequence_id": seq_id,
+                "action": action,
+                "frame_index": frame_idx,
+                "image_path": img_path,
+                "annotation_path": row["annotation_path"],
+                "has_detection": True,
+                "num_persons_detected": num_persons,
+                "det_confidence": b_conf,
+                "bbox_x1": b_xyxy[0],
+                "bbox_y1": b_xyxy[1],
+                "bbox_x2": b_xyxy[2],
+                "bbox_y2": b_xyxy[3],
             }
             for c_idx, c_name in enumerate(COCO_KEYPOINTS):
                 rec[f"pred_{c_name}_x"] = float(k_xy[c_idx, 0])
@@ -125,18 +144,18 @@ def run_yolo_pose_inference(
                 rec[f"pred_{c_name}_conf"] = float(k_conf[c_idx])
         else:
             rec = {
-                'sequence_id': seq_id,
-                'action': action,
-                'frame_index': frame_idx,
-                'image_path': img_path,
-                'annotation_path': row['annotation_path'],
-                'has_detection': False,
-                'num_persons_detected': 0,
-                'det_confidence': np.nan,
-                'bbox_x1': np.nan,
-                'bbox_y1': np.nan,
-                'bbox_x2': np.nan,
-                'bbox_y2': np.nan
+                "sequence_id": seq_id,
+                "action": action,
+                "frame_index": frame_idx,
+                "image_path": img_path,
+                "annotation_path": row["annotation_path"],
+                "has_detection": False,
+                "num_persons_detected": 0,
+                "det_confidence": np.nan,
+                "bbox_x1": np.nan,
+                "bbox_y1": np.nan,
+                "bbox_x2": np.nan,
+                "bbox_y2": np.nan,
             }
             for c_idx, c_name in enumerate(COCO_KEYPOINTS):
                 rec[f"pred_{c_name}_x"] = np.nan
@@ -156,9 +175,12 @@ def run_yolo_pose_inference(
 
     # Print summary
     total_f = len(df_selected)
-    detected_f = df_selected['has_detection'].sum()
-    print(f"Inference complete: {detected_f}/{total_f} frames have person detections ({detected_f/total_f*100:.1f}%)")
+    detected_f = df_selected["has_detection"].sum()
+    print(
+        f"Inference complete: {detected_f}/{total_f} frames have person detections ({detected_f / total_f * 100:.1f}%)"
+    )
     return df_selected
+
 
 if __name__ == "__main__":
     run_yolo_pose_inference()

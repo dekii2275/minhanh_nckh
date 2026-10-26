@@ -5,6 +5,7 @@ Purpose: BiLSTM with Multi-Head Self-Attention for Skeleton-based Action Recogni
 """
 
 from typing import Optional, Tuple, Union
+
 import torch
 from torch import Tensor, nn
 from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence
@@ -15,12 +16,13 @@ class ActionBiLSTMAttentionClassifier(nn.Module):
     BiLSTM followed by Masked Multi-Head Self-Attention and Temporal Pooling
     for human motion action classification from 2D skeleton sequences.
     """
+
     def __init__(
         self,
-        input_size: int = 24,       # 12 joints * 2 (x, y) coordinates
+        input_size: int = 24,  # 12 joints * 2 (x, y) coordinates
         hidden_size: int = 128,
         num_layers: int = 2,
-        num_classes: int = 15,      # 15 Penn Action classes
+        num_classes: int = 15,  # 15 Penn Action classes
         attention_heads: int = 4,
         dropout: float = 0.3,
         bidirectional: bool = True,
@@ -97,7 +99,9 @@ class ActionBiLSTMAttentionClassifier(nn.Module):
         lengths = lengths.to(device=inputs.device, dtype=torch.long).clamp(min=1, max=time)
 
         if padding_mask is None:
-            padding_mask = torch.arange(time, device=inputs.device).unsqueeze(0) >= lengths.unsqueeze(1)
+            padding_mask = torch.arange(time, device=inputs.device).unsqueeze(
+                0
+            ) >= lengths.unsqueeze(1)
         else:
             padding_mask = padding_mask.to(device=inputs.device, dtype=torch.bool)
 

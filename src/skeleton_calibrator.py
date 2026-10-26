@@ -10,26 +10,46 @@ Purpose: Modular 2D Skeleton Post-processing & Calibration Pipeline for Pose Est
 """
 
 import math
+
 import numpy as np
 import pandas as pd
 from scipy.interpolate import PchipInterpolator
 
 # 17 COCO Keypoints
 COCO_KEYPOINTS = [
-    "nose", "left_eye", "right_eye", "left_ear", "right_ear",
-    "left_shoulder", "right_shoulder", "left_elbow", "right_elbow",
-    "left_wrist", "right_wrist", "left_hip", "right_hip",
-    "left_knee", "right_knee", "left_ankle", "right_ankle"
+    "nose",
+    "left_eye",
+    "right_eye",
+    "left_ear",
+    "right_ear",
+    "left_shoulder",
+    "right_shoulder",
+    "left_elbow",
+    "right_elbow",
+    "left_wrist",
+    "right_wrist",
+    "left_hip",
+    "right_hip",
+    "left_knee",
+    "right_knee",
+    "left_ankle",
+    "right_ankle",
 ]
 
 # 12 Paired Keypoints for Left-Right symmetry
 SWAP_COCO = {
-    'left_shoulder': 'right_shoulder', 'right_shoulder': 'left_shoulder',
-    'left_elbow': 'right_elbow', 'right_elbow': 'left_elbow',
-    'left_wrist': 'right_wrist', 'right_wrist': 'left_wrist',
-    'left_hip': 'right_hip', 'right_hip': 'left_hip',
-    'left_knee': 'right_knee', 'right_knee': 'left_knee',
-    'left_ankle': 'right_ankle', 'right_ankle': 'left_ankle'
+    "left_shoulder": "right_shoulder",
+    "right_shoulder": "left_shoulder",
+    "left_elbow": "right_elbow",
+    "right_elbow": "left_elbow",
+    "left_wrist": "right_wrist",
+    "right_wrist": "left_wrist",
+    "left_hip": "right_hip",
+    "right_hip": "left_hip",
+    "left_knee": "right_knee",
+    "right_knee": "left_knee",
+    "left_ankle": "right_ankle",
+    "right_ankle": "left_ankle",
 }
 
 # Anatomical Bone Segments (Parent -> Child)
@@ -41,12 +61,13 @@ BONE_SEGMENTS = [
     ("left_hip", "left_knee"),
     ("right_hip", "right_knee"),
     ("left_knee", "left_ankle"),
-    ("right_knee", "right_ankle")
+    ("right_knee", "right_ankle"),
 ]
 
 
 class LowPassFilter:
     """Standard 1st-order Low-Pass Filter."""
+
     def __init__(self, alpha=0.5):
         self.alpha = alpha
         self.s = None
@@ -70,6 +91,7 @@ class OneEuroFilter1D:
     Adaptive low-pass filter that eliminates jitter at low speeds
     and minimizes lag at high speeds.
     """
+
     def __init__(self, freq=30.0, min_cutoff=1.0, beta=0.05, d_cutoff=1.0):
         self.freq = float(freq)
         self.min_cutoff = float(min_cutoff)
@@ -131,6 +153,7 @@ class OneEuroSmoothingCalibrator:
     Applies independent One-Euro filters on all 2D keypoint coordinates
     along the temporal dimension for each sequence.
     """
+
     def __init__(self, freq=30.0, min_cutoff=1.0, beta=0.05, d_cutoff=1.0):
         self.freq = freq
         self.min_cutoff = min_cutoff
@@ -150,7 +173,6 @@ class OneEuroSmoothingCalibrator:
         for kpt in COCO_KEYPOINTS:
             col_x = f"pred_{kpt}_x"
             col_y = f"pred_{kpt}_y"
-            col_conf = f"pred_{kpt}_conf"
 
             if col_x not in df_out.columns:
                 continue
@@ -182,6 +204,7 @@ class KinematicInterpolationCalibrator:
     and reconstructs trajectories smoothly using Piecewise Cubic Hermite Interpolating
     Polynomial (PCHIP) along time to prevent overshoot.
     """
+
     def __init__(self, conf_threshold=0.35, max_gap=15):
         self.conf_threshold = conf_threshold
         self.max_gap = max_gap
@@ -234,7 +257,7 @@ class KinematicInterpolationCalibrator:
                         if gap_size <= self.max_gap:
                             xs[idx] = float(pchip_x(idx))
                             ys[idx] = float(pchip_y(idx))
-                            confs[idx] = self.conf_threshold # restore baseline confidence
+                            confs[idx] = self.conf_threshold  # restore baseline confidence
             except Exception:
                 pass
 
@@ -254,6 +277,7 @@ class AnthropometricBoneConstraintCalibrator:
     around the sequence median reference length L_ref.
     Projects anomalous child joints back along the anatomical bone vector.
     """
+
     def __init__(self, min_ratio=0.40, max_ratio=1.20):
         self.min_ratio = min_ratio
         self.max_ratio = max_ratio
@@ -324,6 +348,7 @@ class LeftRightContinuityCalibrator:
     under viewer perspective. The module harmonizes the keypoint tracks to
     Viewer-Centric coordinate convention consistently across the sequence.
     """
+
     def __init__(self, mode="auto_viewer_centric"):
         self.mode = mode
 
@@ -339,7 +364,7 @@ class LeftRightContinuityCalibrator:
             ("left_wrist", "right_wrist"),
             ("left_hip", "right_hip"),
             ("left_knee", "right_knee"),
-            ("left_ankle", "right_ankle")
+            ("left_ankle", "right_ankle"),
         ]
 
         lx_col, rx_col = "pred_left_shoulder_x", "pred_right_shoulder_x"
@@ -380,11 +405,19 @@ class FullCalibrationPipeline:
     3. One-Euro Adaptive Temporal Smoothing
     4. Unsupervised Left-Right Continuity Harmonization
     """
-    def __init__(self,
-                 conf_threshold=0.35, max_gap=15,
-                 min_bone_ratio=0.40, max_bone_ratio=1.20,
-                 freq=30.0, min_cutoff=1.0, beta=0.05, d_cutoff=1.0,
-                 lr_mode="auto_viewer_centric"):
+
+    def __init__(
+        self,
+        conf_threshold=0.35,
+        max_gap=15,
+        min_bone_ratio=0.40,
+        max_bone_ratio=1.20,
+        freq=30.0,
+        min_cutoff=1.0,
+        beta=0.05,
+        d_cutoff=1.0,
+        lr_mode="auto_viewer_centric",
+    ):
         self.stage1_interp = KinematicInterpolationCalibrator(conf_threshold, max_gap)
         self.stage2_bone = AnthropometricBoneConstraintCalibrator(min_bone_ratio, max_bone_ratio)
         self.stage3_smooth = OneEuroSmoothingCalibrator(freq, min_cutoff, beta, d_cutoff)
@@ -411,13 +444,25 @@ class FullCalibrationPipeline:
         if T <= 2:
             return raw_kps.copy()
 
-        kpt_list = [
-            "left_shoulder", "right_shoulder", "left_elbow", "right_elbow",
-            "left_wrist", "right_wrist", "left_hip", "right_hip",
-            "left_knee", "right_knee", "left_ankle", "right_ankle"
-        ] if raw_kps.shape[1] == 12 else COCO_KEYPOINTS
+        kpt_list = (
+            [
+                "left_shoulder",
+                "right_shoulder",
+                "left_elbow",
+                "right_elbow",
+                "left_wrist",
+                "right_wrist",
+                "left_hip",
+                "right_hip",
+                "left_knee",
+                "right_knee",
+                "left_ankle",
+                "right_ankle",
+            ]
+            if raw_kps.shape[1] == 12
+            else COCO_KEYPOINTS
+        )
 
-        import pandas as pd
         data = {"frame_index": np.arange(T)}
         for i, kpt in enumerate(kpt_list):
             data[f"pred_{kpt}_x"] = raw_kps[:, i, 0]

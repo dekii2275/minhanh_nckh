@@ -5,26 +5,37 @@ Purpose: Dataset and DataLoader for Skeleton-based Action Recognition on Penn Ac
          Provides Train and Test splits under Ground Truth, Raw YOLO, and Calibrated YOLO modalities.
 """
 
-import os
 import glob
-import json
+import os
 import pickle
+
 import numpy as np
+import pandas as pd
 import scipy.io as sio
 import torch
-from torch.utils.data import Dataset, DataLoader
 from torch.nn.utils.rnn import pad_sequence
+from torch.utils.data import Dataset
 from tqdm import tqdm
-import pandas as pd
 
 from skeleton_calibrator import FullCalibrationPipeline
 
 # 15 Penn Action Classes
 ACTION_CLASSES = [
-    "baseball_pitch", "baseball_swing", "bench_press", "bowl",
-    "clean_and_jerk", "golf_swing", "jump_rope", "jumping_jacks",
-    "pullup", "pushup", "situp", "squat",
-    "strum_guitar", "tennis_forehand", "tennis_serve"
+    "baseball_pitch",
+    "baseball_swing",
+    "bench_press",
+    "bowl",
+    "clean_and_jerk",
+    "golf_swing",
+    "jump_rope",
+    "jumping_jacks",
+    "pullup",
+    "pushup",
+    "situp",
+    "squat",
+    "strum_guitar",
+    "tennis_forehand",
+    "tennis_serve",
 ]
 ACTION_TO_ID = {act: i for i, act in enumerate(ACTION_CLASSES)}
 ID_TO_ACTION = {i: act for i, act in enumerate(ACTION_CLASSES)}
@@ -42,13 +53,22 @@ CANONICAL_JOINTS = [
     ("left_knee", 9),
     ("right_knee", 10),
     ("left_ankle", 11),
-    ("right_ankle", 12)
+    ("right_ankle", 12),
 ]
 
 COCO_TO_CANONICAL = [
-    "left_shoulder", "right_shoulder", "left_elbow", "right_elbow",
-    "left_wrist", "right_wrist", "left_hip", "right_hip",
-    "left_knee", "right_knee", "left_ankle", "right_ankle"
+    "left_shoulder",
+    "right_shoulder",
+    "left_elbow",
+    "right_elbow",
+    "left_wrist",
+    "right_wrist",
+    "left_hip",
+    "right_hip",
+    "left_knee",
+    "right_knee",
+    "left_ankle",
+    "right_ankle",
 ]
 
 
@@ -67,7 +87,7 @@ def normalize_skeleton_sequence(coords):
     # 0: left_shoulder, 1: right_shoulder
     # 6: left_hip, 7: right_hip
     for t in range(T):
-        frame = coords[t] # [12, 2]
+        frame = coords[t]  # [12, 2]
 
         # 1. MidHip Centering
         if not np.isnan(frame[6]).any() and not np.isnan(frame[7]).any():
@@ -102,6 +122,7 @@ def normalize_skeleton_sequence(coords):
 
 class PennActionSkeletonDataset(Dataset):
     """PyTorch Dataset for Penn Action skeleton sequences."""
+
     def __init__(self, samples):
         self.samples = samples
 
@@ -110,9 +131,9 @@ class PennActionSkeletonDataset(Dataset):
 
     def __getitem__(self, idx):
         sample = self.samples[idx]
-        features = torch.tensor(sample['features'], dtype=torch.float32)
-        label = torch.tensor(sample['label'], dtype=torch.long)
-        return features, label, sample['seq_id']
+        features = torch.tensor(sample["features"], dtype=torch.float32)
+        label = torch.tensor(sample["label"], dtype=torch.long)
+        return features, label, sample["seq_id"]
 
 
 def collate_skeleton_batch(batch):
@@ -139,7 +160,7 @@ def build_or_load_penn_action_splits(
     penn_dir="data/raw/Penn_Action",
     yolo_test_csv="outputs/full_test/predictions/yolo_predictions_test.csv",
     cache_path="data/processed/penn_action_bilstm_data.pkl",
-    force_rebuild=False
+    force_rebuild=False,
 ):
     """
     Builds or loads the preprocessed dataset splits:
@@ -160,7 +181,7 @@ def build_or_load_penn_action_splits(
     # 1. Parse all Ground Truth sequences
     print("Parsing 2,326 Ground Truth label files...")
     mat_files = sorted(glob.glob(os.path.join(penn_dir, "labels", "*.mat")))
-    
+
     train_gt_samples = []
     test_gt_samples = []
     gt_dict = {}
@@ -168,15 +189,15 @@ def build_or_load_penn_action_splits(
     for mat_path in tqdm(mat_files, desc="Processing Ground Truth"):
         mat = sio.loadmat(mat_path)
         seq_id = os.path.splitext(os.path.basename(mat_path))[0].zfill(4)
-        is_train = int(mat['train'][0, 0])
-        action = str(mat['action'][0])
+        is_train = int(mat["train"][0, 0])
+        action = str(mat["action"][0])
         if action not in ACTION_TO_ID:
             continue
         label = ACTION_TO_ID[action]
 
-        x_mat = np.array(mat['x'], dtype=float)
-        y_mat = np.array(mat['y'], dtype=float)
-        vis_mat = np.array(mat['visibility'], dtype=int)
+        x_mat = np.array(mat["x"], dtype=float)
+        y_mat = np.array(mat["y"], dtype=float)
+        vis_mat = np.array(mat["visibility"], dtype=int)
         if x_mat.shape[1] != 13 and x_mat.shape[0] == 13:
             x_mat, y_mat, vis_mat = x_mat.T, y_mat.T, vis_mat.T
 
@@ -191,12 +212,7 @@ def build_or_load_penn_action_splits(
             coords[invis, c_idx, :] = np.nan
 
         norm_feats = normalize_skeleton_sequence(coords)
-        sample = {
-            'seq_id': seq_id,
-            'features': norm_feats,
-            'label': label,
-            'action': action
-        }
+        sample = {"seq_id": seq_id, "features": norm_feats, "label": label, "action": action}
         gt_dict[seq_id] = sample
 
         if is_train == 1:
@@ -204,17 +220,21 @@ def build_or_load_penn_action_splits(
         elif is_train == -1:
             test_gt_samples.append(sample)
 
-    print(f"Parsed {len(train_gt_samples)} Train GT sequences and {len(test_gt_samples)} Test GT sequences.")
+    print(
+        f"Parsed {len(train_gt_samples)} Train GT sequences and {len(test_gt_samples)} Test GT sequences."
+    )
 
     # 2. Parse Raw YOLO Test Sequences
     print("\nParsing Raw YOLO test sequences from predictions CSV...")
-    df_test = pd.read_csv(yolo_test_csv, dtype={'sequence_id': str})
-    df_test['sequence_id'] = df_test['sequence_id'].astype(str).str.zfill(4)
+    df_test = pd.read_csv(yolo_test_csv, dtype={"sequence_id": str})
+    df_test["sequence_id"] = df_test["sequence_id"].astype(str).str.zfill(4)
 
     test_raw_samples = []
-    for seq_id, seq_df in tqdm(df_test.groupby('sequence_id', sort=False), desc="Processing Raw YOLO Test"):
-        seq_df = seq_df.sort_values('frame_index')
-        action = seq_df.iloc[0]['action']
+    for seq_id, seq_df in tqdm(
+        df_test.groupby("sequence_id", sort=False), desc="Processing Raw YOLO Test"
+    ):
+        seq_df = seq_df.sort_values("frame_index")
+        action = seq_df.iloc[0]["action"]
         if action not in ACTION_TO_ID:
             continue
         label = ACTION_TO_ID[action]
@@ -227,22 +247,21 @@ def build_or_load_penn_action_splits(
             coords[:, c_idx, 1] = seq_df[col_y].values
 
         norm_feats = normalize_skeleton_sequence(coords)
-        test_raw_samples.append({
-            'seq_id': seq_id,
-            'features': norm_feats,
-            'label': label,
-            'action': action
-        })
+        test_raw_samples.append(
+            {"seq_id": seq_id, "features": norm_feats, "label": label, "action": action}
+        )
 
     # 3. Parse Calibrated YOLO Test Sequences
     print("\nCalibrating YOLO test sequences using FullCalibrationPipeline...")
     calibrator = FullCalibrationPipeline()
     test_calib_samples = []
 
-    for seq_id, seq_df in tqdm(df_test.groupby('sequence_id', sort=False), desc="Calibrating Test Sequences"):
-        seq_df = seq_df.sort_values('frame_index')
+    for seq_id, seq_df in tqdm(
+        df_test.groupby("sequence_id", sort=False), desc="Calibrating Test Sequences"
+    ):
+        seq_df = seq_df.sort_values("frame_index")
         df_cal = calibrator.calibrate_sequence(seq_df)
-        action = df_cal.iloc[0]['action']
+        action = df_cal.iloc[0]["action"]
         if action not in ACTION_TO_ID:
             continue
         label = ACTION_TO_ID[action]
@@ -255,21 +274,20 @@ def build_or_load_penn_action_splits(
             coords[:, c_idx, 1] = df_cal[col_y].values
 
         norm_feats = normalize_skeleton_sequence(coords)
-        test_calib_samples.append({
-            'seq_id': seq_id,
-            'features': norm_feats,
-            'label': label,
-            'action': action
-        })
+        test_calib_samples.append(
+            {"seq_id": seq_id, "features": norm_feats, "label": label, "action": action}
+        )
 
     data = {
-        'train_gt': train_gt_samples,
-        'test_gt': test_gt_samples,
-        'test_raw_yolo': test_raw_samples,
-        'test_calib_yolo': test_calib_samples
+        "train_gt": train_gt_samples,
+        "test_gt": test_gt_samples,
+        "test_raw_yolo": test_raw_samples,
+        "test_calib_yolo": test_calib_samples,
     }
 
     with open(cache_path, "wb") as f:
         pickle.dump(data, f)
-    print(f"\nSaved dataset cache to {cache_path} ({len(data['train_gt'])} train, {len(data['test_gt'])} test)")
+    print(
+        f"\nSaved dataset cache to {cache_path} ({len(data['train_gt'])} train, {len(data['test_gt'])} test)"
+    )
     return data

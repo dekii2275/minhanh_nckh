@@ -5,7 +5,8 @@ Purpose: Spatio-Temporal Dual Attention Network for Skeleton Action Recognition.
          followed by a Bidirectional LSTM and Temporal Self-Attention across video time.
 """
 
-from typing import Optional, Tuple, Union
+from typing import Optional
+
 import torch
 from torch import Tensor, nn
 from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence
@@ -19,11 +20,12 @@ class SpatioTemporalAttentionClassifier(nn.Module):
     3. Temporal BiLSTM Backbone: Models sequential motion dynamics across time.
     4. Temporal Multi-Head Attention + Masked Pooling + Classifier Head.
     """
+
     def __init__(
         self,
         num_joints: int = 12,
-        joint_in_dim: int = 2,       # (x, y) coordinates
-        spatial_dim: int = 64,       # joint feature dimension
+        joint_in_dim: int = 2,  # (x, y) coordinates
+        spatial_dim: int = 64,  # joint feature dimension
         spatial_heads: int = 4,
         hidden_size: int = 128,
         num_layers: int = 2,
@@ -102,7 +104,9 @@ class SpatioTemporalAttentionClassifier(nn.Module):
         lengths = lengths.to(device=inputs.device, dtype=torch.long).clamp(min=1, max=time)
 
         if padding_mask is None:
-            padding_mask = torch.arange(time, device=inputs.device).unsqueeze(0) >= lengths.unsqueeze(1)
+            padding_mask = torch.arange(time, device=inputs.device).unsqueeze(
+                0
+            ) >= lengths.unsqueeze(1)
         else:
             padding_mask = padding_mask.to(device=inputs.device, dtype=torch.bool)
 
@@ -113,21 +117,22 @@ class SpatioTemporalAttentionClassifier(nn.Module):
         BT = batch * time
         spatial_in = spatial_feats.view(BT, self.num_joints, self.spatial_dim)
         spatial_out, _ = self.spatial_attention(spatial_in, spatial_in, spatial_in)
-        spatial_out = self.spatial_norm(spatial_in + spatial_out) # Residual + Norm
+        spatial_out = self.spatial_norm(spatial_in + spatial_out)  # Residual + Norm
 
         # Flatten spatial joints: [B, T, num_joints * spatial_dim] -> project to [B, T, 128]
         temporal_inputs = spatial_out.view(batch, time, self.num_joints * self.spatial_dim)
         temporal_inputs = self.spatial_to_lstm(temporal_inputs)
 
         # Step 2: Temporal BiLSTM
-        packed = pack_padded_sequence(temporal_inputs, lengths.cpu(), batch_first=True, enforce_sorted=False)
+        packed = pack_padded_sequence(
+            temporal_inputs, lengths.cpu(), batch_first=True, enforce_sorted=False
+        )
         packed_output, _ = self.lstm(packed)
         lstm_output, _ = pad_packed_sequence(packed_output, batch_first=True, total_length=time)
 
         # Step 3: Temporal Multi-Head Attention
         attended, _ = self.temporal_attention(
-            lstm_output, lstm_output, lstm_output,
-            key_padding_mask=padding_mask
+            lstm_output, lstm_output, lstm_output, key_padding_mask=padding_mask
         )
 
         # Masked Mean Pooling

@@ -9,21 +9,21 @@ End-to-End J-HMDB Benchmark Pipeline:
 7. Save summary JSON and comparative outputs.
 """
 
-import os
-import glob
 import json
+import os
 import time
+
+import cv2
 import numpy as np
 import scipy.io as sio
-import cv2
 import torch
 import torch.nn as nn
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import DataLoader, Dataset
 from tqdm import tqdm
 from ultralytics import YOLO
 
-from skeleton_calibrator import FullCalibrationPipeline
 from models.action_bilstm import ActionBiLSTMAttentionClassifier as ActionBiLSTM
+from skeleton_calibrator import FullCalibrationPipeline
 
 # Constants & Paths
 JHMDB_ROOT = os.path.abspath("data/raw/jhmdb")
@@ -46,21 +46,46 @@ COCO_12_INDICES = [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
 # Bones connecting pairs of indices (0 to 11):
 BONES = [
     (0, 1),  # shoulders
-    (0, 2), (2, 4),  # left arm
-    (1, 3), (3, 5),  # right arm
+    (0, 2),
+    (2, 4),  # left arm
+    (1, 3),
+    (3, 5),  # right arm
     (6, 7),  # hips
-    (0, 6), (1, 7),  # torso
-    (6, 8), (8, 10), # left leg
-    (7, 9), (9, 11), # right leg
+    (0, 6),
+    (1, 7),  # torso
+    (6, 8),
+    (8, 10),  # left leg
+    (7, 9),
+    (9, 11),  # right leg
 ]
 
-ACTION_CLASSES = sorted([
-    "brush_hair", "catch", "clap", "climb_stairs", "golf", "jump",
-    "kick_ball", "pick", "pour", "pullup", "push", "run",
-    "shoot_ball", "shoot_bow", "shoot_gun", "sit", "stand",
-    "swing_baseball", "throw", "walk", "wave"
-])
+ACTION_CLASSES = sorted(
+    [
+        "brush_hair",
+        "catch",
+        "clap",
+        "climb_stairs",
+        "golf",
+        "jump",
+        "kick_ball",
+        "pick",
+        "pour",
+        "pullup",
+        "push",
+        "run",
+        "shoot_ball",
+        "shoot_bow",
+        "shoot_gun",
+        "sit",
+        "stand",
+        "swing_baseball",
+        "throw",
+        "walk",
+        "wave",
+    ]
+)
 CLASS_TO_IDX = {c: i for i, c in enumerate(ACTION_CLASSES)}
+
 
 def parse_split(split_num=1):
     """Parse Split 1 text files into train and test video lists."""
@@ -75,12 +100,17 @@ def parse_split(split_num=1):
                 parts = line.strip().split()
                 if len(parts) == 2:
                     vname, flag = parts[0], parts[1]
-                    item = {"action": action, "video_name": vname, "video_id": vname.replace(".avi", "")}
+                    item = {
+                        "action": action,
+                        "video_name": vname,
+                        "video_id": vname.replace(".avi", ""),
+                    }
                     if flag == "1":
                         train_videos.append(item)
                     elif flag == "2":
                         test_videos.append(item)
     return train_videos, test_videos
+
 
 def extract_all_skeletons(all_videos, device="cuda"):
     """
@@ -118,7 +148,7 @@ def extract_all_skeletons(all_videos, device="cuda"):
         total_frames += T
 
         # GT 12 joints: (T, 12, 2)
-        gt_12 = gt_pos_full[:, JHMDB_12_INDICES, :].transpose(2, 1, 0) # (T, 12, 2)
+        gt_12 = gt_pos_full[:, JHMDB_12_INDICES, :].transpose(2, 1, 0)  # (T, 12, 2)
 
         # Video frames
         cap = cv2.VideoCapture(vpath)
@@ -143,8 +173,12 @@ def extract_all_skeletons(all_videos, device="cuda"):
                     if out.boxes is not None and len(out.boxes.conf) > 0:
                         best_person_idx = int(torch.argmax(out.boxes.conf).cpu())
 
-                    kps_xy = out.keypoints.xy[best_person_idx].cpu().numpy() # (17, 2)
-                    kps_conf = out.keypoints.conf[best_person_idx].cpu().numpy() if out.keypoints.conf is not None else np.ones(17)
+                    kps_xy = out.keypoints.xy[best_person_idx].cpu().numpy()  # (17, 2)
+                    kps_conf = (
+                        out.keypoints.conf[best_person_idx].cpu().numpy()
+                        if out.keypoints.conf is not None
+                        else np.ones(17)
+                    )
 
                     raw_kps[t_idx] = kps_xy[COCO_12_INDICES]
                     raw_confs[t_idx] = kps_conf[COCO_12_INDICES]
@@ -158,7 +192,7 @@ def extract_all_skeletons(all_videos, device="cuda"):
             "raw": raw_kps,
             "calib": calib_kps,
             "confs": raw_confs,
-            "num_frames": T
+            "num_frames": T,
         }
 
     elapsed = time.time() - start_time
@@ -167,6 +201,7 @@ def extract_all_skeletons(all_videos, device="cuda"):
 
     np.savez_compressed(cache_path, skeletons=results)
     return results
+
 
 def compute_pose_metrics(skeletons, test_videos):
     """Compute quantitative pose estimation and calibration metrics on Test Split 1."""
@@ -191,8 +226,8 @@ def compute_pose_metrics(skeletons, test_videos):
         if vid not in skeletons:
             continue
         data = skeletons[vid]
-        gt = data["gt"]        # (T, 12, 2)
-        raw = data["raw"]      # (T, 12, 2)
+        gt = data["gt"]  # (T, 12, 2)
+        raw = data["raw"]  # (T, 12, 2)
         calib = data["calib"]  # (T, 12, 2)
         T = data["num_frames"]
 
@@ -203,11 +238,11 @@ def compute_pose_metrics(skeletons, test_videos):
         l_hip = gt[:, 6]
         d1 = np.linalg.norm(l_shoulder - r_hip, axis=1)
         d2 = np.linalg.norm(r_shoulder - l_hip, axis=1)
-        torso_size = np.maximum(d1, d2) # (T,)
+        torso_size = np.maximum(d1, d2)  # (T,)
 
         # Errors
-        err_raw = np.linalg.norm(raw - gt, axis=2)    # (T, 12)
-        err_calib = np.linalg.norm(calib - gt, axis=2)# (T, 12)
+        err_raw = np.linalg.norm(raw - gt, axis=2)  # (T, 12)
+        err_calib = np.linalg.norm(calib - gt, axis=2)  # (T, 12)
 
         raw_errors.extend(err_raw.flatten())
         calib_errors.extend(err_calib.flatten())
@@ -217,7 +252,7 @@ def compute_pose_metrics(skeletons, test_videos):
         total_pts += err_raw.size
 
         # Torso normalized PCK
-        torso_diag = torso_size[:, None] # (T, 1)
+        torso_diag = torso_size[:, None]  # (T, 1)
         torso_pck10_raw += np.sum(err_raw <= 0.10 * torso_diag)
         torso_pck10_calib += np.sum(err_calib <= 0.10 * torso_diag)
         torso_pck20_raw += np.sum(err_raw <= 0.20 * torso_diag)
@@ -240,7 +275,9 @@ def compute_pose_metrics(skeletons, test_videos):
     metrics = {
         "raw_mean_error_px": float(np.mean(raw_errors)),
         "calib_mean_error_px": float(np.mean(calib_errors)),
-        "error_reduction_pct": float((np.mean(raw_errors) - np.mean(calib_errors)) / np.mean(raw_errors) * 100),
+        "error_reduction_pct": float(
+            (np.mean(raw_errors) - np.mean(calib_errors)) / np.mean(raw_errors) * 100
+        ),
         "raw_pck20": float(pck20_raw / total_pts * 100),
         "calib_pck20": float(pck20_calib / total_pts * 100),
         "pck20_gain_abs": float((pck20_calib - pck20_raw) / total_pts * 100),
@@ -250,12 +287,17 @@ def compute_pose_metrics(skeletons, test_videos):
         "calib_torso_pck20": float(torso_pck20_calib / total_pts * 100),
         "raw_jitter_px_per_frame": float(np.mean(raw_jitters)),
         "calib_jitter_px_per_frame": float(np.mean(calib_jitters)),
-        "jitter_reduction_pct": float((np.mean(raw_jitters) - np.mean(calib_jitters)) / np.mean(raw_jitters) * 100),
+        "jitter_reduction_pct": float(
+            (np.mean(raw_jitters) - np.mean(calib_jitters)) / np.mean(raw_jitters) * 100
+        ),
         "raw_bone_std_px": float(np.mean(raw_bone_stds)),
         "calib_bone_std_px": float(np.mean(calib_bone_stds)),
-        "bone_std_reduction_pct": float((np.mean(raw_bone_stds) - np.mean(calib_bone_stds)) / np.mean(raw_bone_stds) * 100)
+        "bone_std_reduction_pct": float(
+            (np.mean(raw_bone_stds) - np.mean(calib_bone_stds)) / np.mean(raw_bone_stds) * 100
+        ),
     }
     return metrics
+
 
 class JHMDBActionDataset(Dataset):
     def __init__(self, video_items, skeletons, modality="gt", max_frames=45):
@@ -266,19 +308,19 @@ class JHMDBActionDataset(Dataset):
             vid = item["video_id"]
             if vid in skeletons:
                 data = skeletons[vid]
-                kps = data[modality].copy() # (T, 12, 2)
+                kps = data[modality].copy()  # (T, 12, 2)
                 label = CLASS_TO_IDX[item["action"]]
-                
+
                 # Normalization: MidHip centering & torso scaling
                 mid_hip = (kps[:, 6:7, :] + kps[:, 7:8, :]) / 2.0
                 kps_centered = kps - mid_hip
-                
+
                 # Torso scale: distance between shoulders
                 shoulder_dist = np.linalg.norm(kps[:, 0] - kps[:, 1], axis=1, keepdims=True)
                 scale = np.mean(shoulder_dist)
                 if scale < 1.0:
                     scale = 50.0
-                kps_norm = (kps_centered / scale).reshape(kps.shape[0], -1) # (T, 24)
+                kps_norm = (kps_centered / scale).reshape(kps.shape[0], -1)  # (T, 24)
 
                 self.samples.append((torch.tensor(kps_norm, dtype=torch.float32), label))
 
@@ -288,22 +330,28 @@ class JHMDBActionDataset(Dataset):
     def __getitem__(self, idx):
         return self.samples[idx]
 
+
 def collate_fn(batch):
     sequences, labels = zip(*batch)
     lengths = [len(seq) for seq in sequences]
     max_len = max(lengths)
     padded = torch.zeros(len(sequences), max_len, sequences[0].shape[-1])
     for i, seq in enumerate(sequences):
-        padded[i, :len(seq)] = seq
+        padded[i, : len(seq)] = seq
     return padded, torch.tensor(lengths), torch.tensor(labels)
 
-def train_and_eval_bilstm(train_items, test_items, skeletons, train_mod="gt", epochs=50, device="cuda"):
+
+def train_and_eval_bilstm(
+    train_items, test_items, skeletons, train_mod="gt", epochs=50, device="cuda"
+):
     """Train BiLSTM on specified training modality and evaluate on all test modalities."""
     train_dataset = JHMDBActionDataset(train_items, skeletons, modality=train_mod)
     train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True, collate_fn=collate_fn)
 
     # 21 classes for J-HMDB
-    model = ActionBiLSTM(input_size=24, hidden_size=128, num_classes=21, num_layers=2, attention_heads=4).to(device)
+    model = ActionBiLSTM(
+        input_size=24, hidden_size=128, num_classes=21, num_layers=2, attention_heads=4
+    ).to(device)
     criterion = nn.CrossEntropyLoss()
     optimizer = torch.optim.AdamW(model.parameters(), lr=1e-3, weight_decay=1e-4)
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=epochs)
@@ -334,7 +382,7 @@ def train_and_eval_bilstm(train_items, test_items, skeletons, train_mod="gt", ep
             for seqs, lens, targets in test_loader:
                 seqs, lens, targets = seqs.to(device), lens.to(device), targets.to(device)
                 outputs = model(seqs, lens)
-                
+
                 # Top-1
                 preds_top1 = outputs.argmax(dim=1)
                 correct_top1 += (preds_top1 == targets).sum().item()
@@ -351,18 +399,23 @@ def train_and_eval_bilstm(train_items, test_items, skeletons, train_mod="gt", ep
 
     return results
 
+
 def main():
     print("=" * 70)
     print("J-HMDB BENCHMARK: POSE EVALUATION, CALIBRATION & ACTION RECOGNITION")
     print("=" * 70)
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    print(f"Compute Device: {device} ({torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'CPU'})")
+    print(
+        f"Compute Device: {device} ({torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'CPU'})"
+    )
 
     # Step 1: Parse splits
     train_videos, test_videos = parse_split(split_num=1)
     all_videos = train_videos + test_videos
-    print(f"J-HMDB Split 1: {len(train_videos)} train videos, {len(test_videos)} test videos (Total: {len(all_videos)})")
+    print(
+        f"J-HMDB Split 1: {len(train_videos)} train videos, {len(test_videos)} test videos (Total: {len(all_videos)})"
+    )
 
     # Step 2: Extract skeletons
     skeletons = extract_all_skeletons(all_videos, device=device)
@@ -375,14 +428,18 @@ def main():
 
     # Step 4: Action Recognition Experiment 1: Trained on Ground Truth
     print("\n--- Training Action Recognition Baseline on Ground Truth Train (50 Epochs) ---")
-    gt_trained_results = train_and_eval_bilstm(train_videos, test_videos, skeletons, train_mod="gt", epochs=50, device=device)
+    gt_trained_results = train_and_eval_bilstm(
+        train_videos, test_videos, skeletons, train_mod="gt", epochs=50, device=device
+    )
     print("Results (GT-trained model):")
     for k, v in gt_trained_results.items():
         print(f"  {k}: {v:.2f}%")
 
     # Step 5: Action Recognition Experiment 2: Domain-Matched Training on Calibrated Skeleton
     print("\n--- Training Action Recognition Model on Calibrated Skeleton Train (50 Epochs) ---")
-    calib_trained_results = train_and_eval_bilstm(train_videos, test_videos, skeletons, train_mod="calib", epochs=50, device=device)
+    calib_trained_results = train_and_eval_bilstm(
+        train_videos, test_videos, skeletons, train_mod="calib", epochs=50, device=device
+    )
     print("Results (Domain-Matched Calibrated model):")
     for k, v in calib_trained_results.items():
         print(f"  {k}: {v:.2f}%")
@@ -403,6 +460,7 @@ def main():
     with open(out_file, "w") as f:
         json.dump(summary, f, indent=4)
     print(f"\nAll results saved to {out_file} successfully!")
+
 
 if __name__ == "__main__":
     main()

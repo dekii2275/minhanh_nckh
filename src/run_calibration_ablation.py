@@ -10,40 +10,42 @@ Usage:
     python src/run_calibration_ablation.py --all
 """
 
-import os
-import sys
 import argparse
-import time
 import json
+import os
+import time
+
 import numpy as np
 import pandas as pd
 import scipy.io as sio
 from tqdm import tqdm
 
 from skeleton_calibrator import (
-    OneEuroSmoothingCalibrator,
-    KinematicInterpolationCalibrator,
+    BONE_SEGMENTS,
     AnthropometricBoneConstraintCalibrator,
-    LeftRightContinuityCalibrator,
     FullCalibrationPipeline,
-    COCO_KEYPOINTS,
-    BONE_SEGMENTS
+    KinematicInterpolationCalibrator,
+    LeftRightContinuityCalibrator,
+    OneEuroSmoothingCalibrator,
 )
+
 
 def load_joint_mapping(mapping_json="configs/joint_mapping.json"):
     with open(mapping_json, "r") as f:
         data = json.load(f)
     return data["joint_pairs"]
 
+
 def get_torso_scale(x_penn, y_penn, vis_penn):
     if vis_penn[1] == 1 and vis_penn[2] == 1 and vis_penn[7] == 1 and vis_penn[8] == 1:
         if x_penn[1] > 0 and x_penn[2] > 0 and x_penn[7] > 0 and x_penn[8] > 0:
             sx, sy = (x_penn[1] + x_penn[2]) / 2.0, (y_penn[1] + y_penn[2]) / 2.0
             hx, hy = (x_penn[7] + x_penn[8]) / 2.0, (y_penn[7] + y_penn[8]) / 2.0
-            scale = np.sqrt((sx - hx)**2 + (sy - hy)**2)
+            scale = np.sqrt((sx - hx) ** 2 + (sy - hy) ** 2)
             if scale > 1e-3:
                 return float(scale)
     return None
+
 
 def compute_motion_jitter(df_preds):
     """
@@ -51,10 +53,17 @@ def compute_motion_jitter(df_preds):
     Jitter = mean ||x_{t+1} - 2*x_t + x_{t-1}||_2
     """
     jitters = []
-    for seq_id, seq_df in df_preds.groupby('sequence_id'):
+    for seq_id, seq_df in df_preds.groupby("sequence_id"):
         if len(seq_df) < 3:
             continue
-        for kpt in ["left_wrist", "right_wrist", "left_elbow", "right_elbow", "left_ankle", "right_ankle"]:
+        for kpt in [
+            "left_wrist",
+            "right_wrist",
+            "left_elbow",
+            "right_elbow",
+            "left_ankle",
+            "right_ankle",
+        ]:
             col_x, col_y = f"pred_{kpt}_x", f"pred_{kpt}_y"
             if col_x in seq_df.columns:
                 xs = seq_df[col_x].values
@@ -70,12 +79,13 @@ def compute_motion_jitter(df_preds):
                         jitters.extend(valid_acc.tolist())
     return float(np.mean(jitters)) if jitters else 0.0
 
+
 def compute_bone_length_dispersion(df_preds):
     """
     Computes mean standard deviation of bone lengths across sequences.
     """
     stds = []
-    for seq_id, seq_df in df_preds.groupby('sequence_id'):
+    for seq_id, seq_df in df_preds.groupby("sequence_id"):
         if len(seq_df) < 3:
             continue
         for parent_kpt, child_kpt in BONE_SEGMENTS:
@@ -89,6 +99,7 @@ def compute_bone_length_dispersion(df_preds):
                 if len(valid_lens) >= 3:
                     stds.append(float(np.std(valid_lens)))
     return float(np.mean(stds)) if stds else 0.0
+
 
 def evaluate_dataframe(df_preds, annotations_cache, joint_pairs):
     """
@@ -113,8 +124,8 @@ def evaluate_dataframe(df_preds, annotations_cache, joint_pairs):
         t_scale = get_torso_scale(x_gt, y_gt, vis_gt)
 
         for p in joint_pairs:
-            p_idx = p['penn_index_0based']
-            c_name = p['coco_joint_name']
+            p_idx = p["penn_index_0based"]
+            c_name = p["coco_joint_name"]
 
             if vis_gt[p_idx] == 1 and (x_gt[p_idx] > 0 or y_gt[p_idx] > 0):
                 gx, gy = x_gt[p_idx], y_gt[p_idx]
@@ -122,7 +133,7 @@ def evaluate_dataframe(df_preds, annotations_cache, joint_pairs):
                 py = getattr(row, f"pred_{c_name}_y")
 
                 if has_det and not np.isnan(px) and not np.isnan(py):
-                    err = float(np.sqrt((px - gx)**2 + (py - gy)**2))
+                    err = float(np.sqrt((px - gx) ** 2 + (py - gy) ** 2))
                     errors.append(err)
                     pck20.append(1 if err <= 20.0 else 0)
 
@@ -142,19 +153,20 @@ def evaluate_dataframe(df_preds, annotations_cache, joint_pairs):
         "p90_error_px": float(np.percentile(errs, 90)),
         "pck_20px": float(np.mean(pck20)),
         "pck_torso_010": float(np.mean(pck_t01)),
-        "pck_torso_020": float(np.mean(pck_t02))
+        "pck_torso_020": float(np.mean(pck_t02)),
     }
+
 
 def run_calibration_ablation(
     module_name="module1_one_euro",
     predictions_csv="outputs/full_test/predictions/yolo_predictions_test.csv",
     mapping_json="configs/joint_mapping.json",
-    output_dir="outputs/calibration"
+    output_dir="outputs/calibration",
 ):
     os.makedirs(output_dir, exist_ok=True)
-    print(f"\n==================================================================")
+    print("\n==================================================================")
     print(f"RUNNING ABLATION EXPERIMENT: {module_name}")
-    print(f"==================================================================")
+    print("==================================================================")
 
     print(f"Loading predictions from {predictions_csv}...")
     df_raw = pd.read_csv(predictions_csv)
@@ -181,7 +193,9 @@ def run_calibration_ablation(
     if calibrator is not None:
         print(f"Applying {calibrator.__class__.__name__} to 1,068 test sequences...")
         calib_chunks = []
-        for seq_id, seq_df in tqdm(df_raw.groupby('sequence_id', sort=False), desc=f"Calibrating with {module_name}"):
+        for seq_id, seq_df in tqdm(
+            df_raw.groupby("sequence_id", sort=False), desc=f"Calibrating with {module_name}"
+        ):
             df_res = calibrator.calibrate_sequence(seq_df)
             calib_chunks.append(df_res)
         df_calib = pd.concat(calib_chunks, ignore_index=True)
@@ -199,11 +213,11 @@ def run_calibration_ablation(
     # 3. Cache annotations & Compute accuracy against GT
     print("Loading Penn Action annotations cache...")
     annotations_cache = {}
-    for mat_path in tqdm(df_calib['annotation_path'].unique(), desc="Caching annotations"):
+    for mat_path in tqdm(df_calib["annotation_path"].unique(), desc="Caching annotations"):
         mat = sio.loadmat(mat_path)
-        x_mat = np.array(mat['x'], dtype=float)
-        y_mat = np.array(mat['y'], dtype=float)
-        vis_mat = np.array(mat['visibility'], dtype=int)
+        x_mat = np.array(mat["x"], dtype=float)
+        y_mat = np.array(mat["y"], dtype=float)
+        vis_mat = np.array(mat["visibility"], dtype=int)
         if x_mat.shape[1] != 13 and x_mat.shape[0] == 13:
             x_mat, y_mat, vis_mat = x_mat.T, y_mat.T, vis_mat.T
         annotations_cache[mat_path] = (x_mat, y_mat, vis_mat)
@@ -222,7 +236,7 @@ def run_calibration_ablation(
         "p90_error_px": acc_metrics["p90_error_px"],
         "pck_20px": acc_metrics["pck_20px"],
         "pck_torso_010": acc_metrics["pck_torso_010"],
-        "pck_torso_020": acc_metrics["pck_torso_020"]
+        "pck_torso_020": acc_metrics["pck_torso_020"],
     }
 
     print("\n--- RESULTS FOR", module_name.upper(), "---")
@@ -230,8 +244,8 @@ def run_calibration_ablation(
     print(f"  * Bone Length Std (Dispersion): {bone_std:.3f} px (lower is more consistent)")
     print(f"  * Mean Euclidean Error:         {acc_metrics['mean_error_px']:.2f} px")
     print(f"  * Median Error:                 {acc_metrics['median_error_px']:.2f} px")
-    print(f"  * PCK@20px:                     {acc_metrics['pck_20px']*100:.2f}%")
-    print(f"  * PCK-torso@0.20:               {acc_metrics['pck_torso_020']*100:.2f}%")
+    print(f"  * PCK@20px:                     {acc_metrics['pck_20px'] * 100:.2f}%")
+    print(f"  * PCK-torso@0.20:               {acc_metrics['pck_torso_020'] * 100:.2f}%")
 
     out_file = os.path.join(output_dir, f"{module_name}_metrics.json")
     with open(out_file, "w") as f:
@@ -239,17 +253,34 @@ def run_calibration_ablation(
     print(f"Saved module result to {out_file}\n")
     return result
 
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--module", type=str, default="module1_one_euro",
-                        choices=["baseline", "module1_one_euro", "module2_interpolation",
-                                 "module3_bone_constraint", "module4_left_right", "module5_full_combined"])
+    parser.add_argument(
+        "--module",
+        type=str,
+        default="module1_one_euro",
+        choices=[
+            "baseline",
+            "module1_one_euro",
+            "module2_interpolation",
+            "module3_bone_constraint",
+            "module4_left_right",
+            "module5_full_combined",
+        ],
+    )
     parser.add_argument("--all", action="store_true", help="Run all modules in sequence")
     args = parser.parse_args()
 
     if args.all:
-        modules = ["baseline", "module1_one_euro", "module2_interpolation",
-                   "module3_bone_constraint", "module4_left_right", "module5_full_combined"]
+        modules = [
+            "baseline",
+            "module1_one_euro",
+            "module2_interpolation",
+            "module3_bone_constraint",
+            "module4_left_right",
+            "module5_full_combined",
+        ]
         all_results = []
         for mod in modules:
             res = run_calibration_ablation(mod)
