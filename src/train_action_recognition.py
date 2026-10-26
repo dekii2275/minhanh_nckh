@@ -25,6 +25,7 @@ from data.action_dataset import (
     build_or_load_penn_action_splits,
     collate_skeleton_batch,
 )
+from experiment_protocol import prepare_penn_splits, protocol_metadata
 from models.action_bilstm import ActionBiLSTMAttentionClassifier
 
 
@@ -157,8 +158,8 @@ def plot_training_curves(history, output_path):
 
     # Loss Curve
     ax1.plot(epochs, history["train_loss"], "b-", label="Train Loss", linewidth=2)
-    ax1.plot(epochs, history["val_loss"], "r--", label="Test (GT) Loss", linewidth=2)
-    ax1.set_title("Cross-Entropy Loss over 50 Epochs", fontsize=13, fontweight="bold")
+    ax1.plot(epochs, history["val_loss"], "r--", label="Validation (GT) Loss", linewidth=2)
+    ax1.set_title(f"Cross-Entropy Loss over {len(epochs)} Epochs", fontsize=13, fontweight="bold")
     ax1.set_xlabel("Epoch", fontsize=11)
     ax1.set_ylabel("Loss", fontsize=11)
     ax1.legend(loc="upper right")
@@ -166,9 +167,11 @@ def plot_training_curves(history, output_path):
 
     # Accuracy & F1 Curve
     ax2.plot(epochs, history["train_acc"], "b-", label="Train Top-1 Acc (%)", linewidth=2)
-    ax2.plot(epochs, history["val_acc"], "r-", label="Test (GT) Top-1 Acc (%)", linewidth=2)
-    ax2.plot(epochs, history["val_f1"], "g--", label="Test (GT) Macro-F1 (%)", linewidth=2)
-    ax2.set_title("Accuracy and Macro-F1 over 50 Epochs", fontsize=13, fontweight="bold")
+    ax2.plot(epochs, history["val_acc"], "r-", label="Validation (GT) Top-1 Acc (%)", linewidth=2)
+    ax2.plot(epochs, history["val_f1"], "g--", label="Validation (GT) Macro-F1 (%)", linewidth=2)
+    ax2.set_title(
+        f"Accuracy and Macro-F1 over {len(epochs)} Epochs", fontsize=13, fontweight="bold"
+    )
     ax2.set_xlabel("Epoch", fontsize=11)
     ax2.set_ylabel("Metric (%)", fontsize=11)
     ax2.legend(loc="lower right")
@@ -189,22 +192,31 @@ def main():
     parser.add_argument("--heads", type=int, default=4, help="Attention heads")
     parser.add_argument("--dropout", type=float, default=0.3, help="Dropout rate")
     parser.add_argument("--seed", type=int, default=42, help="Random seed")
-    parser.add_argument("--output_dir", type=str, default="outputs/action_recognition")
+    parser.add_argument("--output_dir", type=str, default="outputs/action_recognition/protocol_v2")
+    parser.add_argument("--validation_fraction", type=float, default=0.2)
     args = parser.parse_args()
+    if args.epochs < 1 or args.batch_size < 1:
+        parser.error("epochs and batch_size must be positive")
 
     set_seed(args.seed)
     os.makedirs(args.output_dir, exist_ok=True)
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
     print("==================================================================")
-    print("TRAINING ACTION RECOGNITION BASELINE (50 EPOCHS)")
-    print(f"Device: {device} | Architecture: BiLSTM + Attention (2 layers, 128 hidden)")
+    print(f"TRAINING ACTION RECOGNITION BASELINE ({args.epochs} EPOCHS)")
+    print(
+        f"Device: {device} | Architecture: BiLSTM + Attention "
+        f"({args.num_layers} layers, {args.hidden_size} hidden)"
+    )
     print(f"Classes: 15 Penn Action categories | Batch size: {args.batch_size} | LR: {args.lr}")
     print("==================================================================\n")
 
     # 1. Load Data
-    splits = build_or_load_penn_action_splits()
+    splits = prepare_penn_splits(
+        build_or_load_penn_action_splits(), args.validation_fraction, args.seed
+    )
     train_dataset = PennActionSkeletonDataset(splits["train_gt"])
+    validation_dataset = PennActionSkeletonDataset(splits["validation_gt"])
     test_gt_dataset = PennActionSkeletonDataset(splits["test_gt"])
     test_raw_dataset = PennActionSkeletonDataset(splits["test_raw_yolo"])
     test_calib_dataset = PennActionSkeletonDataset(splits["test_calib_yolo"])
@@ -214,7 +226,13 @@ def main():
         batch_size=args.batch_size,
         shuffle=True,
         collate_fn=collate_skeleton_batch,
-        pin_memory=True,
+        pin_memory=device.type == "cuda",
+    )
+    validation_loader = DataLoader(
+        validation_dataset,
+        batch_size=args.batch_size,
+        shuffle=False,
+        collate_fn=collate_skeleton_batch,
     )
     test_gt_loader = DataLoader(
         test_gt_dataset,
@@ -237,6 +255,7 @@ def main():
 
     print("Dataset summary:")
     print(f"  * Train sequences (GT):           {len(train_dataset)}")
+    print(f"  * Validation sequences (GT):      {len(validation_dataset)}")
     print(f"  * Test sequences (GT):            {len(test_gt_dataset)}")
     print(f"  * Test sequences (Raw YOLO):      {len(test_raw_dataset)}")
     print(f"  * Test sequences (Calibrated):    {len(test_calib_dataset)}")
@@ -262,7 +281,7 @@ def main():
     )
 
     # 3. Train Loop
-    best_val_acc = 0.0
+    best_val_acc = -1.0
     best_epoch = 0
     checkpoint_path = os.path.join(args.output_dir, "best_bilstm_model.pt")
 
@@ -298,8 +317,8 @@ def main():
         epoch_train_loss = train_loss / train_total
         epoch_train_acc = (train_correct / train_total) * 100.0
 
-        # Evaluate on GT test split
-        eval_gt = evaluate_model(model, test_gt_loader, criterion, device)
+        # Select checkpoints using held-out training sequences only
+        eval_gt = evaluate_model(model, validation_loader, criterion, device)
 
         history["train_loss"].append(epoch_train_loss)
         history["train_acc"].append(epoch_train_acc)
@@ -317,13 +336,13 @@ def main():
             print(
                 f"Epoch [{epoch:02d}/{args.epochs:02d}] "
                 f"Train Loss: {epoch_train_loss:.4f} | Train Acc: {epoch_train_acc:.2f}% | "
-                f"Test (GT) Acc: {eval_gt['top1_acc']:.2f}% | Test F1: {eval_gt['macro_f1']:.2f}% | "
+                f"Validation (GT) Acc: {eval_gt['top1_acc']:.2f}% | Validation F1: {eval_gt['macro_f1']:.2f}% | "
                 f"Best: {best_val_acc:.2f}% (Epoch {best_epoch})"
             )
 
     train_duration = time.time() - start_train_time
     print(f"\nTraining completed in {train_duration:.2f}s ({train_duration / 60:.2f} mins).")
-    print(f"Best GT Test Accuracy: {best_val_acc:.2f}% at Epoch {best_epoch}")
+    print(f"Best GT Validation Accuracy: {best_val_acc:.2f}% at Epoch {best_epoch}")
 
     # Plot training curves
     curves_path = os.path.join(args.output_dir, "training_curves.png")
@@ -334,7 +353,7 @@ def main():
     print("\n==================================================================")
     print("FINAL EVALUATION ACROSS ALL 3 TEST MODALITIES (Best Checkpoint)")
     print("==================================================================")
-    model.load_state_dict(torch.load(checkpoint_path, map_location=device))
+    model.load_state_dict(torch.load(checkpoint_path, map_location=device, weights_only=True))
 
     res_gt = evaluate_model(model, test_gt_loader, criterion, device)
     res_raw = evaluate_model(model, test_raw_loader, criterion, device)
@@ -382,6 +401,8 @@ def main():
 
     # Save summary json
     summary = {
+        "protocol": protocol_metadata(splits, args.validation_fraction, args.seed),
+        "best_validation_top1_acc": best_val_acc,
         "epochs": args.epochs,
         "best_epoch": best_epoch,
         "train_time_seconds": train_duration,

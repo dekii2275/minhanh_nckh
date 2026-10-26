@@ -19,7 +19,8 @@ import torch.nn as nn
 from torch.nn.utils.rnn import pad_sequence
 from torch.utils.data import DataLoader, Dataset
 
-from data.action_dataset import build_or_load_penn_action_splits
+from data.action_dataset import ACTION_CLASSES, build_or_load_penn_action_splits
+from experiment_protocol import prepare_penn_splits, protocol_metadata
 from models.action_bilstm import ActionBiLSTMAttentionClassifier
 from models.spatiotemporal_attention import SpatioTemporalAttentionClassifier
 
@@ -211,10 +212,21 @@ def evaluate(model, loader, device):
     return {"top1_acc": acc, "top3_acc": top3_acc, "macro_f1": macro_f1, "confusion_matrix": cm}
 
 
-def run_experiment(exp_name, epochs=50, batch_size=32, lr=0.001, device="cuda:0"):
-    set_seed(42)
+def run_experiment(
+    exp_name,
+    epochs=50,
+    batch_size=32,
+    lr=0.001,
+    device="cuda:0",
+    seed=42,
+    validation_fraction=0.2,
+    output_dir="outputs/action_recognition/experiments/protocol_v2",
+):
+    if epochs < 1 or batch_size < 1:
+        raise ValueError("epochs and batch_size must be positive")
+    set_seed(seed)
     device = torch.device(device if torch.cuda.is_available() else "cpu")
-    out_dir = "outputs/action_recognition/experiments"
+    out_dir = output_dir
     os.makedirs(out_dir, exist_ok=True)
 
     print("\n==================================================================")
@@ -222,61 +234,24 @@ def run_experiment(exp_name, epochs=50, batch_size=32, lr=0.001, device="cuda:0"
     print(f"Device: {device} | Epochs: {epochs} | Batch size: {batch_size}")
     print("==================================================================")
 
-    splits = build_or_load_penn_action_splits()
+    splits = prepare_penn_splits(build_or_load_penn_action_splits(), validation_fraction, seed)
 
-    if exp_name == "exp1_kinematics":
-        # Feature mode: 64 dims; No augmentation; Standard BiLSTM
-        train_ds = ExperimentSkeletonDataset(
-            splits["train_gt"], feature_mode="kinematic_64", augment=False
-        )
-        test_gt_ds = ExperimentSkeletonDataset(
-            splits["test_gt"], feature_mode="kinematic_64", augment=False
-        )
-        test_raw_ds = ExperimentSkeletonDataset(
-            splits["test_raw_yolo"], feature_mode="kinematic_64", augment=False
-        )
-        test_calib_ds = ExperimentSkeletonDataset(
-            splits["test_calib_yolo"], feature_mode="kinematic_64", augment=False
-        )
+    configurations = {
+        "exp1_kinematics": ("kinematic_64", False),
+        "exp2_augmentation": ("baseline_24", True),
+        "exp3_spatiotemporal": ("baseline_24", False),
+        "exp4_combined": ("kinematic_64", True),
+    }
+    if exp_name not in configurations:
+        raise ValueError(f"Unknown experiment: {exp_name}")
+    feature_mode, augment = configurations[exp_name]
+    train_ds = ExperimentSkeletonDataset(splits["train_gt"], feature_mode, augment=augment)
+    validation_ds = ExperimentSkeletonDataset(splits["validation_gt"], feature_mode)
+    test_gt_ds = ExperimentSkeletonDataset(splits["test_gt"], feature_mode)
+    test_raw_ds = ExperimentSkeletonDataset(splits["test_raw_yolo"], feature_mode)
+    test_calib_ds = ExperimentSkeletonDataset(splits["test_calib_yolo"], feature_mode)
 
-        model = ActionBiLSTMAttentionClassifier(
-            input_size=64, hidden_size=128, num_layers=2, num_classes=15, attention_heads=4
-        ).to(device)
-
-    elif exp_name == "exp2_augmentation":
-        # Feature mode: 24 dims; Augment = True on train; Standard BiLSTM
-        train_ds = ExperimentSkeletonDataset(
-            splits["train_gt"], feature_mode="baseline_24", augment=True
-        )
-        test_gt_ds = ExperimentSkeletonDataset(
-            splits["test_gt"], feature_mode="baseline_24", augment=False
-        )
-        test_raw_ds = ExperimentSkeletonDataset(
-            splits["test_raw_yolo"], feature_mode="baseline_24", augment=False
-        )
-        test_calib_ds = ExperimentSkeletonDataset(
-            splits["test_calib_yolo"], feature_mode="baseline_24", augment=False
-        )
-
-        model = ActionBiLSTMAttentionClassifier(
-            input_size=24, hidden_size=128, num_layers=2, num_classes=15, attention_heads=4
-        ).to(device)
-
-    elif exp_name == "exp3_spatiotemporal":
-        # Feature mode: 24 dims; No augmentation; SpatioTemporalAttentionClassifier
-        train_ds = ExperimentSkeletonDataset(
-            splits["train_gt"], feature_mode="baseline_24", augment=False
-        )
-        test_gt_ds = ExperimentSkeletonDataset(
-            splits["test_gt"], feature_mode="baseline_24", augment=False
-        )
-        test_raw_ds = ExperimentSkeletonDataset(
-            splits["test_raw_yolo"], feature_mode="baseline_24", augment=False
-        )
-        test_calib_ds = ExperimentSkeletonDataset(
-            splits["test_calib_yolo"], feature_mode="baseline_24", augment=False
-        )
-
+    if exp_name == "exp3_spatiotemporal":
         model = SpatioTemporalAttentionClassifier(
             num_joints=12,
             joint_in_dim=2,
@@ -284,37 +259,26 @@ def run_experiment(exp_name, epochs=50, batch_size=32, lr=0.001, device="cuda:0"
             spatial_heads=4,
             hidden_size=128,
             num_layers=2,
-            num_classes=15,
-        ).to(device)
-
-    elif exp_name == "exp4_combined":
-        # Feature mode: 64 dims; Augment = True on train; BiLSTM + Kinematic representation
-        train_ds = ExperimentSkeletonDataset(
-            splits["train_gt"], feature_mode="kinematic_64", augment=True
-        )
-        test_gt_ds = ExperimentSkeletonDataset(
-            splits["test_gt"], feature_mode="kinematic_64", augment=False
-        )
-        test_raw_ds = ExperimentSkeletonDataset(
-            splits["test_raw_yolo"], feature_mode="kinematic_64", augment=False
-        )
-        test_calib_ds = ExperimentSkeletonDataset(
-            splits["test_calib_yolo"], feature_mode="kinematic_64", augment=False
-        )
-
-        model = ActionBiLSTMAttentionClassifier(
-            input_size=64,
-            hidden_size=128,
-            num_layers=2,
-            num_classes=15,
-            attention_heads=4,
-            dropout=0.3,
+            num_classes=len(ACTION_CLASSES),
         ).to(device)
     else:
-        raise ValueError(f"Unknown experiment: {exp_name}")
+        model = ActionBiLSTMAttentionClassifier(
+            input_size=64 if feature_mode == "kinematic_64" else 24,
+            hidden_size=128,
+            num_layers=2,
+            num_classes=len(ACTION_CLASSES),
+            attention_heads=4,
+        ).to(device)
 
+    validation_loader = DataLoader(
+        validation_ds, batch_size=batch_size, shuffle=False, collate_fn=collate_fn
+    )
     train_loader = DataLoader(
-        train_ds, batch_size=batch_size, shuffle=True, collate_fn=collate_fn, pin_memory=True
+        train_ds,
+        batch_size=batch_size,
+        shuffle=True,
+        collate_fn=collate_fn,
+        pin_memory=device.type == "cuda",
     )
     test_gt_loader = DataLoader(
         test_gt_ds, batch_size=batch_size, shuffle=False, collate_fn=collate_fn
@@ -330,7 +294,8 @@ def run_experiment(exp_name, epochs=50, batch_size=32, lr=0.001, device="cuda:0"
     optimizer = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=1e-4)
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=epochs, eta_min=1e-5)
 
-    best_gt_acc = 0.0
+    best_val_acc = -1.0
+    best_epoch = 0
     best_weights_path = os.path.join(out_dir, f"{exp_name}_best.pt")
 
     t0 = time.time()
@@ -347,27 +312,30 @@ def run_experiment(exp_name, epochs=50, batch_size=32, lr=0.001, device="cuda:0"
 
         scheduler.step()
 
-        # Evaluate on GT test
-        if ep % 5 == 0 or ep == epochs:
-            res_val = evaluate(model, test_gt_loader, device)
-            if res_val["top1_acc"] > best_gt_acc:
-                best_gt_acc = res_val["top1_acc"]
+        # Select checkpoints on validation only
+        if ep == 1 or ep % 5 == 0 or ep == epochs:
+            res_val = evaluate(model, validation_loader, device)
+            if res_val["top1_acc"] > best_val_acc:
+                best_val_acc = res_val["top1_acc"]
+                best_epoch = ep
                 torch.save(model.state_dict(), best_weights_path)
             print(
-                f"[{exp_name}] Epoch {ep:02d}/{epochs:02d} | Test GT Acc: {res_val['top1_acc']:.2f}% | F1: {res_val['macro_f1']:.2f}% | Best: {best_gt_acc:.2f}%"
+                f"[{exp_name}] Epoch {ep:02d}/{epochs:02d} | Validation GT Acc: {res_val['top1_acc']:.2f}% | F1: {res_val['macro_f1']:.2f}% | Best: {best_val_acc:.2f}%"
             )
 
     duration = time.time() - t0
 
     # Load best checkpoint and evaluate on all 3 test modalities
-    if os.path.exists(best_weights_path):
-        model.load_state_dict(torch.load(best_weights_path, map_location=device))
+    model.load_state_dict(torch.load(best_weights_path, map_location=device, weights_only=True))
 
     res_gt = evaluate(model, test_gt_loader, device)
     res_raw = evaluate(model, test_raw_loader, device)
     res_calib = evaluate(model, test_calib_loader, device)
 
     result_dict = {
+        "protocol": protocol_metadata(splits, validation_fraction, seed),
+        "best_epoch": best_epoch,
+        "best_validation_top1_acc": best_val_acc,
         "experiment": exp_name,
         "epochs": epochs,
         "train_time_seconds": duration,
@@ -415,6 +383,18 @@ if __name__ == "__main__":
     )
     parser.add_argument("--epochs", type=int, default=50)
     parser.add_argument("--batch_size", type=int, default=32)
+    parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--validation_fraction", type=float, default=0.2)
+    parser.add_argument(
+        "--output_dir", default="outputs/action_recognition/experiments/protocol_v2"
+    )
     args = parser.parse_args()
 
-    run_experiment(args.mode, epochs=args.epochs, batch_size=args.batch_size)
+    run_experiment(
+        args.mode,
+        epochs=args.epochs,
+        batch_size=args.batch_size,
+        seed=args.seed,
+        validation_fraction=args.validation_fraction,
+        output_dir=args.output_dir,
+    )
