@@ -1,3 +1,5 @@
+> **Lưu ý về phiên bản kết quả:** Báo cáo này lưu số liệu và diễn giải cũ. Một số chỉ số chưa khớp artifact; kết quả Penn Action chưa được chạy lại sau khi tách validation. Xem [quy trình thực nghiệm và đối chiếu số liệu](EXPERIMENT_PROTOCOL.md) trước khi trích dẫn.
+
 # BÁO CÁO THỰC NGHIỆM ĐỐI CHUẨN TẬP DỮ LIỆU THỨ HAI: J-HMDB
 
 > **Đề tài**: *Đánh giá tính tổng quát hóa đa tập dữ liệu (Cross-Dataset Generalization) của mô hình YOLO11n-Pose và Pipeline Hiệu chỉnh KineCalib trên tập dữ liệu J-HMDB*  

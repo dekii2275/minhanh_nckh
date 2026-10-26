@@ -1,3 +1,5 @@
+> **Lưu ý về phiên bản kết quả:** Báo cáo này lưu số liệu và diễn giải cũ. Một số chỉ số chưa khớp artifact; kết quả Penn Action chưa được chạy lại sau khi tách validation. Xem [quy trình thực nghiệm và đối chiếu số liệu](EXPERIMENT_PROTOCOL.md) trước khi trích dẫn.
+
 # BÁO CÁO TỔNG HỢP TOÀN DIỆN ĐỀ TÀI NGHIÊN CỨU KHOA HỌC
 *(Tài liệu Chuẩn hóa Dữ liệu Thực nghiệm & Cơ sở Xây dựng Slide Thuyết trình)*
 

@@ -1,6 +1,10 @@
-# Penn Action — YOLO Pose Evaluation Pilot
+# Penn Action & J-HMDB — Skeleton Calibration and Action Recognition
 
-Thực nghiệm độc lập đánh giá định lượng độ chính xác của mô hình pose estimation (YOLO11n-Pose) trên tập dữ liệu video chuyển động người Penn Action Dataset.
+Pipeline đánh giá YOLO11n-Pose, hiệu chỉnh khung xương 2D và nhận diện hành động trên Penn Action và J-HMDB.
+
+**Trạng thái thực nghiệm:** Code Penn Action hiện tách validation từ train để chọn checkpoint; kết quả chạy mới lưu trong `protocol_v2`. Số liệu cũ chưa được chạy lại theo quy trình này. Đọc [quy trình và các sai khác đã xác định trong báo cáo](reports/EXPERIMENT_PROTOCOL.md) trước khi trích dẫn kết quả.
+
+Chạy các lệnh bên dưới từ thư mục gốc repository.
 
 ## 1. Cấu trúc thư mục
 
@@ -124,3 +128,23 @@ python src/run_jhmdb_pipeline.py
 * [Báo cáo Thử nghiệm Triệt tiêu Hiệu chỉnh Khung xương (Ablation Study)](reports/SKELETON_CALIBRATION_ABLATION_STUDY.md)
 * [Báo cáo Đối sánh Toàn diện Trước & Sau Hiệu chỉnh (Before vs After)](reports/SKELETON_CALIBRATION_BEFORE_AFTER_REPORT.md)
 * [Báo cáo Nhận diện Hành động BiLSTM + Attention (50 Epochs Downstream Task)](reports/ACTION_RECOGNITION_BASELINE_REPORT.md)
+
+## 4. Phát triển và kiểm tra
+
+```bash
+pip install -r requirements-dev.txt
+ruff check src tests
+ruff format --check src tests
+python -m pytest -q
+```
+
+Để định dạng code sau khi chỉnh sửa:
+
+```bash
+ruff format src tests
+```
+
+GitHub Actions chạy lint, kiểm tra định dạng và test trên CPU với Python 3.10.
+Các test dùng dữ liệu tổng hợp, không yêu cầu tải dataset hay checkpoint YOLO.
+Giữ dataset, cache và checkpoint ngoài Git theo `.gitignore`. Commit source,
+cấu hình và tài liệu riêng theo từng thay đổi có thể kiểm tra độc lập.

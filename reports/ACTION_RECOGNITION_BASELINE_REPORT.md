@@ -1,3 +1,5 @@
+> **Lưu ý về phiên bản kết quả:** Báo cáo này lưu số liệu và diễn giải cũ. Một số chỉ số chưa khớp artifact; kết quả Penn Action chưa được chạy lại sau khi tách validation. Xem [quy trình thực nghiệm và đối chiếu số liệu](EXPERIMENT_PROTOCOL.md) trước khi trích dẫn.
+
 # BÁO CÁO THỰC NGHIỆM NHẬN DIỆN HÀNH ĐỘNG VỚI MÔ HÌNH BiLSTM + ATTENTION
 ## Đánh Giá Đóng Góp Của Pipeline Hiệu Chỉnh Khung Xương 2D Lên Bài Toán Hạ Nguồn (Downstream Action Recognition)
 
