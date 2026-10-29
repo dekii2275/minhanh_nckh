@@ -1,150 +1,37 @@
-# Penn Action & J-HMDB — Skeleton Calibration and Action Recognition
+# Correspondence và calibration cho nhận diện hành động từ skeleton 2D
 
-Pipeline đánh giá YOLO11n-Pose, hiệu chỉnh khung xương 2D và nhận diện hành động trên Penn Action và J-HMDB.
+Dự án kiểm tra YOLO11n-Pose → xử lý skeleton → BiLSTM trên Penn Action. **Ba bước chẩn đoán mới cho thấy gain accuracy chủ yếu đến từ alignment; PCHIP, Bone và One-Euro chưa chứng minh lợi ích Top-1 bổ sung trên checkpoint/validation đã kiểm tra.**
 
-**Trạng thái thực nghiệm:** Code Penn Action hiện tách validation từ train để chọn checkpoint; kết quả chạy mới lưu trong `protocol_v2`. Số liệu cũ chưa được chạy lại theo quy trình này. Đọc [quy trình và các sai khác đã xác định trong báo cáo](reports/EXPERIMENT_PROTOCOL.md) trước khi trích dẫn kết quả.
+Đọc [báo cáo tổng hợp hiện tại](reports/COMPREHENSIVE_RESEARCH_REPORT.md), [protocol](reports/EXPERIMENT_PROTOCOL.md) và [phạm vi công bố/tái lập](reports/REPRODUCIBILITY.md) trước khi trích dẫn kết quả.
 
-Chạy các lệnh bên dưới từ thư mục gốc repository.
+| Thực nghiệm validation | Top-1 (%) | Macro-F1 (%) |
+|---|---:|---:|
+| Raw YOLO | 44,66 | 38,21 |
+| Fixed Swap | 67,59 | 68,21 |
+| Heuristic Only | 66,80 | 67,39 |
+| Full KineCalib | 64,43 | 64,79 |
 
-## 1. Cấu trúc thư mục
+Cùng 253 video / 17.747 frame, checkpoint GT-trained BiLSTM 24D Protocol v2 seed0. Alignment production trên raw tăng +22,13 điểm; phần calibration còn lại −2,37 điểm, CI 95% [−5,14; +0,40]. Không train, tuning hoặc chạy official test trong ba bước mới. Checkpoint đã được chọn bằng validation GT này, nên đây là chẩn đoán, chưa phải test độc lập.
 
-```
-minhanh_nckh/
-|-- README.md
-|-- requirements.txt
-|-- configs/
-|   |-- experiment.yaml
-|   |-- joint_mapping.json
-|-- data/
-|   |-- raw/
-|   |   |-- Penn_Action.tar.gz
-|   |   |-- Penn_Action/
-|   |-- processed/
-|-- models/
-|   |-- yolo11n-pose.pt
-|-- src/
-|   |-- download_dataset.py
-|   |-- inspect_dataset.py
-|   |-- select_sequences.py
-|   |-- run_inference.py
-|   |-- evaluate.py
-|   |-- visualize.py
-|   |-- run_pipeline.py
-|   |-- audit_evaluation.py
-|   |-- run_full_test_evaluation.py
-|   |-- skeleton_calibrator.py
-|   |-- run_calibration_ablation.py
-|   |-- visualize_calibration_comparison.py
-|   |-- data/
-|   |   |-- action_dataset.py
-|   |-- models/
-|   |   |-- action_bilstm.py
-|   |   |-- spatiotemporal_attention.py
-|   |-- train_action_recognition.py
-|   |-- run_action_experiments.py
-|   |-- download_jhmdb.py
-|   |-- run_jhmdb_pipeline.py
-|-- outputs/
-|   |-- predictions/
-|   |-- metrics/
-|   |-- figures/
-|   |-- demo/
-|   |   |-- pilot_demo.mp4
-|   |   |-- pilot_demo.gif
-|   |-- full_test/
-|   |   |-- figures/
-|   |   |-- metrics/
-|   |-- calibration/
-|   |   |-- figures/
-|   |   |-- ablation_summary.csv
-|   |-- action_recognition/
-|   |   |-- experiments/
-|   |   |-- confusion_matrix_*.png
-|   |   |-- training_curves.png
-|   |-- jhmdb/
-|       |-- jhmdb_benchmark_summary.json
-|-- reports/
-|   |-- COMPREHENSIVE_RESEARCH_REPORT.md
-|   |-- JHMDB_EVALUATION_REPORT.md
-|   |-- PENN_ACTION_YOLO_PILOT.md
-|   |-- PENN_ACTION_EVALUATION_AUDIT.md
-|   |-- PENN_ACTION_FULL_TEST_EVALUATION.md
-|   |-- SKELETON_CALIBRATION_ABLATION_STUDY.md
-|   |-- SKELETON_CALIBRATION_BEFORE_AFTER_REPORT.md
-|   |-- ACTION_RECOGNITION_BASELINE_REPORT.md
-```
+| Báo cáo | Phạm vi |
+|---|---|
+| [Bước 1](reports/LEFT_RIGHT_ALIGNMENT_STEP1_2026-10-29.md) | 30 clip official train; lỗi heuristic, đảo cục bộ và nhầm target |
+| [Bước 2](reports/LEFT_RIGHT_ALIGNMENT_STEP2_2026-10-29.md) | Raw / Fixed Swap / Heuristic Only / Full, paired CI |
+| [Bước 3](reports/CALIBRATION_ABLATION_STEP3_2026-10-29.md) | Thiết kế 2³ với cùng cờ swap; A/H tái tạo C3/C4 |
+| [Bản thảo được sửa](reports/MANUSCRIPT_DRAFT.md) | Nghiên cứu chẩn đoán có đối chứng; chưa tuyên bố SOTA/novelty đã xác nhận |
 
-## 2. Hướng dẫn tái lập thực nghiệm
+Trong ablation, A=Alignment Only đạt Top-1 cao nhất 66,80%; F=PCHIP+One-Euro đạt Macro-F1 cao nhất 67,75% nhưng Top-1 66,40%. Bone có point estimate âm ở bốn ngữ cảnh. Tác động phụ thuộc mục tiêu và điều kiện; không kết luận mọi calibration vô ích.
 
-### Cài đặt môi trường Conda
-```bash
-conda create -n penn_pose python=3.10 -y
-conda activate penn_pose
-pip install -r requirements.txt
-```
+Tại working tree cục bộ, CSV dự đoán, metric, posterior, cờ alignment và hình audit nằm trong `outputs/alignment_step1`, `outputs/alignment_step2`, `outputs/calibration_step3`. Source dùng để đo được lưu nguyên byte trong `outputs/research_snapshot`, kèm hash và hướng dẫn khôi phục. Dataset, checkpoint và cache npz không được commit. Không ghi đè code production hoặc chọn lại thuật toán khi cập nhật tài liệu.
 
-### Bước 1: Đánh giá Pose Estimation (YOLO11n-Pose trên Penn Action)
-```bash
-# Thử nghiệm Pilot nhanh (150 frames)
-python src/run_pipeline.py
-
-# Đánh giá toàn diện 100% Tập Test (76.298 frames / 1.068 video sequences)
-python src/run_full_test_evaluation.py
-```
-
-### Bước 2: Hiệu chỉnh Khung xương 2D (Skeleton Calibration & Ablation Study)
-```bash
-# Đánh giá triệt tiêu 4 module hiệu chỉnh độc lập và kết hợp
-python src/run_calibration_ablation.py
-
-# Trực quan hóa đối sánh 5 cột (GT, Raw YOLO, Smooth, Calibrated, Overlay)
-python src/visualize_calibration_comparison.py
-```
-
-### Bước 3: Nhận diện Hành động Hạ tầng (BiLSTM Action Recognition & 4 Hướng Cải tiến)
-```bash
-# Huấn luyện baseline 50 epochs và đối sánh 3 modality (Ground Truth, Raw YOLO, Calibrated YOLO)
-python src/train_action_recognition.py
-
-# Thực nghiệm 4 hướng cải tiến độc lập & Domain-Matched Training
-python src/run_action_experiments.py
-```
-
-### Bước 4: Đánh giá Đa Tập Dữ Liệu trên J-HMDB (Cross-Dataset Generalization)
-```bash
-# Tải và giải nén J-HMDB (928 videos, 21 classes)
-python src/download_jhmdb.py
-
-# Chạy toàn bộ pipeline pose evaluation, calibration và nhận diện hành động trên J-HMDB
-python src/run_jhmdb_pipeline.py
-```
-
-## 3. Các báo cáo nghiên cứu
-* 🌟 **[Báo cáo Tổng hợp Toàn diện Đề tài Nghiên cứu](reports/COMPREHENSIVE_RESEARCH_REPORT.md)** (Tổng hợp bài toán, I/O, dữ liệu, kiểm toán, calibration, nhận diện hành động & khuyến nghị)
-* 🚀 **[Báo cáo Thực nghiệm Đối chuẩn Tập Dữ liệu J-HMDB](reports/JHMDB_EVALUATION_REPORT.md)** (Đánh giá tính tổng quát hóa đa tập dữ liệu, 21 hành động, đối sánh Penn Action vs J-HMDB)
-* [Báo cáo Thử nghiệm Pilot (142 frames)](reports/PENN_ACTION_YOLO_PILOT.md)
-* [Báo cáo Kiểm toán Sai số & Quy ước Nhãn Giải phẫu](reports/PENN_ACTION_EVALUATION_AUDIT.md)
-* [Báo cáo Đánh giá Toàn diện 100% Tập Test (76.298 frames)](reports/PENN_ACTION_FULL_TEST_EVALUATION.md)
-* [Báo cáo Thử nghiệm Triệt tiêu Hiệu chỉnh Khung xương (Ablation Study)](reports/SKELETON_CALIBRATION_ABLATION_STUDY.md)
-* [Báo cáo Đối sánh Toàn diện Trước & Sau Hiệu chỉnh (Before vs After)](reports/SKELETON_CALIBRATION_BEFORE_AFTER_REPORT.md)
-* [Báo cáo Nhận diện Hành động BiLSTM + Attention (50 Epochs Downstream Task)](reports/ACTION_RECOGNITION_BASELINE_REPORT.md)
-
-## 4. Phát triển và kiểm tra
+Ở máy có đủ CSV/snapshot cục bộ, kiểm tra bảng không cần dataset/model:
 
 ```bash
-pip install -r requirements-dev.txt
-ruff check src tests
-ruff format --check src tests
-python -m pytest -q
+python outputs/research_snapshot/verify_published_tables.py
 ```
 
-Để định dạng code sau khi chỉnh sửa:
+Các báo cáo phụ giữ riêng dữ liệu lịch sử: [multi-seed](reports/MULTI_SEED_BENCHMARK_REPORT.md), [pose ablation](reports/SKELETON_CALIBRATION_ABLATION_STUDY.md), [J-HMDB split 1](reports/JHMDB_EVALUATION_REPORT.md), [KD](reports/KNOWLEDGE_DISTILLATION_REPORT.md), [movement proxy](reports/AQA_MOVEMENT_PROFILING_REPORT.md). Các số này không thay thế đối chứng alignment, không chứng minh transfer, AQA được thẩm định hoặc tốc độ streaming end-to-end. [Review trước audit](reports/CRITICAL_RESEARCH_REVIEW_2026-10-29.md) được giữ để truy vết câu hỏi nghiên cứu.
 
-```bash
-ruff format src tests
-```
+Môi trường dự án dùng Python 3.10; dependencies trong `requirements.txt`, kiểm tra phát triển trong `requirements-dev.txt`. Sau khi khôi phục source snapshot vào một bản sao riêng và cung cấp dữ liệu/checkpoint đúng hash, dùng các lệnh tái lập ở report tương ứng. Các lệnh huấn luyện/evaluate test cũ không phải bước bắt buộc để kiểm tra bảng validation đã công bố.
 
-GitHub Actions chạy lint, kiểm tra định dạng và test trên CPU với Python 3.10.
-Các test dùng dữ liệu tổng hợp, không yêu cầu tải dataset hay checkpoint YOLO.
-Giữ dataset, cache và checkpoint ngoài Git theo `.gitignore`. Commit source,
-cấu hình và tài liệu riêng theo từng thay đổi có thể kiểm tra độc lập.
+Phạm vi nhánh GitHub này chỉ gồm tài liệu. CSV, hình và code snapshot mới giữ cục bộ; xem [phạm vi công bố](reports/REPRODUCIBILITY.md).
