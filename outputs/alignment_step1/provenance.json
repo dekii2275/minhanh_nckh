@@ -1,0 +1,13 @@
+{
+  "seed": 20261029,
+  "sampling": "2 per action; second from different pose; official train==1 only",
+  "model_sha256": "869e83fcdffdc7371fa4e34cd8e51c838cc729571d1635e5141e3075e9319dc0",
+  "ultralytics": "8.4.183",
+  "torch": "2.6.0+cu124",
+  "device": "cpu",
+  "imgsz": 640,
+  "conf": 0.25,
+  "selection": "highest person box confidence, no GT",
+  "diagnostic_conf": 0.5,
+  "calibrator_sha256": "28bd65265f6b418d763278a378460ce9b14dcf6781253f3220984529d6ade865"
+}

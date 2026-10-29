@@ -1,0 +1,212 @@
+[
+  {
+    "id": "0099",
+    "action": "baseball_pitch",
+    "pose": "front",
+    "frames": 111,
+    "official_train": 1
+  },
+  {
+    "id": "0137",
+    "action": "baseball_pitch",
+    "pose": "back",
+    "frames": 76,
+    "official_train": 1
+  },
+  {
+    "id": "0219",
+    "action": "baseball_swing",
+    "pose": "right",
+    "frames": 35,
+    "official_train": 1
+  },
+  {
+    "id": "0287",
+    "action": "baseball_swing",
+    "pose": "back",
+    "frames": 37,
+    "official_train": 1
+  },
+  {
+    "id": "0433",
+    "action": "bench_press",
+    "pose": "front",
+    "frames": 41,
+    "official_train": 1
+  },
+  {
+    "id": "0443",
+    "action": "bench_press",
+    "pose": "left",
+    "frames": 124,
+    "official_train": 1
+  },
+  {
+    "id": "0604",
+    "action": "bowl",
+    "pose": "back",
+    "frames": 55,
+    "official_train": 1
+  },
+  {
+    "id": "0543",
+    "action": "bowl",
+    "pose": "front",
+    "frames": 59,
+    "official_train": 1
+  },
+  {
+    "id": "0757",
+    "action": "clean_and_jerk",
+    "pose": "front",
+    "frames": 221,
+    "official_train": 1
+  },
+  {
+    "id": "0775",
+    "action": "clean_and_jerk",
+    "pose": "right",
+    "frames": 249,
+    "official_train": 1
+  },
+  {
+    "id": "0864",
+    "action": "golf_swing",
+    "pose": "back",
+    "frames": 53,
+    "official_train": 1
+  },
+  {
+    "id": "0801",
+    "action": "golf_swing",
+    "pose": "front",
+    "frames": 56,
+    "official_train": 1
+  },
+  {
+    "id": "0996",
+    "action": "jump_rope",
+    "pose": "front",
+    "frames": 38,
+    "official_train": 1
+  },
+  {
+    "id": "0976",
+    "action": "jump_rope",
+    "pose": "right",
+    "frames": 43,
+    "official_train": 1
+  },
+  {
+    "id": "1053",
+    "action": "jumping_jacks",
+    "pose": "front",
+    "frames": 22,
+    "official_train": 1
+  },
+  {
+    "id": "1112",
+    "action": "jumping_jacks",
+    "pose": "left",
+    "frames": 28,
+    "official_train": 1
+  },
+  {
+    "id": "1316",
+    "action": "pullup",
+    "pose": "back",
+    "frames": 54,
+    "official_train": 1
+  },
+  {
+    "id": "1170",
+    "action": "pullup",
+    "pose": "front",
+    "frames": 79,
+    "official_train": 1
+  },
+  {
+    "id": "1484",
+    "action": "pushup",
+    "pose": "right",
+    "frames": 31,
+    "official_train": 1
+  },
+  {
+    "id": "1377",
+    "action": "pushup",
+    "pose": "left",
+    "frames": 73,
+    "official_train": 1
+  },
+  {
+    "id": "1597",
+    "action": "situp",
+    "pose": "left",
+    "frames": 94,
+    "official_train": 1
+  },
+  {
+    "id": "1622",
+    "action": "situp",
+    "pose": "right",
+    "frames": 51,
+    "official_train": 1
+  },
+  {
+    "id": "1787",
+    "action": "squat",
+    "pose": "front",
+    "frames": 85,
+    "official_train": 1
+  },
+  {
+    "id": "1691",
+    "action": "squat",
+    "pose": "left",
+    "frames": 58,
+    "official_train": 1
+  },
+  {
+    "id": "1914",
+    "action": "strum_guitar",
+    "pose": "front",
+    "frames": 45,
+    "official_train": 1
+  },
+  {
+    "id": "1897",
+    "action": "strum_guitar",
+    "pose": "front",
+    "frames": 48,
+    "official_train": 1
+  },
+  {
+    "id": "2062",
+    "action": "tennis_forehand",
+    "pose": "back",
+    "frames": 63,
+    "official_train": 1
+  },
+  {
+    "id": "2104",
+    "action": "tennis_forehand",
+    "pose": "left",
+    "frames": 61,
+    "official_train": 1
+  },
+  {
+    "id": "2203",
+    "action": "tennis_serve",
+    "pose": "right",
+    "frames": 91,
+    "official_train": 1
+  },
+  {
+    "id": "2192",
+    "action": "tennis_serve",
+    "pose": "back",
+    "frames": 68,
+    "official_train": 1
+  }
+]

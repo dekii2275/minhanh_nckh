@@ -1,0 +1,52 @@
+{
+  "checkpoint": "outputs/action_recognition/protocol_v2/multi_seed/baseline/seed0/best_bilstm_model.pt",
+  "checkpoint_sha256": "dc01f24210e57ccb7a52611b0b37fe91a40b35e938718fdb123847267fb74347",
+  "yolo_sha256": "869e83fcdffdc7371fa4e34cd8e51c838cc729571d1635e5141e3075e9319dc0",
+  "calibrator_sha256": "28bd65265f6b418d763278a378460ce9b14dcf6781253f3220984529d6ade865",
+  "classifier_code_sha256": "120f707c85304484e074a83b683fbe4aee551925eab8dc24f5a6b8537527935a",
+  "feature_code_sha256": "3914eda049360062006c91e95f0768a9f43e666f50715dd0d8c3fa01852e2234",
+  "script_sha256": "8997d6000948377ae3d145531750226a308c932b66b24f5b0d4057efd3cb179c",
+  "torch_version": "2.6.0+cu124",
+  "ultralytics_version": "8.4.183",
+  "numpy_version": "2.2.6",
+  "pandas_version": "2.3.3",
+  "classifier": {
+    "input_size": 24,
+    "hidden_size": 128,
+    "num_layers": 2,
+    "num_classes": 15,
+    "attention_heads": 4,
+    "dropout": 0.3,
+    "bidirectional": true,
+    "pooling": "mean"
+  },
+  "yolo": {
+    "imgsz": 640,
+    "conf": 0.25,
+    "device": "cpu",
+    "batch_size": 16,
+    "person_selection": "highest box confidence; no GT"
+  },
+  "calibration": {
+    "conf_threshold": 0.35,
+    "max_gap": 15,
+    "min_bone_ratio": 0.4,
+    "max_bone_ratio": 1.2,
+    "freq": 30.0,
+    "min_cutoff": 1.0,
+    "beta": 0.05,
+    "d_cutoff": 1.0,
+    "lr_mode": "auto_viewer_centric"
+  },
+  "evaluation_batch_size": 32,
+  "training_performed": false,
+  "official_test_evaluated": false,
+  "bootstrap": {
+    "unit": "video",
+    "paired": true,
+    "stratified_by": "GT action",
+    "replicates": 20000,
+    "seed": 20261029,
+    "ci": "percentile 95%; unadjusted; conditional on fixed checkpoint"
+  }
+}

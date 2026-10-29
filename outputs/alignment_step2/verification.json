@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "validation_videos": 253,
+  "validation_frames": 17747,
+  "checks": [
+    "unique validation IDs and no train overlap",
+    "unchanged model, calibration, features, evaluation-script hashes",
+    "all four metrics independently recomputed",
+    "posterior and per-video predictions consistent",
+    "C3 posterior matches C2 on swap and C1 on identity clips",
+    "paired improvement/harm counts reproduce deltas",
+    "report artifact links valid"
+  ]
+}

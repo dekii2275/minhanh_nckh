@@ -1,0 +1,2026 @@
+[
+  {
+    "id": "0004",
+    "action": "baseball_pitch",
+    "label": 0,
+    "frames": 82,
+    "official_train": 1,
+    "annotation_sha256": "52b0ee4396de7397ba4bbbfcbc8772444681fdb1a44fc02284d9690a086dda03"
+  },
+  {
+    "id": "0011",
+    "action": "baseball_pitch",
+    "label": 0,
+    "frames": 60,
+    "official_train": 1,
+    "annotation_sha256": "51ea53843568fe89408930a0b1037cfcdb1aea040d2d46a9329d14b7e02c09f4"
+  },
+  {
+    "id": "0018",
+    "action": "baseball_pitch",
+    "label": 0,
+    "frames": 66,
+    "official_train": 1,
+    "annotation_sha256": "e20d86559ac112091f85d8858fe4704e7a1c1e6e89ae61d52486623c1d303c5b"
+  },
+  {
+    "id": "0021",
+    "action": "baseball_pitch",
+    "label": 0,
+    "frames": 59,
+    "official_train": 1,
+    "annotation_sha256": "a377f355bfe7c671def7c2315d75c538e3b0bf96b72e40cd48260b899855b2e4"
+  },
+  {
+    "id": "0040",
+    "action": "baseball_pitch",
+    "label": 0,
+    "frames": 132,
+    "official_train": 1,
+    "annotation_sha256": "c384daf55772dd6f3aa102b820492aad47bb55d0e23a69c4cb6304675fee9132"
+  },
+  {
+    "id": "0041",
+    "action": "baseball_pitch",
+    "label": 0,
+    "frames": 55,
+    "official_train": 1,
+    "annotation_sha256": "7deeaa6692bebd6a1243bf5e2107a669dc801c93ad20452b96f1732fb8c467a5"
+  },
+  {
+    "id": "0046",
+    "action": "baseball_pitch",
+    "label": 0,
+    "frames": 87,
+    "official_train": 1,
+    "annotation_sha256": "149c9f67584ed9a3dfa7a86ef072e8f3e2f3cdbbcd56a1b8a1fdd9cfc6acfc53"
+  },
+  {
+    "id": "0047",
+    "action": "baseball_pitch",
+    "label": 0,
+    "frames": 102,
+    "official_train": 1,
+    "annotation_sha256": "4312ba47a88634ad8f71608e76dba0e76c341a25ee9bbea9417fc62f402d64b6"
+  },
+  {
+    "id": "0055",
+    "action": "baseball_pitch",
+    "label": 0,
+    "frames": 51,
+    "official_train": 1,
+    "annotation_sha256": "82db570303a35f4868714b02149ae8c745f302125915259646845ab8d4239117"
+  },
+  {
+    "id": "0061",
+    "action": "baseball_pitch",
+    "label": 0,
+    "frames": 71,
+    "official_train": 1,
+    "annotation_sha256": "405aa8a837a3cfd2d2b1f7fb24d711a3261ee89361918ef7fce2d86d0456820b"
+  },
+  {
+    "id": "0063",
+    "action": "baseball_pitch",
+    "label": 0,
+    "frames": 100,
+    "official_train": 1,
+    "annotation_sha256": "6575d7ab2aac462ff972d69a22884802a6f84be2442a3e030aa7e33c7bd45544"
+  },
+  {
+    "id": "0064",
+    "action": "baseball_pitch",
+    "label": 0,
+    "frames": 53,
+    "official_train": 1,
+    "annotation_sha256": "9824e167676e4d8989863d0a5fe43ef39622157d3d435a4c3be7b4eeff0651fc"
+  },
+  {
+    "id": "0067",
+    "action": "baseball_pitch",
+    "label": 0,
+    "frames": 109,
+    "official_train": 1,
+    "annotation_sha256": "7d84bc592428457928385f59aa9ef07bfb64e31342044d48392a41ecd7146735"
+  },
+  {
+    "id": "0080",
+    "action": "baseball_pitch",
+    "label": 0,
+    "frames": 111,
+    "official_train": 1,
+    "annotation_sha256": "890f1425ba933388d014957a70413de3ea5fc02053d1d3de8d723bd8c2d94e9e"
+  },
+  {
+    "id": "0092",
+    "action": "baseball_pitch",
+    "label": 0,
+    "frames": 59,
+    "official_train": 1,
+    "annotation_sha256": "3652d4ff1813ed2438d722e1e19271a2a213eef959feaf9890162339c2382d50"
+  },
+  {
+    "id": "0127",
+    "action": "baseball_pitch",
+    "label": 0,
+    "frames": 109,
+    "official_train": 1,
+    "annotation_sha256": "57d86015f8bc0934947f7733da4ec406dc246dea225a30608d13b25764ef8bb2"
+  },
+  {
+    "id": "0137",
+    "action": "baseball_pitch",
+    "label": 0,
+    "frames": 76,
+    "official_train": 1,
+    "annotation_sha256": "9c04a54185446c35e5c752b2e5235e5969099acff0f2df28ad552e6a2cbfe353"
+  },
+  {
+    "id": "0144",
+    "action": "baseball_pitch",
+    "label": 0,
+    "frames": 124,
+    "official_train": 1,
+    "annotation_sha256": "6ba7690f506c943e0ca705b39e2e7fcbac3fadb6a16731573d395e612c4b0c21"
+  },
+  {
+    "id": "0154",
+    "action": "baseball_pitch",
+    "label": 0,
+    "frames": 108,
+    "official_train": 1,
+    "annotation_sha256": "2b42bb2e50b66d7800c91bcf8b3899a42808973578f7ddfb59093f04d10074bb"
+  },
+  {
+    "id": "0159",
+    "action": "baseball_pitch",
+    "label": 0,
+    "frames": 89,
+    "official_train": 1,
+    "annotation_sha256": "629e8e8c28d7ed1e54761fe18d7eba69cc8ac56a39f87962145ee2bc1ef483ad"
+  },
+  {
+    "id": "0165",
+    "action": "baseball_pitch",
+    "label": 0,
+    "frames": 69,
+    "official_train": 1,
+    "annotation_sha256": "15d16dca25ffaf468efdf7325f77f70318d020367ace06be7d0857b431ec0911"
+  },
+  {
+    "id": "0174",
+    "action": "baseball_swing",
+    "label": 1,
+    "frames": 37,
+    "official_train": 1,
+    "annotation_sha256": "f176a6a23d87d5fd75e6bf581855cb22116bea755e28862505b52bcb6b8265f3"
+  },
+  {
+    "id": "0186",
+    "action": "baseball_swing",
+    "label": 1,
+    "frames": 39,
+    "official_train": 1,
+    "annotation_sha256": "1a6e646f39658351d7e680b19619ee5fc96c1106df7fd007f345d175bb37c24a"
+  },
+  {
+    "id": "0203",
+    "action": "baseball_swing",
+    "label": 1,
+    "frames": 49,
+    "official_train": 1,
+    "annotation_sha256": "cf48560d9d8a70c6f25a6207aadbcad3eb535d76dc9699861e8831e3d75d8b03"
+  },
+  {
+    "id": "0207",
+    "action": "baseball_swing",
+    "label": 1,
+    "frames": 52,
+    "official_train": 1,
+    "annotation_sha256": "647bac1240043aec1b4032b206b1e40a5309f2cf59b8b2157540810ee36552a1"
+  },
+  {
+    "id": "0215",
+    "action": "baseball_swing",
+    "label": 1,
+    "frames": 44,
+    "official_train": 1,
+    "annotation_sha256": "c410231e5406815414c7e2cfd401f0acd528159061efb3f9dd0673189a813493"
+  },
+  {
+    "id": "0240",
+    "action": "baseball_swing",
+    "label": 1,
+    "frames": 46,
+    "official_train": 1,
+    "annotation_sha256": "802cc698374b6ed1da06820d1faae5f2fa6b0141abc0188637f41d5eba8b5497"
+  },
+  {
+    "id": "0242",
+    "action": "baseball_swing",
+    "label": 1,
+    "frames": 42,
+    "official_train": 1,
+    "annotation_sha256": "e62c305882e67ded2cf6f2cfd92fd293ddd208b600a8bc9f29d5352bfff59ba9"
+  },
+  {
+    "id": "0243",
+    "action": "baseball_swing",
+    "label": 1,
+    "frames": 43,
+    "official_train": 1,
+    "annotation_sha256": "c1ac7f0af0dcaa9cac6410884defc85c3acfa947a0652608411328d8400b4c10"
+  },
+  {
+    "id": "0246",
+    "action": "baseball_swing",
+    "label": 1,
+    "frames": 33,
+    "official_train": 1,
+    "annotation_sha256": "e921b18be7dda6408b40c809bb9c7dbd2b6721df0bd98633172ab974b3347fd0"
+  },
+  {
+    "id": "0252",
+    "action": "baseball_swing",
+    "label": 1,
+    "frames": 44,
+    "official_train": 1,
+    "annotation_sha256": "4c590cdeb00686fb0e3829f779bde472f32a9c98801f2d883553b4f6a9685156"
+  },
+  {
+    "id": "0253",
+    "action": "baseball_swing",
+    "label": 1,
+    "frames": 41,
+    "official_train": 1,
+    "annotation_sha256": "27171b50a9b14b203ebaef5735a52bf6ab59ebe4a0d588ef766bd5cd58b6f4c4"
+  },
+  {
+    "id": "0260",
+    "action": "baseball_swing",
+    "label": 1,
+    "frames": 59,
+    "official_train": 1,
+    "annotation_sha256": "941692b3229ee845009f90d8495ff1a8ed43bf2243739fa638d42b2099e45e8c"
+  },
+  {
+    "id": "0270",
+    "action": "baseball_swing",
+    "label": 1,
+    "frames": 57,
+    "official_train": 1,
+    "annotation_sha256": "4d8898b21e65b7f66e85a278c672a02dd8be4a2f304e936da815ecb896983946"
+  },
+  {
+    "id": "0274",
+    "action": "baseball_swing",
+    "label": 1,
+    "frames": 53,
+    "official_train": 1,
+    "annotation_sha256": "d54d666a41d644d962eeda8bb791ba82bb372d673a13906b736ef1a933520d66"
+  },
+  {
+    "id": "0299",
+    "action": "baseball_swing",
+    "label": 1,
+    "frames": 48,
+    "official_train": 1,
+    "annotation_sha256": "57a8c2bd3a5b3294ace32168fa09e29dcc85f8ac2ebdc267d319ce44108600e2"
+  },
+  {
+    "id": "0307",
+    "action": "baseball_swing",
+    "label": 1,
+    "frames": 43,
+    "official_train": 1,
+    "annotation_sha256": "c5ccc4f52d5b367b0846f832649f575c6c3996bf12ac21a6e4c2ef49ec74de36"
+  },
+  {
+    "id": "0312",
+    "action": "baseball_swing",
+    "label": 1,
+    "frames": 35,
+    "official_train": 1,
+    "annotation_sha256": "2f86cd52d2c1a2b9cc5579d5bb669e26a8853dd6e2d7974f092e288c3d85b5c2"
+  },
+  {
+    "id": "0314",
+    "action": "baseball_swing",
+    "label": 1,
+    "frames": 38,
+    "official_train": 1,
+    "annotation_sha256": "43b7752d4d0ca6391896a767e52fe38fa5f923942aa11d02de481ffa8fc96c3f"
+  },
+  {
+    "id": "0315",
+    "action": "baseball_swing",
+    "label": 1,
+    "frames": 40,
+    "official_train": 1,
+    "annotation_sha256": "9617382fd3d210770439a0b04d432bf87c1e8a9818e850c887e6b77ec6c48a11"
+  },
+  {
+    "id": "0319",
+    "action": "baseball_swing",
+    "label": 1,
+    "frames": 41,
+    "official_train": 1,
+    "annotation_sha256": "3128bbd338c7e5fd73f3e06c11fdfa5a0e4a9f0d88db4cdb774ae8df83eea0c5"
+  },
+  {
+    "id": "0327",
+    "action": "baseball_swing",
+    "label": 1,
+    "frames": 40,
+    "official_train": 1,
+    "annotation_sha256": "20fc1317cef5c3e7c34d76fd4e530c9d9e2b1a34ad42708f377d48c7975d9b18"
+  },
+  {
+    "id": "0334",
+    "action": "baseball_swing",
+    "label": 1,
+    "frames": 38,
+    "official_train": 1,
+    "annotation_sha256": "6bea6128aa40b36b1be9d9a12c106ff22ccf0ba0ab663bf8325b0a712c0fb4bb"
+  },
+  {
+    "id": "0337",
+    "action": "baseball_swing",
+    "label": 1,
+    "frames": 46,
+    "official_train": 1,
+    "annotation_sha256": "1b5e8543011ea2b65fa163244f5c821d48b1e35ae2bd78afbb0edbcfea2ae6c8"
+  },
+  {
+    "id": "0351",
+    "action": "bench_press",
+    "label": 2,
+    "frames": 83,
+    "official_train": 1,
+    "annotation_sha256": "0f0b15049a85ef5fe3219ad4ee09b484744a85df4249231f57d87c81395a3656"
+  },
+  {
+    "id": "0352",
+    "action": "bench_press",
+    "label": 2,
+    "frames": 66,
+    "official_train": 1,
+    "annotation_sha256": "5411244cd5b84eaf275e2387eb5132617c55fc9997591aef5e00935578c99f7f"
+  },
+  {
+    "id": "0354",
+    "action": "bench_press",
+    "label": 2,
+    "frames": 51,
+    "official_train": 1,
+    "annotation_sha256": "a318f82b5f72f94f9c492cd8bba4329f575cc17eda66a1b21876ca20ff13cda2"
+  },
+  {
+    "id": "0359",
+    "action": "bench_press",
+    "label": 2,
+    "frames": 50,
+    "official_train": 1,
+    "annotation_sha256": "6381f4c8f26fa43e83f04640c955702eeb9480e0142cf0ca90adae94e0c0b98b"
+  },
+  {
+    "id": "0362",
+    "action": "bench_press",
+    "label": 2,
+    "frames": 66,
+    "official_train": 1,
+    "annotation_sha256": "aa8a16e816d9cf990c08fbcba870236929435cbd0e3b7f072357a45ccd65c8bd"
+  },
+  {
+    "id": "0377",
+    "action": "bench_press",
+    "label": 2,
+    "frames": 63,
+    "official_train": 1,
+    "annotation_sha256": "dd178332f143a6933cf242677dd5650e40a7d35b74d573152fbebc51f94c923d"
+  },
+  {
+    "id": "0399",
+    "action": "bench_press",
+    "label": 2,
+    "frames": 44,
+    "official_train": 1,
+    "annotation_sha256": "153d100fa49be88454be8d42a06970af2c54ea1e7099ca06faf9f527d792a274"
+  },
+  {
+    "id": "0405",
+    "action": "bench_press",
+    "label": 2,
+    "frames": 87,
+    "official_train": 1,
+    "annotation_sha256": "9caaaa3e1402d4db6de67c0de748bff5e50e81e27a8465a8542ad78b137eb67f"
+  },
+  {
+    "id": "0413",
+    "action": "bench_press",
+    "label": 2,
+    "frames": 86,
+    "official_train": 1,
+    "annotation_sha256": "ee5e0888e8323a321e760e82a7b6d77b87117a8873e8f99c4bf0699f0946b396"
+  },
+  {
+    "id": "0425",
+    "action": "bench_press",
+    "label": 2,
+    "frames": 72,
+    "official_train": 1,
+    "annotation_sha256": "894a294edf92732788fbf8541d759e1b66db3d648cc26b6c3ae08fc99259d1fd"
+  },
+  {
+    "id": "0447",
+    "action": "bench_press",
+    "label": 2,
+    "frames": 88,
+    "official_train": 1,
+    "annotation_sha256": "106c1acf12a55d30b19ef7107c25c895c8fb262f1eda9ff1a8ebbc96499afc36"
+  },
+  {
+    "id": "0453",
+    "action": "bench_press",
+    "label": 2,
+    "frames": 111,
+    "official_train": 1,
+    "annotation_sha256": "d890f91c1f09a57da67653ac5cd8051270b61ff22844038a586114d80ecdc5f8"
+  },
+  {
+    "id": "0455",
+    "action": "bench_press",
+    "label": 2,
+    "frames": 92,
+    "official_train": 1,
+    "annotation_sha256": "5a9605ca814173c5c67df314e8bd93b620113f583b021a6bd7d67da8fea54f9c"
+  },
+  {
+    "id": "0463",
+    "action": "bench_press",
+    "label": 2,
+    "frames": 61,
+    "official_train": 1,
+    "annotation_sha256": "b8bc5bc94eda325f86bb164eaec3d659b619a31870082001b2ed12202f2c3139"
+  },
+  {
+    "id": "0490",
+    "action": "bowl",
+    "label": 3,
+    "frames": 65,
+    "official_train": 1,
+    "annotation_sha256": "65b8bac0577d0f9c78c7e677f0b1c70a3fe4e8a9b695f05e0d462618bf3bceef"
+  },
+  {
+    "id": "0504",
+    "action": "bowl",
+    "label": 3,
+    "frames": 61,
+    "official_train": 1,
+    "annotation_sha256": "28445f4a0b52a3ddbed3c6ffdddc6434513f2dbe4ea69a0535aebf4cee0cc23f"
+  },
+  {
+    "id": "0509",
+    "action": "bowl",
+    "label": 3,
+    "frames": 51,
+    "official_train": 1,
+    "annotation_sha256": "6407169ab066fb4b09d15afcdd975dec48ca27ead369502b21761528913d322d"
+  },
+  {
+    "id": "0517",
+    "action": "bowl",
+    "label": 3,
+    "frames": 50,
+    "official_train": 1,
+    "annotation_sha256": "224f6b3744115ae57cc0f3e265143669484d4034cbc313abdbbcae2ce19e7ee0"
+  },
+  {
+    "id": "0522",
+    "action": "bowl",
+    "label": 3,
+    "frames": 51,
+    "official_train": 1,
+    "annotation_sha256": "b7883ca0e541fe26e30dfbe07c57a9650bac065264176491dc486e56e16e2202"
+  },
+  {
+    "id": "0531",
+    "action": "bowl",
+    "label": 3,
+    "frames": 57,
+    "official_train": 1,
+    "annotation_sha256": "d648d0262a73135d399058b3e77c349b768a89eb31a9b40a8b8e99a715c54f4c"
+  },
+  {
+    "id": "0536",
+    "action": "bowl",
+    "label": 3,
+    "frames": 40,
+    "official_train": 1,
+    "annotation_sha256": "543709cccb9fb703ee79da9b20cc3d28705b3aabf09625cda330d10dd1de73a7"
+  },
+  {
+    "id": "0542",
+    "action": "bowl",
+    "label": 3,
+    "frames": 59,
+    "official_train": 1,
+    "annotation_sha256": "0616c2c0b57b6e469589007dc7e28a50a0a1f1c3085819f7a2598901b7cae542"
+  },
+  {
+    "id": "0574",
+    "action": "bowl",
+    "label": 3,
+    "frames": 66,
+    "official_train": 1,
+    "annotation_sha256": "8f6835ec8535b3f5a7f8bb9e0f6b0e4eb87064299bc9572e0ef70319fec2f90f"
+  },
+  {
+    "id": "0576",
+    "action": "bowl",
+    "label": 3,
+    "frames": 57,
+    "official_train": 1,
+    "annotation_sha256": "0450237b298259b808f1006f718e1d461c52d62e4db676fa05488d223059b184"
+  },
+  {
+    "id": "0581",
+    "action": "bowl",
+    "label": 3,
+    "frames": 48,
+    "official_train": 1,
+    "annotation_sha256": "ee2b08ae3c001735607919e4d0f0d75f52e18cd8faed335648692b3e28531397"
+  },
+  {
+    "id": "0584",
+    "action": "bowl",
+    "label": 3,
+    "frames": 48,
+    "official_train": 1,
+    "annotation_sha256": "151fd28d223ed990fc8000dee2df7b28cd90e2da510b62aec35654c461e15201"
+  },
+  {
+    "id": "0586",
+    "action": "bowl",
+    "label": 3,
+    "frames": 33,
+    "official_train": 1,
+    "annotation_sha256": "7fa2eb2de300fbbb194994346b3267d77eef67b9cfc4b97c6d8334fb4247acd6"
+  },
+  {
+    "id": "0600",
+    "action": "bowl",
+    "label": 3,
+    "frames": 40,
+    "official_train": 1,
+    "annotation_sha256": "5ee6baae2ca6a197ff729377554a2f858364e96de278c000a51f35d9d5bd0527"
+  },
+  {
+    "id": "0605",
+    "action": "bowl",
+    "label": 3,
+    "frames": 47,
+    "official_train": 1,
+    "annotation_sha256": "774eab4a99f3c886a925d14cd820ed58e0f14c74c0b7dbf6cb85fbd88968ab65"
+  },
+  {
+    "id": "0607",
+    "action": "bowl",
+    "label": 3,
+    "frames": 43,
+    "official_train": 1,
+    "annotation_sha256": "2017b444618b4edb22020d56481c04441970c5a6d58fc56a2bf141cbb89e3204"
+  },
+  {
+    "id": "0608",
+    "action": "bowl",
+    "label": 3,
+    "frames": 45,
+    "official_train": 1,
+    "annotation_sha256": "17da19b41ac33cf510f3de5abdb56c4ca16c852fc100b8456bd66b851ed8a923"
+  },
+  {
+    "id": "0613",
+    "action": "bowl",
+    "label": 3,
+    "frames": 57,
+    "official_train": 1,
+    "annotation_sha256": "3300da0ecfd8581f1ea0da3fec5392ac4fd4b9d6778fd3dafe413aabd21a7165"
+  },
+  {
+    "id": "0626",
+    "action": "bowl",
+    "label": 3,
+    "frames": 47,
+    "official_train": 1,
+    "annotation_sha256": "49abfcd3fe458a8802bd5bbca7d6b1fa61ae386d5962b9030b44d8885a8d1059"
+  },
+  {
+    "id": "0628",
+    "action": "bowl",
+    "label": 3,
+    "frames": 54,
+    "official_train": 1,
+    "annotation_sha256": "d6dc4b0497a4e85220bff120a5b46d02cca2aee7e5eee36b98e092819fcd4407"
+  },
+  {
+    "id": "0647",
+    "action": "bowl",
+    "label": 3,
+    "frames": 45,
+    "official_train": 1,
+    "annotation_sha256": "0d1cc6b9b388e3f242d62a066646ffbdbdd0c7d4840de338e5e7c2f0e19608f9"
+  },
+  {
+    "id": "0673",
+    "action": "bowl",
+    "label": 3,
+    "frames": 57,
+    "official_train": 1,
+    "annotation_sha256": "f4c7f411e45de98d03f256941fec2e0f8edcd82c07e9d288a77b96e9f17d14c7"
+  },
+  {
+    "id": "0676",
+    "action": "bowl",
+    "label": 3,
+    "frames": 62,
+    "official_train": 1,
+    "annotation_sha256": "fb6eec5000e1f2e57fb3a8f1a14bc0a6c6304456c71e2204b2f7b4210db00687"
+  },
+  {
+    "id": "0679",
+    "action": "bowl",
+    "label": 3,
+    "frames": 73,
+    "official_train": 1,
+    "annotation_sha256": "e82239d94ff962de4226c863debc68044aed39d20593822b51139edcedad91b5"
+  },
+  {
+    "id": "0681",
+    "action": "bowl",
+    "label": 3,
+    "frames": 60,
+    "official_train": 1,
+    "annotation_sha256": "0085618c8a8027e333b1e52f78e99bdb56170e398199ff689f3c114267dfc520"
+  },
+  {
+    "id": "0683",
+    "action": "bowl",
+    "label": 3,
+    "frames": 67,
+    "official_train": 1,
+    "annotation_sha256": "e40d897cc95cadeee307dd2748d094d8e4f167ee04b42005c8a99307431e66e0"
+  },
+  {
+    "id": "0686",
+    "action": "bowl",
+    "label": 3,
+    "frames": 62,
+    "official_train": 1,
+    "annotation_sha256": "f9cc5ea1001842c2b54e56e0d0b56b4125cf35d8b071063ac3b871fc82648dfb"
+  },
+  {
+    "id": "0703",
+    "action": "clean_and_jerk",
+    "label": 4,
+    "frames": 137,
+    "official_train": 1,
+    "annotation_sha256": "5aa60b58e45f8cc6a84a6a3327ce19e8a66ea100ae4c905957f04218e7d8a91e"
+  },
+  {
+    "id": "0715",
+    "action": "clean_and_jerk",
+    "label": 4,
+    "frames": 352,
+    "official_train": 1,
+    "annotation_sha256": "37d4d1d815ecef63a4faa868ab478da7a93930349534b87c2e015d6edb0fab90"
+  },
+  {
+    "id": "0741",
+    "action": "clean_and_jerk",
+    "label": 4,
+    "frames": 305,
+    "official_train": 1,
+    "annotation_sha256": "58dc6924b1e684fb5eaf9acdd4902c626c759cd09fc34fc1ab80bc8b840e780d"
+  },
+  {
+    "id": "0751",
+    "action": "clean_and_jerk",
+    "label": 4,
+    "frames": 283,
+    "official_train": 1,
+    "annotation_sha256": "dddd076e3a3bf2c5e459d5eeb218d84d6687e7876efb4f7228a4141f81a072c5"
+  },
+  {
+    "id": "0757",
+    "action": "clean_and_jerk",
+    "label": 4,
+    "frames": 221,
+    "official_train": 1,
+    "annotation_sha256": "0eee4718b7b2c04515bfcf59b542fb26a999839cf807e2fec4d5cd24f28f937c"
+  },
+  {
+    "id": "0761",
+    "action": "clean_and_jerk",
+    "label": 4,
+    "frames": 402,
+    "official_train": 1,
+    "annotation_sha256": "ddc554c26d578573acfbb8c5e8b0c951be564aed10be74e80740dcbbf1025ef8"
+  },
+  {
+    "id": "0773",
+    "action": "clean_and_jerk",
+    "label": 4,
+    "frames": 280,
+    "official_train": 1,
+    "annotation_sha256": "b5d91fa695769283c8e3a25ceeb693c16e69c2dd5a11231fb9d14e5823555562"
+  },
+  {
+    "id": "0777",
+    "action": "clean_and_jerk",
+    "label": 4,
+    "frames": 244,
+    "official_train": 1,
+    "annotation_sha256": "0464fb5572629483461edd7071cc12c9891c0f1a10e0c5ced5ce6d9f122b0cd7"
+  },
+  {
+    "id": "0778",
+    "action": "clean_and_jerk",
+    "label": 4,
+    "frames": 315,
+    "official_train": 1,
+    "annotation_sha256": "eb3ca8753752891131e850aa0f849a54247977f5bfa81d69186dd784f6a331ba"
+  },
+  {
+    "id": "0795",
+    "action": "golf_swing",
+    "label": 5,
+    "frames": 58,
+    "official_train": 1,
+    "annotation_sha256": "eb0eeeb7613bcb2c33ca1a0d6fdad22fe92bc43337c70d26eec7f742b6ff9745"
+  },
+  {
+    "id": "0803",
+    "action": "golf_swing",
+    "label": 5,
+    "frames": 53,
+    "official_train": 1,
+    "annotation_sha256": "36f00de57a61541b97a482a8163db9f95a0a07b3dc7deed2279ec3d4340507d0"
+  },
+  {
+    "id": "0808",
+    "action": "golf_swing",
+    "label": 5,
+    "frames": 53,
+    "official_train": 1,
+    "annotation_sha256": "ce1c3a101298c8f18a482c4be07c018d5ef7c53ac383afeebfd33f878d08bd06"
+  },
+  {
+    "id": "0812",
+    "action": "golf_swing",
+    "label": 5,
+    "frames": 51,
+    "official_train": 1,
+    "annotation_sha256": "9a214a1eca45371709d033b6dd6ff20c6606984f466db067af81a3647e159800"
+  },
+  {
+    "id": "0814",
+    "action": "golf_swing",
+    "label": 5,
+    "frames": 48,
+    "official_train": 1,
+    "annotation_sha256": "6f698d091ba670f40345f851801b9e3421c17511775b4e6bf86b7ad7dc9be42b"
+  },
+  {
+    "id": "0818",
+    "action": "golf_swing",
+    "label": 5,
+    "frames": 70,
+    "official_train": 1,
+    "annotation_sha256": "f236ecdc98b1253b27e812add962ea23bb0a1c67f05ba99cff8f136a625fe2a6"
+  },
+  {
+    "id": "0827",
+    "action": "golf_swing",
+    "label": 5,
+    "frames": 62,
+    "official_train": 1,
+    "annotation_sha256": "0f984d29235c17abda32ead14bbff631d29c8e45fd5f85e2e13e459fc403f59a"
+  },
+  {
+    "id": "0830",
+    "action": "golf_swing",
+    "label": 5,
+    "frames": 49,
+    "official_train": 1,
+    "annotation_sha256": "84131b531a04889679f229c7311276502755b42f0232d7a368d240292e6f70da"
+  },
+  {
+    "id": "0831",
+    "action": "golf_swing",
+    "label": 5,
+    "frames": 64,
+    "official_train": 1,
+    "annotation_sha256": "1ddbf651259cc3739edc00ff3287c17cafec1c2beab5c1e996d4289b7d7a6853"
+  },
+  {
+    "id": "0832",
+    "action": "golf_swing",
+    "label": 5,
+    "frames": 64,
+    "official_train": 1,
+    "annotation_sha256": "d5ab03bbba8e86ddec06e8280f894d442c6a060af3156b9016566e6fe48134a4"
+  },
+  {
+    "id": "0839",
+    "action": "golf_swing",
+    "label": 5,
+    "frames": 55,
+    "official_train": 1,
+    "annotation_sha256": "253bab18e065acefaf00c059017ff4580b7d3cb5f0d67687cd697ff2be2c7350"
+  },
+  {
+    "id": "0848",
+    "action": "golf_swing",
+    "label": 5,
+    "frames": 54,
+    "official_train": 1,
+    "annotation_sha256": "390f6c052faeaba027e8216785f5dff4e7d78826b4c15a7f6a40d3b6579d762f"
+  },
+  {
+    "id": "0854",
+    "action": "golf_swing",
+    "label": 5,
+    "frames": 66,
+    "official_train": 1,
+    "annotation_sha256": "8c1ffaa14e2c67a91a700dbafe620fbceb2b67dc06312ed8e50a937b66da1d45"
+  },
+  {
+    "id": "0855",
+    "action": "golf_swing",
+    "label": 5,
+    "frames": 59,
+    "official_train": 1,
+    "annotation_sha256": "3c5cd39b2d4d647b51e2327bd56cc20caf35bb9b693f152930ac54704997bf73"
+  },
+  {
+    "id": "0867",
+    "action": "golf_swing",
+    "label": 5,
+    "frames": 58,
+    "official_train": 1,
+    "annotation_sha256": "69305cbadeca9728c0c82cf961cdcbe59e7924ede0f4013e9ba186ecfa62e282"
+  },
+  {
+    "id": "0886",
+    "action": "golf_swing",
+    "label": 5,
+    "frames": 57,
+    "official_train": 1,
+    "annotation_sha256": "796732177b5c7f9812078fa3e6eba35ee11209a0340e660cc866c73e39bbf9ad"
+  },
+  {
+    "id": "0901",
+    "action": "golf_swing",
+    "label": 5,
+    "frames": 56,
+    "official_train": 1,
+    "annotation_sha256": "e0f2db44e44adea34cd59d89b8ad085ae1d2dee9cd7c82897f593175dd72864a"
+  },
+  {
+    "id": "0937",
+    "action": "golf_swing",
+    "label": 5,
+    "frames": 67,
+    "official_train": 1,
+    "annotation_sha256": "6aecaad19bb599607ca362c554acd0adc2938411d8efca39b9330be936114b0d"
+  },
+  {
+    "id": "0966",
+    "action": "jump_rope",
+    "label": 6,
+    "frames": 50,
+    "official_train": 1,
+    "annotation_sha256": "6e4236636e9f84ae22ecf344f8b4aff066360bba95243202adb36797afac3132"
+  },
+  {
+    "id": "0971",
+    "action": "jump_rope",
+    "label": 6,
+    "frames": 40,
+    "official_train": 1,
+    "annotation_sha256": "cc260261673f29cb12da8f2e252bb2be237e0799084fc51684aefe1d5ae0ecc3"
+  },
+  {
+    "id": "0993",
+    "action": "jump_rope",
+    "label": 6,
+    "frames": 41,
+    "official_train": 1,
+    "annotation_sha256": "db0d0caea1059a0e9c437da88806f135137190455c0621137878daf5c29dc20e"
+  },
+  {
+    "id": "0999",
+    "action": "jump_rope",
+    "label": 6,
+    "frames": 46,
+    "official_train": 1,
+    "annotation_sha256": "e5dd9357ba10978154cee7c56b3ff51b1558151b607dd4096b303d282940abd2"
+  },
+  {
+    "id": "1005",
+    "action": "jump_rope",
+    "label": 6,
+    "frames": 33,
+    "official_train": 1,
+    "annotation_sha256": "f4e5e5968e2516e4b8b22f43c851be42a189f9ab4c3fa4e08b4c95de8f6f8a9a"
+  },
+  {
+    "id": "1025",
+    "action": "jump_rope",
+    "label": 6,
+    "frames": 41,
+    "official_train": 1,
+    "annotation_sha256": "63284f11fddcab55c028c5b85ec2904fe236bf45eb61160cea9de4c2b6c87a0d"
+  },
+  {
+    "id": "1030",
+    "action": "jump_rope",
+    "label": 6,
+    "frames": 35,
+    "official_train": 1,
+    "annotation_sha256": "e408182728a09c95d052bae5571f07743430d1095caab9b3ea4c2437e9acd944"
+  },
+  {
+    "id": "1036",
+    "action": "jump_rope",
+    "label": 6,
+    "frames": 28,
+    "official_train": 1,
+    "annotation_sha256": "43f53545821daa8fa8cecf65f7f12621f95caa0e6da9dd772bbe0e8b0a120cc0"
+  },
+  {
+    "id": "1047",
+    "action": "jumping_jacks",
+    "label": 7,
+    "frames": 34,
+    "official_train": 1,
+    "annotation_sha256": "e6542a301200144936f2d40f5b7425cd8dd276216ed7b9dbb5965c26521797b8"
+  },
+  {
+    "id": "1049",
+    "action": "jumping_jacks",
+    "label": 7,
+    "frames": 26,
+    "official_train": 1,
+    "annotation_sha256": "ef1ee9ca7b5ac038cd9abdef7ebc9ef7aa0ac7ab574d5a1c6bbfc56db7ddbeb6"
+  },
+  {
+    "id": "1053",
+    "action": "jumping_jacks",
+    "label": 7,
+    "frames": 22,
+    "official_train": 1,
+    "annotation_sha256": "7e016a907801b80a05ea767b8056ca7218457ab1b89ff3c9d29f98b8e363115e"
+  },
+  {
+    "id": "1064",
+    "action": "jumping_jacks",
+    "label": 7,
+    "frames": 26,
+    "official_train": 1,
+    "annotation_sha256": "d5d060d2badfadac703437a47a46bb1d1f0b1289b9359ea77a0b2de19e51d5f2"
+  },
+  {
+    "id": "1073",
+    "action": "jumping_jacks",
+    "label": 7,
+    "frames": 27,
+    "official_train": 1,
+    "annotation_sha256": "f5aac18d16fef17c6beb2f2875b5d68fe8245f1abd4c28a043abbf1673c9a677"
+  },
+  {
+    "id": "1084",
+    "action": "jumping_jacks",
+    "label": 7,
+    "frames": 30,
+    "official_train": 1,
+    "annotation_sha256": "aac621dd619545b3857caae90266baf502950dd53c572cf9329cc08a5f3df724"
+  },
+  {
+    "id": "1089",
+    "action": "jumping_jacks",
+    "label": 7,
+    "frames": 32,
+    "official_train": 1,
+    "annotation_sha256": "982823807f98d5576da614c7b888c7166eb1a63fd60b805ded1557dd5a809cc9"
+  },
+  {
+    "id": "1091",
+    "action": "jumping_jacks",
+    "label": 7,
+    "frames": 32,
+    "official_train": 1,
+    "annotation_sha256": "09af42ca141b34317c7a0852b848df2dfdd59234e12d1b8842fb0c1d1d2fec4c"
+  },
+  {
+    "id": "1108",
+    "action": "jumping_jacks",
+    "label": 7,
+    "frames": 23,
+    "official_train": 1,
+    "annotation_sha256": "98e228480715b3d9193553b209335fea3fa774de818a8e493bb42910856d092d"
+  },
+  {
+    "id": "1132",
+    "action": "jumping_jacks",
+    "label": 7,
+    "frames": 26,
+    "official_train": 1,
+    "annotation_sha256": "7aa7fa46ffcfe662aa0b447551d5a88414005b5a569539a25dfcc9c257497f2b"
+  },
+  {
+    "id": "1146",
+    "action": "jumping_jacks",
+    "label": 7,
+    "frames": 30,
+    "official_train": 1,
+    "annotation_sha256": "4cbdc1af19e6f52fa78cc18e6c4632333359630c9f48670236dc72334539ddac"
+  },
+  {
+    "id": "1152",
+    "action": "pullup",
+    "label": 8,
+    "frames": 44,
+    "official_train": 1,
+    "annotation_sha256": "37d49762c23eb301a621685f4564f46bd6f503278561b836829afabdd14df319"
+  },
+  {
+    "id": "1170",
+    "action": "pullup",
+    "label": 8,
+    "frames": 79,
+    "official_train": 1,
+    "annotation_sha256": "c6d3a63573fa8f99f5e390d5e4f05d30ab7e39bbc985c4e752755dcdb361b636"
+  },
+  {
+    "id": "1190",
+    "action": "pullup",
+    "label": 8,
+    "frames": 56,
+    "official_train": 1,
+    "annotation_sha256": "269b1bd99fdc618c542d45fd4e6670bbdafb798ea3949cbace22aad2729a3bbc"
+  },
+  {
+    "id": "1194",
+    "action": "pullup",
+    "label": 8,
+    "frames": 122,
+    "official_train": 1,
+    "annotation_sha256": "8946c81f65ed092b13cfc52a38f2d828c98e657e0fb21592af202e2143e9184a"
+  },
+  {
+    "id": "1199",
+    "action": "pullup",
+    "label": 8,
+    "frames": 114,
+    "official_train": 1,
+    "annotation_sha256": "38e35b15fe8d0ed2238500d586d582d5dfe4b567fa46074f7a184e193950ce05"
+  },
+  {
+    "id": "1213",
+    "action": "pullup",
+    "label": 8,
+    "frames": 79,
+    "official_train": 1,
+    "annotation_sha256": "5a4190fe7b4371fb02cfd170122d1ddcae265b5d6c64be27b22b0a761012947c"
+  },
+  {
+    "id": "1214",
+    "action": "pullup",
+    "label": 8,
+    "frames": 50,
+    "official_train": 1,
+    "annotation_sha256": "41107db2db20ef10ddc4e366e9dbe910a73d8c1de4455d86703136d2d1ccd0d0"
+  },
+  {
+    "id": "1218",
+    "action": "pullup",
+    "label": 8,
+    "frames": 183,
+    "official_train": 1,
+    "annotation_sha256": "667f05b82958fbefe3d3c6785f9af231acb66aa21bf5e41d5db0d7814868a73b"
+  },
+  {
+    "id": "1232",
+    "action": "pullup",
+    "label": 8,
+    "frames": 93,
+    "official_train": 1,
+    "annotation_sha256": "25f47bdd12c36ae9c9f9c87daa7d035a23a7c5aff89ac71165a73e6303de29a7"
+  },
+  {
+    "id": "1241",
+    "action": "pullup",
+    "label": 8,
+    "frames": 108,
+    "official_train": 1,
+    "annotation_sha256": "73a57c2f7180e85db70538456c54199c1e6050f3d2a561ee231c889a6a5123b7"
+  },
+  {
+    "id": "1256",
+    "action": "pullup",
+    "label": 8,
+    "frames": 109,
+    "official_train": 1,
+    "annotation_sha256": "09d31b55ace4159d3ef82f349c5b5f52e65c07531f8ead753a2346bbccd8758d"
+  },
+  {
+    "id": "1261",
+    "action": "pullup",
+    "label": 8,
+    "frames": 94,
+    "official_train": 1,
+    "annotation_sha256": "3fa31a598b23641ccbb65865d4a0caf37901bef9a14ea8131422a866a2e7cc0e"
+  },
+  {
+    "id": "1265",
+    "action": "pullup",
+    "label": 8,
+    "frames": 37,
+    "official_train": 1,
+    "annotation_sha256": "96d60113f4a76cd92c396f2ff438d072d3b32a2dbf663433698458c24266f0f3"
+  },
+  {
+    "id": "1272",
+    "action": "pullup",
+    "label": 8,
+    "frames": 82,
+    "official_train": 1,
+    "annotation_sha256": "c937a1ce087739ccb1c9081726939c6853d3fb6814fdebebc542874d5cd9f924"
+  },
+  {
+    "id": "1279",
+    "action": "pullup",
+    "label": 8,
+    "frames": 64,
+    "official_train": 1,
+    "annotation_sha256": "d81d6ffeba4f718f45ae18754bcb82c9d9bde4ce4b2f8dc905e095df00b42529"
+  },
+  {
+    "id": "1287",
+    "action": "pullup",
+    "label": 8,
+    "frames": 147,
+    "official_train": 1,
+    "annotation_sha256": "ff343d0bb53d7cb10dfe2f0a0489c9e2f6dc952708f83c94c2124a08886faf10"
+  },
+  {
+    "id": "1306",
+    "action": "pullup",
+    "label": 8,
+    "frames": 51,
+    "official_train": 1,
+    "annotation_sha256": "6ac6382a2c96f7555ba3019a5a65ad3412fefabc93af11699ae1313acd9a87e3"
+  },
+  {
+    "id": "1317",
+    "action": "pullup",
+    "label": 8,
+    "frames": 42,
+    "official_train": 1,
+    "annotation_sha256": "22cf9fb122862380329ae73004de3e7972ded57030e3569871b9f1ffe4ddde2d"
+  },
+  {
+    "id": "1325",
+    "action": "pullup",
+    "label": 8,
+    "frames": 79,
+    "official_train": 1,
+    "annotation_sha256": "7bfedf94ba55e215fb576a2bda4b31d362dfe14f98466543653949057e20e67d"
+  },
+  {
+    "id": "1341",
+    "action": "pullup",
+    "label": 8,
+    "frames": 50,
+    "official_train": 1,
+    "annotation_sha256": "ec188cb5ee002139f66e135174f6d8d32f30dc7efc9a6cbbf74fb8592e15ab2f"
+  },
+  {
+    "id": "1365",
+    "action": "pushup",
+    "label": 9,
+    "frames": 72,
+    "official_train": 1,
+    "annotation_sha256": "042200fea40966cca9e62d9155708c83989a9fe1768617fd40389dbb19201658"
+  },
+  {
+    "id": "1371",
+    "action": "pushup",
+    "label": 9,
+    "frames": 55,
+    "official_train": 1,
+    "annotation_sha256": "4f0fc35a9d81ea9c6f2af4dbcd6dec110d6903f14368efa3268db001dcbea306"
+  },
+  {
+    "id": "1387",
+    "action": "pushup",
+    "label": 9,
+    "frames": 51,
+    "official_train": 1,
+    "annotation_sha256": "8ee2f10346c7adf099bc7d5b9dee9c16f753c00567eab87752b95e7d6fc69f2f"
+  },
+  {
+    "id": "1397",
+    "action": "pushup",
+    "label": 9,
+    "frames": 51,
+    "official_train": 1,
+    "annotation_sha256": "26ec845c1336970978136254ba2497f3d4dc13b073e40472d905c9a1673eb6d8"
+  },
+  {
+    "id": "1400",
+    "action": "pushup",
+    "label": 9,
+    "frames": 39,
+    "official_train": 1,
+    "annotation_sha256": "eee277847c49528eeec4aaf70afea1839e6c0796aec758cbfc0b1fc748891699"
+  },
+  {
+    "id": "1404",
+    "action": "pushup",
+    "label": 9,
+    "frames": 41,
+    "official_train": 1,
+    "annotation_sha256": "851c022dc509fcbe94b04f6e5a9dc07de33d3ab7108a4b611907500415462687"
+  },
+  {
+    "id": "1424",
+    "action": "pushup",
+    "label": 9,
+    "frames": 47,
+    "official_train": 1,
+    "annotation_sha256": "f77b38e5aa1d84c814432461ed008f091e8e8ac9b42543ce70870244a46a5e9a"
+  },
+  {
+    "id": "1425",
+    "action": "pushup",
+    "label": 9,
+    "frames": 46,
+    "official_train": 1,
+    "annotation_sha256": "40e143b498fe3f2b424e6403aacc9268c7a5bc4ef8217409a0139f922eb7dd74"
+  },
+  {
+    "id": "1478",
+    "action": "pushup",
+    "label": 9,
+    "frames": 39,
+    "official_train": 1,
+    "annotation_sha256": "74ad614092fda2aef11777b7e2e66cdc10bb94e6f58382dd7474c686b75d908b"
+  },
+  {
+    "id": "1490",
+    "action": "pushup",
+    "label": 9,
+    "frames": 30,
+    "official_train": 1,
+    "annotation_sha256": "3cfd69652538a38fc4fae4bad4238e8301dd41aec2fb38200f62d17316bf4fee"
+  },
+  {
+    "id": "1493",
+    "action": "pushup",
+    "label": 9,
+    "frames": 74,
+    "official_train": 1,
+    "annotation_sha256": "6dddeabf5c4b115f9366d7b58716604cc742f229a37453e23f71d6d9858a0de1"
+  },
+  {
+    "id": "1502",
+    "action": "pushup",
+    "label": 9,
+    "frames": 53,
+    "official_train": 1,
+    "annotation_sha256": "5c21cd4621d5e49646bc8a61ae7c0a6a3879354abd84eb595ad072cf8e4c0efc"
+  },
+  {
+    "id": "1516",
+    "action": "pushup",
+    "label": 9,
+    "frames": 68,
+    "official_train": 1,
+    "annotation_sha256": "ee447d30b26e17e8d4e8f583ca8ebdcc2780a1e7a0b3165e861daceaa4d948b3"
+  },
+  {
+    "id": "1523",
+    "action": "pushup",
+    "label": 9,
+    "frames": 53,
+    "official_train": 1,
+    "annotation_sha256": "7a37a29c092114d76b9fac6cd1b09528ac6953c45f9430dd1632cffb5e23a3fa"
+  },
+  {
+    "id": "1528",
+    "action": "pushup",
+    "label": 9,
+    "frames": 56,
+    "official_train": 1,
+    "annotation_sha256": "43cedd4f75e0422712af0fe17963ff41115b01cc5746471f1731c567789df842"
+  },
+  {
+    "id": "1529",
+    "action": "pushup",
+    "label": 9,
+    "frames": 56,
+    "official_train": 1,
+    "annotation_sha256": "419e5c2479a2dcff792951dc6e79e60f9dce3e90a6a28cd7d8daf590c4fb16eb"
+  },
+  {
+    "id": "1530",
+    "action": "pushup",
+    "label": 9,
+    "frames": 49,
+    "official_train": 1,
+    "annotation_sha256": "3fdbc08e57658b0170f108b776cb68184c10d03f53d418a52966c068f155fdea"
+  },
+  {
+    "id": "1534",
+    "action": "pushup",
+    "label": 9,
+    "frames": 40,
+    "official_train": 1,
+    "annotation_sha256": "6faffdcbab9d968708c98b815385dc02efa32aee3365e298df07ac34712e24aa"
+  },
+  {
+    "id": "1535",
+    "action": "pushup",
+    "label": 9,
+    "frames": 43,
+    "official_train": 1,
+    "annotation_sha256": "27a41c7822c5716e523592128d608c86bb2c2339b05c6adf4faf93df8b2f9773"
+  },
+  {
+    "id": "1541",
+    "action": "pushup",
+    "label": 9,
+    "frames": 53,
+    "official_train": 1,
+    "annotation_sha256": "7d6b5c87c851ef0a292e56e21b2549341221e76c0c910e1e4116ad609fb9493d"
+  },
+  {
+    "id": "1558",
+    "action": "pushup",
+    "label": 9,
+    "frames": 60,
+    "official_train": 1,
+    "annotation_sha256": "e3fafdd89c6298b9d526c2c0b4436fb72e3a1bae7fcdd92459f5e8ab0eff23e9"
+  },
+  {
+    "id": "1566",
+    "action": "situp",
+    "label": 10,
+    "frames": 194,
+    "official_train": 1,
+    "annotation_sha256": "5ca10c11c7b8265d3d9770107978e781b476ec1d04637ea881aa05e223523158"
+  },
+  {
+    "id": "1568",
+    "action": "situp",
+    "label": 10,
+    "frames": 35,
+    "official_train": 1,
+    "annotation_sha256": "b603d8c97eb07eafbef5f75e77caa88c8193d5251043b47227b2e5d560805a29"
+  },
+  {
+    "id": "1592",
+    "action": "situp",
+    "label": 10,
+    "frames": 112,
+    "official_train": 1,
+    "annotation_sha256": "4bcd31b204df44da3a4ec09ac2449b961a061d44d42bf46de6fa18c0fbb8940c"
+  },
+  {
+    "id": "1600",
+    "action": "situp",
+    "label": 10,
+    "frames": 75,
+    "official_train": 1,
+    "annotation_sha256": "326294016573c590b78560344876ff9aca244a4a1c0e50122c0f656faecb42a9"
+  },
+  {
+    "id": "1604",
+    "action": "situp",
+    "label": 10,
+    "frames": 151,
+    "official_train": 1,
+    "annotation_sha256": "fec77763ce395f1fcbfaee85d5ab7f83a31f81f01ad198fe8a11e79001db347b"
+  },
+  {
+    "id": "1625",
+    "action": "situp",
+    "label": 10,
+    "frames": 130,
+    "official_train": 1,
+    "annotation_sha256": "cbc5518da2734452042911f955eb5cdac6f795db8be88191f4334ff82f9682f5"
+  },
+  {
+    "id": "1626",
+    "action": "situp",
+    "label": 10,
+    "frames": 97,
+    "official_train": 1,
+    "annotation_sha256": "3491ef08faed84f689b8d2db12d3608ea0846d81f39c6810c037956bd3f6c90d"
+  },
+  {
+    "id": "1641",
+    "action": "situp",
+    "label": 10,
+    "frames": 53,
+    "official_train": 1,
+    "annotation_sha256": "6efc3c55795ea4dd99a36c17f871e9b2b8e243f9a99597e751c0eb3a4e48ba0b"
+  },
+  {
+    "id": "1649",
+    "action": "situp",
+    "label": 10,
+    "frames": 75,
+    "official_train": 1,
+    "annotation_sha256": "b46e0c5d9c407ab1642de80f72edb5e097c71d3ea3a8ca245450ea9fa535a9c4"
+  },
+  {
+    "id": "1652",
+    "action": "situp",
+    "label": 10,
+    "frames": 61,
+    "official_train": 1,
+    "annotation_sha256": "87d76abb01c708e70744f6d453a45257ed088cdc1adeccb70c6ad6e1f10c351b"
+  },
+  {
+    "id": "1667",
+    "action": "squat",
+    "label": 11,
+    "frames": 132,
+    "official_train": 1,
+    "annotation_sha256": "deb9fdb9d5b5bae39258e95491b67e6debbdfd20d51029404b8f6207b3f9b3b3"
+  },
+  {
+    "id": "1675",
+    "action": "squat",
+    "label": 11,
+    "frames": 141,
+    "official_train": 1,
+    "annotation_sha256": "60a03080b4af2ca5ed77709d688e472ee9f268ad87a44127702caecaa9351817"
+  },
+  {
+    "id": "1678",
+    "action": "squat",
+    "label": 11,
+    "frames": 82,
+    "official_train": 1,
+    "annotation_sha256": "a8d948f16f5264a85326cf4a267944d1616a1d4c923b2ab6a1a5f597866fc7ab"
+  },
+  {
+    "id": "1685",
+    "action": "squat",
+    "label": 11,
+    "frames": 54,
+    "official_train": 1,
+    "annotation_sha256": "3fa168c9654912d40e21a5087f0cf25ed4824d2792a2e7f13ddeda490196fbcd"
+  },
+  {
+    "id": "1695",
+    "action": "squat",
+    "label": 11,
+    "frames": 104,
+    "official_train": 1,
+    "annotation_sha256": "40a99d74035f76e8522c6e1fe78ac138608cb695c58f5d2e21cbd3d6c199b472"
+  },
+  {
+    "id": "1707",
+    "action": "squat",
+    "label": 11,
+    "frames": 77,
+    "official_train": 1,
+    "annotation_sha256": "5a704c6a15d382a4ee7aac51c6d13285dbe93b29ea96410fb8846c226261581a"
+  },
+  {
+    "id": "1722",
+    "action": "squat",
+    "label": 11,
+    "frames": 77,
+    "official_train": 1,
+    "annotation_sha256": "a546a7f2df3fdb537a53bc49b869230cf39ee08c7faf6d456bbe603a963e63f0"
+  },
+  {
+    "id": "1738",
+    "action": "squat",
+    "label": 11,
+    "frames": 76,
+    "official_train": 1,
+    "annotation_sha256": "90c7005e927ffe580074bdc57eb5c1e0f2853d000c7dc5930384a01d3f8f0f79"
+  },
+  {
+    "id": "1742",
+    "action": "squat",
+    "label": 11,
+    "frames": 65,
+    "official_train": 1,
+    "annotation_sha256": "4ef539d844a7ba4856fc24a12c40a8f04da371ac9cc51d88f6cdf5681857d3d4"
+  },
+  {
+    "id": "1746",
+    "action": "squat",
+    "label": 11,
+    "frames": 127,
+    "official_train": 1,
+    "annotation_sha256": "7b105937c58e9f6b336cdab17005cc9e71b9e0fcfc800660667d73c9855be493"
+  },
+  {
+    "id": "1760",
+    "action": "squat",
+    "label": 11,
+    "frames": 119,
+    "official_train": 1,
+    "annotation_sha256": "a34ca6a5d43029513a6e2a6066226cc45aa76b9b67d8a9b14e14fee507697f79"
+  },
+  {
+    "id": "1767",
+    "action": "squat",
+    "label": 11,
+    "frames": 116,
+    "official_train": 1,
+    "annotation_sha256": "a5438cc7798c7f8a0a7224a069b8042e99dd3db19d182a0d370edd1744673370"
+  },
+  {
+    "id": "1774",
+    "action": "squat",
+    "label": 11,
+    "frames": 96,
+    "official_train": 1,
+    "annotation_sha256": "6497e47ed2962d56b9dc527cea8c87a3aa8a42f12f1fea3dd15359f0b3ca3e7d"
+  },
+  {
+    "id": "1780",
+    "action": "squat",
+    "label": 11,
+    "frames": 93,
+    "official_train": 1,
+    "annotation_sha256": "d002ecd59fdc8097f97b81195e3bf6c201fb559e7cbe2d3bcc01a3ba22f54ae9"
+  },
+  {
+    "id": "1795",
+    "action": "squat",
+    "label": 11,
+    "frames": 44,
+    "official_train": 1,
+    "annotation_sha256": "da695a9bc479f1d7e571dabd916cca61d2d266e6cfb838b3bd7af1f1c2ad202b"
+  },
+  {
+    "id": "1805",
+    "action": "squat",
+    "label": 11,
+    "frames": 76,
+    "official_train": 1,
+    "annotation_sha256": "a695aa80477f7252eca18c64a92989e46765b9ce4f546241a2ffb5de7893a88e"
+  },
+  {
+    "id": "1817",
+    "action": "squat",
+    "label": 11,
+    "frames": 56,
+    "official_train": 1,
+    "annotation_sha256": "f747c799ada746608c5f7554d959c8c39a7a1dc48e9dbdfc585ddc4e39127162"
+  },
+  {
+    "id": "1819",
+    "action": "squat",
+    "label": 11,
+    "frames": 97,
+    "official_train": 1,
+    "annotation_sha256": "eaf4e47d918b2064bfdf5850c653ede2ec9ece58546df8ac139cc68862d43ee4"
+  },
+  {
+    "id": "1831",
+    "action": "squat",
+    "label": 11,
+    "frames": 59,
+    "official_train": 1,
+    "annotation_sha256": "ba1b7b30cd13a2502bcfcd74b86c14d7eed7f4fbdeddb7ab3d60c94e2ab72eea"
+  },
+  {
+    "id": "1832",
+    "action": "squat",
+    "label": 11,
+    "frames": 63,
+    "official_train": 1,
+    "annotation_sha256": "e94dacbb1680c11b9962ba8707de2b99dd090c77c7296187ecf14a0263cac743"
+  },
+  {
+    "id": "1847",
+    "action": "squat",
+    "label": 11,
+    "frames": 109,
+    "official_train": 1,
+    "annotation_sha256": "b587ff2987a96f239453473448da68f385ed250681342f3a8b9a37586518a122"
+  },
+  {
+    "id": "1853",
+    "action": "squat",
+    "label": 11,
+    "frames": 60,
+    "official_train": 1,
+    "annotation_sha256": "1ddd6574354d690928a823474b982b6a937acabaf61b3d97a0693b3f68fa7b81"
+  },
+  {
+    "id": "1854",
+    "action": "squat",
+    "label": 11,
+    "frames": 116,
+    "official_train": 1,
+    "annotation_sha256": "a40ba0d88604cb773835894399d79c38e47ce9cc38f7bdcb54b38e1676848e44"
+  },
+  {
+    "id": "1895",
+    "action": "strum_guitar",
+    "label": 12,
+    "frames": 34,
+    "official_train": 1,
+    "annotation_sha256": "c5339fab07a5fd964be4e628e62bba5358a81cba527548b0a70e17e4bb5b67f3"
+  },
+  {
+    "id": "1896",
+    "action": "strum_guitar",
+    "label": 12,
+    "frames": 36,
+    "official_train": 1,
+    "annotation_sha256": "6a2338707cf85e4080a39dc57b279418a1ba360dc860e16455a480d321003744"
+  },
+  {
+    "id": "1905",
+    "action": "strum_guitar",
+    "label": 12,
+    "frames": 34,
+    "official_train": 1,
+    "annotation_sha256": "f6b09aaa8415fc9c67335218ccb9b7ce2d6a7afddba0860a91b2057e0c8997cf"
+  },
+  {
+    "id": "1918",
+    "action": "strum_guitar",
+    "label": 12,
+    "frames": 34,
+    "official_train": 1,
+    "annotation_sha256": "5135ed5a8cbd2f72ef46ce3baa69a93fc917339644c0c10522153502ba3b3056"
+  },
+  {
+    "id": "1919",
+    "action": "strum_guitar",
+    "label": 12,
+    "frames": 35,
+    "official_train": 1,
+    "annotation_sha256": "95e9dd9acfd60354cbbeb331d48591da0cf6385de84fa4653cabdb6a2286462e"
+  },
+  {
+    "id": "1933",
+    "action": "strum_guitar",
+    "label": 12,
+    "frames": 38,
+    "official_train": 1,
+    "annotation_sha256": "aff2f9999ee80f120cf12f26210e3f6175fd71d9c59ecfb47a782d9522ce8cc5"
+  },
+  {
+    "id": "1939",
+    "action": "strum_guitar",
+    "label": 12,
+    "frames": 39,
+    "official_train": 1,
+    "annotation_sha256": "7c6f1ddf55758270421f37bff77d62ac73ae7d0774161607c32f82591ba9331c"
+  },
+  {
+    "id": "1963",
+    "action": "strum_guitar",
+    "label": 12,
+    "frames": 63,
+    "official_train": 1,
+    "annotation_sha256": "fe3cc7b2b9001dde7406ab84d442b18859fca1a9d7c93e6729cb156190c897a2"
+  },
+  {
+    "id": "1983",
+    "action": "strum_guitar",
+    "label": 12,
+    "frames": 50,
+    "official_train": 1,
+    "annotation_sha256": "45daeb2b98ee2eb49ea43a02cf218f2c12f66ca36a647516aa459178cc122506"
+  },
+  {
+    "id": "1988",
+    "action": "tennis_forehand",
+    "label": 13,
+    "frames": 52,
+    "official_train": 1,
+    "annotation_sha256": "ba74c62030b0de228a923286949fc5c5adabba13c174302fe671222b382d978c"
+  },
+  {
+    "id": "1996",
+    "action": "tennis_forehand",
+    "label": 13,
+    "frames": 32,
+    "official_train": 1,
+    "annotation_sha256": "aee16df0bfda643b2a8b7108367a37703312f4bc55b261b6331942d465709896"
+  },
+  {
+    "id": "2007",
+    "action": "tennis_forehand",
+    "label": 13,
+    "frames": 42,
+    "official_train": 1,
+    "annotation_sha256": "e0b876114b23f6dc11bf58cf0366f90b89e48f58c65d8615b6b98db160d32b9e"
+  },
+  {
+    "id": "2020",
+    "action": "tennis_forehand",
+    "label": 13,
+    "frames": 72,
+    "official_train": 1,
+    "annotation_sha256": "a7e947ff9c8051f4a8f1fc47058494a3c1c1620865af2b357804c7a846fe8f1b"
+  },
+  {
+    "id": "2025",
+    "action": "tennis_forehand",
+    "label": 13,
+    "frames": 38,
+    "official_train": 1,
+    "annotation_sha256": "fb770dd01ac22ec5a14451616407cd6ad400d5e931ed548e9b332e7d17f1fd1a"
+  },
+  {
+    "id": "2035",
+    "action": "tennis_forehand",
+    "label": 13,
+    "frames": 43,
+    "official_train": 1,
+    "annotation_sha256": "c7a56d8e04d8905b3b7c97d99bbda018f82a4238b9d67d6b62f71a3d1ab404fe"
+  },
+  {
+    "id": "2036",
+    "action": "tennis_forehand",
+    "label": 13,
+    "frames": 41,
+    "official_train": 1,
+    "annotation_sha256": "4fb5b20f64210557f63630e263a72060efd7f19303ab90b8d19c59d47bdeb508"
+  },
+  {
+    "id": "2041",
+    "action": "tennis_forehand",
+    "label": 13,
+    "frames": 46,
+    "official_train": 1,
+    "annotation_sha256": "d4a7337509c5605ad3d379adbbadcbcf292380946dfc0f359a95e2b8015aec9c"
+  },
+  {
+    "id": "2064",
+    "action": "tennis_forehand",
+    "label": 13,
+    "frames": 41,
+    "official_train": 1,
+    "annotation_sha256": "3122190360f7cb2eda2392494463d073234a881c752ea7b69f288ffbddc04c92"
+  },
+  {
+    "id": "2066",
+    "action": "tennis_forehand",
+    "label": 13,
+    "frames": 50,
+    "official_train": 1,
+    "annotation_sha256": "5adb3ac1417e748333c4ebed13d0213ba9ffce074a68d1848bf68e446d757c69"
+  },
+  {
+    "id": "2073",
+    "action": "tennis_forehand",
+    "label": 13,
+    "frames": 38,
+    "official_train": 1,
+    "annotation_sha256": "2b8a8e326e8356cec50c9b04182d680a8a41916aba0d23cf8f56d3f79b03b7fc"
+  },
+  {
+    "id": "2075",
+    "action": "tennis_forehand",
+    "label": 13,
+    "frames": 47,
+    "official_train": 1,
+    "annotation_sha256": "ff0ef44b64bf00f60f0cbac8595e0d38dec27f18ea2770bf5a66b0bfae6bd015"
+  },
+  {
+    "id": "2076",
+    "action": "tennis_forehand",
+    "label": 13,
+    "frames": 40,
+    "official_train": 1,
+    "annotation_sha256": "4afa70c5135c28abe5ba6a29799f11e487a6a1715d21df16913f6aec6dedd2a8"
+  },
+  {
+    "id": "2080",
+    "action": "tennis_forehand",
+    "label": 13,
+    "frames": 54,
+    "official_train": 1,
+    "annotation_sha256": "ee5ec7ec1c78753d2db8aff2c523cdb7843c2279e21baad1c1f5df6e09f7f6c0"
+  },
+  {
+    "id": "2099",
+    "action": "tennis_forehand",
+    "label": 13,
+    "frames": 44,
+    "official_train": 1,
+    "annotation_sha256": "fbb087fa76a0375fd878bdca56dce32c54170720f51f6461c712fb8fec1501e2"
+  },
+  {
+    "id": "2125",
+    "action": "tennis_forehand",
+    "label": 13,
+    "frames": 23,
+    "official_train": 1,
+    "annotation_sha256": "f3f18434d811441165fc924fe247aa62d45cff2b317ab5ac3d7ae698dc2fef6c"
+  },
+  {
+    "id": "2154",
+    "action": "tennis_serve",
+    "label": 14,
+    "frames": 42,
+    "official_train": 1,
+    "annotation_sha256": "8a3b69e0b09373a33d56159ce6a057da93144fe4ec84ac1166b155760f5b03c8"
+  },
+  {
+    "id": "2155",
+    "action": "tennis_serve",
+    "label": 14,
+    "frames": 46,
+    "official_train": 1,
+    "annotation_sha256": "00f23176dbb53e092d93dc7e6921ae43a496241b52b3d79adbf73f56cad4a65f"
+  },
+  {
+    "id": "2156",
+    "action": "tennis_serve",
+    "label": 14,
+    "frames": 72,
+    "official_train": 1,
+    "annotation_sha256": "1df7b59f3a6cdbacc1bdb4e8377c2af2c8e8a826ef97c3ccb9f3bf4532f12bb2"
+  },
+  {
+    "id": "2158",
+    "action": "tennis_serve",
+    "label": 14,
+    "frames": 52,
+    "official_train": 1,
+    "annotation_sha256": "ab3c8a0e59f71238ac4cdecd52fa700f3b63e3e1cfb8e02a3292fcd0930017f9"
+  },
+  {
+    "id": "2161",
+    "action": "tennis_serve",
+    "label": 14,
+    "frames": 63,
+    "official_train": 1,
+    "annotation_sha256": "44756c62ec78c95ddefbab30a4051c12ffca691dbf08eb32748390452e8d3ceb"
+  },
+  {
+    "id": "2162",
+    "action": "tennis_serve",
+    "label": 14,
+    "frames": 65,
+    "official_train": 1,
+    "annotation_sha256": "5affbac0567dcf04c080d6870d55a49bc27c99687f22004a2a9e346009f5c991"
+  },
+  {
+    "id": "2175",
+    "action": "tennis_serve",
+    "label": 14,
+    "frames": 63,
+    "official_train": 1,
+    "annotation_sha256": "8596fcc15c152041a4b28c4cbbc14995ae2034310a731bfc9f5c3c40f3f79bbb"
+  },
+  {
+    "id": "2183",
+    "action": "tennis_serve",
+    "label": 14,
+    "frames": 60,
+    "official_train": 1,
+    "annotation_sha256": "c7ab69b19c5565e6839c84bacd490f7fe1849f585a8458ab04c3af82218a9e0b"
+  },
+  {
+    "id": "2203",
+    "action": "tennis_serve",
+    "label": 14,
+    "frames": 91,
+    "official_train": 1,
+    "annotation_sha256": "8de1233738fd6c0b17b9e436e47c5df9cefc8cb318c17107f5e34566ee69f55a"
+  },
+  {
+    "id": "2207",
+    "action": "tennis_serve",
+    "label": 14,
+    "frames": 64,
+    "official_train": 1,
+    "annotation_sha256": "3edcf5f366e893c0accecfa470307ecce546b1d4d67fa877b1593d5fc60cea11"
+  },
+  {
+    "id": "2211",
+    "action": "tennis_serve",
+    "label": 14,
+    "frames": 81,
+    "official_train": 1,
+    "annotation_sha256": "e1edaf226c2a205cf0fb30c4b163df5ce3efaeaf355420e1345ea78b59bf12f7"
+  },
+  {
+    "id": "2213",
+    "action": "tennis_serve",
+    "label": 14,
+    "frames": 64,
+    "official_train": 1,
+    "annotation_sha256": "4b9740bcf41e2dbff2e0dc572e723aff009bb588d222b133392eee7b104bccce"
+  },
+  {
+    "id": "2215",
+    "action": "tennis_serve",
+    "label": 14,
+    "frames": 72,
+    "official_train": 1,
+    "annotation_sha256": "6d414f4941e6207e85b5d2b5652442a58dd72aefc98ed894d3f0463ae38afc99"
+  },
+  {
+    "id": "2236",
+    "action": "tennis_serve",
+    "label": 14,
+    "frames": 66,
+    "official_train": 1,
+    "annotation_sha256": "e4b15f651c29e358d13b4ea036996f81f4a9cf8489b6f3b88709fc26b1e5e641"
+  },
+  {
+    "id": "2237",
+    "action": "tennis_serve",
+    "label": 14,
+    "frames": 72,
+    "official_train": 1,
+    "annotation_sha256": "ea820082e713b3201359319dfd3f8bd9a9b94d78832540711883e218afc7edb0"
+  },
+  {
+    "id": "2243",
+    "action": "tennis_serve",
+    "label": 14,
+    "frames": 74,
+    "official_train": 1,
+    "annotation_sha256": "c22f93dae8541f266368cbe0825b2b1345f8264a8f6eb2b542e032723b52b0e2"
+  },
+  {
+    "id": "2244",
+    "action": "tennis_serve",
+    "label": 14,
+    "frames": 72,
+    "official_train": 1,
+    "annotation_sha256": "39dcbf85be787d2a6c848ef414e383231a6eb6056a22e99fdae46fdef97aca8b"
+  },
+  {
+    "id": "2250",
+    "action": "tennis_serve",
+    "label": 14,
+    "frames": 57,
+    "official_train": 1,
+    "annotation_sha256": "f95e20e3080dd564a61d1800f79054c779bd29043ee9ba48be006a3897147c4a"
+  },
+  {
+    "id": "2252",
+    "action": "tennis_serve",
+    "label": 14,
+    "frames": 56,
+    "official_train": 1,
+    "annotation_sha256": "68a714773bada88f7fc40bd5ba72e6731595a9cd9b9fa93735ed110257d42840"
+  },
+  {
+    "id": "2258",
+    "action": "tennis_serve",
+    "label": 14,
+    "frames": 66,
+    "official_train": 1,
+    "annotation_sha256": "0125b6f55fbf3a9b5ab2ec711bf33d74e9520b1da0cc28cd4938d3e0ae99cae9"
+  },
+  {
+    "id": "2277",
+    "action": "tennis_serve",
+    "label": 14,
+    "frames": 53,
+    "official_train": 1,
+    "annotation_sha256": "2764332006fcd037a210feae321571a69809463a941363ca2e63abc9560b60e3"
+  },
+  {
+    "id": "2304",
+    "action": "tennis_serve",
+    "label": 14,
+    "frames": 55,
+    "official_train": 1,
+    "annotation_sha256": "770837bdc5263bf25e01be4ba7645aa91f5a49283794996d3b5c37345d09608f"
+  },
+  {
+    "id": "2311",
+    "action": "tennis_serve",
+    "label": 14,
+    "frames": 44,
+    "official_train": 1,
+    "annotation_sha256": "1dcaa70944195c22d6a354c416ea559651cda47c9ff7d604e1ad1bb2ff0ce42b"
+  }
+]

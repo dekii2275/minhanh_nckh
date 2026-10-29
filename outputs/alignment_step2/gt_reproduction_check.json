@@ -1,0 +1,6 @@
+{
+  "expected_top1": 94.46640316205533,
+  "observed_top1": 94.46640316205533,
+  "videos": 253,
+  "purpose": "checkpoint/feature/split validation only; GT never enters swap decisions"
+}

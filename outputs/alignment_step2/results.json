@@ -1,0 +1,81 @@
+{
+  "videos": 253,
+  "frames": 17747,
+  "production_swap_clips": 168,
+  "metrics": {
+    "C1": {
+      "top1_accuracy": 44.66403162055336,
+      "macro_f1": 38.21290692937552,
+      "correct": 113,
+      "videos": 253,
+      "improvement_vs_raw_pp": 0.0
+    },
+    "C2": {
+      "top1_accuracy": 67.58893280632411,
+      "macro_f1": 68.21354067669857,
+      "correct": 171,
+      "videos": 253,
+      "improvement_vs_raw_pp": 22.92490118577075
+    },
+    "C3": {
+      "top1_accuracy": 66.79841897233202,
+      "macro_f1": 67.38876984542908,
+      "correct": 169,
+      "videos": 253,
+      "improvement_vs_raw_pp": 22.134387351778656
+    },
+    "C4": {
+      "top1_accuracy": 64.42687747035573,
+      "macro_f1": 64.7862733985664,
+      "correct": 163,
+      "videos": 253,
+      "improvement_vs_raw_pp": 19.762845849802375
+    }
+  },
+  "comparisons": [
+    {
+      "comparison": "C2-C1",
+      "accuracy_delta_pp": 22.92490118577075,
+      "accuracy_ci95_low_pp": 16.99604743083004,
+      "accuracy_ci95_high_pp": 28.85375494071146,
+      "macro_f1_delta_pp": 30.00063374732305,
+      "improved_videos": 75,
+      "harmed_videos": 17,
+      "both_correct": 96,
+      "both_wrong": 65
+    },
+    {
+      "comparison": "C3-C1",
+      "accuracy_delta_pp": 22.134387351778656,
+      "accuracy_ci95_low_pp": 17.786561264822133,
+      "accuracy_ci95_high_pp": 26.48221343873518,
+      "macro_f1_delta_pp": 29.17586291605356,
+      "improved_videos": 62,
+      "harmed_videos": 6,
+      "both_correct": 107,
+      "both_wrong": 78
+    },
+    {
+      "comparison": "C4-C3",
+      "accuracy_delta_pp": -2.3715415019762816,
+      "accuracy_ci95_low_pp": -5.138339920948617,
+      "accuracy_ci95_high_pp": 0.3952569169960474,
+      "macro_f1_delta_pp": -2.6024964468626877,
+      "improved_videos": 4,
+      "harmed_videos": 10,
+      "both_correct": 159,
+      "both_wrong": 80
+    },
+    {
+      "comparison": "C4-C2",
+      "accuracy_delta_pp": -3.1620553359683754,
+      "accuracy_ci95_low_pp": -7.114624505928854,
+      "accuracy_ci95_high_pp": 0.7905138339920948,
+      "macro_f1_delta_pp": -3.4272672781321774,
+      "improved_videos": 11,
+      "harmed_videos": 19,
+      "both_correct": 152,
+      "both_wrong": 71
+    }
+  ]
+}

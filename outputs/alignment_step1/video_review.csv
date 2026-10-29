@@ -1,0 +1,31 @@
+id,action,pose,frames,official_train,heuristic_swap,raw_heuristic_swap,median_dx,raw_median_dx,I_frames,S_frames,uncertain_frames,multi_person_frames,no_detection_frames,review,identity_correct,fixed_swap_correct,heuristic_correct,body_turn_observed,review_note
+0099,baseball_pitch,front,111,1,True,True,17.533233642578125,14.632049560546877,0,84,27,89,0,S,False,True,True,True,S rõ ở người mục tiêu; xoay thân khi ném.
+0137,baseball_pitch,back,76,1,False,False,-127.8192901611328,-126.397705078125,6,6,64,76,0,U,,,,True,Chọn người STAFF ở tiền cảnh; vote I/S không có giá trị cho người GT.
+0219,baseball_swing,right,35,1,True,True,18.238021850585938,17.71600341796875,0,30,5,0,0,S,False,True,True,True,S; xoay thân khi đánh bóng.
+0287,baseball_swing,back,37,1,True,True,12.273056030273438,8.55963134765625,0,27,10,10,0,S,False,True,True,True,S dù nhãn pose=back; median vai dương nên heuristic tình cờ chọn S.
+0433,bench_press,front,41,1,True,True,7.585052490234375,10.741973876953123,0,7,34,41,0,U,,,,False,Có frame chọn người hỗ trợ đứng sau thay vì người nằm ghế.
+0443,bench_press,left,124,1,True,True,56.13799285888672,55.79258728027344,0,44,80,122,0,U,,,,False,Chọn người hỗ trợ đứng sau ở các frame kiểm tra.
+0604,bowl,back,55,1,False,False,-10.305692171946816,-7.820383548736572,1,19,35,25,1,U,,,,True,"S ở f15; I gợi ý tại f36; f41 chọn người khác, không kết luận clip. Không xếp mixed đã xác nhận."
+0543,bowl,front,59,1,True,True,31.902130126953125,31.766860961914062,0,57,2,0,0,S,False,True,True,False,S rõ khi đi về phía camera.
+0757,clean_and_jerk,front,221,1,True,True,28.389175415039062,28.48114013671875,2,219,0,211,0,M,False,False,False,False,"S 219 frame chẩn đoán; I tại f176 và f183 (6/6 cặp); hai lỗi ngắn, không có xoay hướng rõ."
+0775,clean_and_jerk,right,249,1,True,True,15.558853149414062,15.435455322265623,0,139,110,247,0,S,False,True,True,False,S trên các cặp phân biệt được; nhiều người nền nhưng target đúng ở frame kiểm tra.
+0864,golf_swing,back,53,1,True,False,0.8903961181640625,-0.2328643798828125,6,24,23,0,0,M,False,False,False,True,"S f27/29; I f41–43,45–47; xoay thân. Raw chọn I, đầu vào production chọn S."
+0801,golf_swing,front,56,1,False,False,-1.639862060546875,-2.259368896484375,0,11,45,56,0,S,False,True,False,True,"S trên khớp nhìn thấy; heuristic giữ I vì median vai âm, gần nghiêng."
+0996,jump_rope,front,38,1,True,True,33.05610656738281,33.18806457519531,0,38,0,1,0,S,False,True,True,False,S rõ.
+0976,jump_rope,right,43,1,True,True,21.73500061035156,21.96002197265625,0,31,12,43,0,S,False,True,True,False,S trên các cặp phân biệt được.
+1053,jumping_jacks,front,22,1,True,True,31.55513000488281,31.738426208496094,0,22,0,0,0,S,False,True,True,False,S rõ.
+1112,jumping_jacks,left,28,1,True,True,41.69573211669922,41.58404541015625,0,28,0,0,0,S,False,True,True,False,S rõ dù pose metadata=left.
+1316,pullup,back,54,1,True,True,6.4843597412109375,6.388114929199219,0,0,54,54,0,U,,,,False,YOLO chọn người đứng bên trái thay vì người kéo xà.
+1170,pullup,front,79,1,True,True,59.651123046875,59.344482421875,0,79,0,0,0,S,False,True,True,False,S rõ.
+1484,pushup,right,31,1,True,True,1.9130314808926985,2.45294189453125,0,0,31,0,25,U,,,,False,"25/31 frame không phát hiện; người nhỏ, nghiêng và chồng khớp."
+1377,pushup,left,73,1,True,True,11.441962424161003,8.70853042602539,0,0,73,3,31,U,,,,False,"31/73 frame không phát hiện; một bên bị che/chồng, thiếu bằng chứng hai phía."
+1597,situp,left,94,1,False,True,-0.09771728515625,6.227287292480469,0,35,59,94,0,U,,,,False,"Đổi target: có frame chọn người tập, có frame chọn người đứng; không kết luận toàn clip."
+1622,situp,right,51,1,True,True,14.427337646484377,14.309478759765623,0,0,51,51,0,U,,,,False,Chọn người giữ chân thay vì người GT nằm tập.
+1787,squat,front,85,1,True,True,45.5733642578125,45.67478942871094,0,44,41,85,0,U,,,,False,Đổi target giữa người tập và huấn luyện viên.
+1691,squat,left,58,1,True,True,5.700950622558594,5.8170928955078125,0,0,58,0,0,U,,,,False,"Nghiêng, che khuất, hai phía chồng nhau; không phân biệt chắc I/S."
+1914,strum_guitar,front,45,1,True,True,144.50147247314453,144.7063751220703,0,45,0,0,0,S,False,True,True,False,S rõ ở tay; không suy luận cho chân không quan sát được.
+1897,strum_guitar,front,48,1,False,True,-25.232086181640625,170.88327026367188,0,34,14,39,0,S,False,True,False,False,"S rõ ở tay; crop mất vai, production median âm nên heuristic I; raw median dương."
+2062,tennis_forehand,back,63,1,False,False,-17.075958251953125,-17.62762451171875,0,63,0,2,0,S,False,True,False,True,"S rõ cả f1,32,47,63; lưng/chéo lưng, heuristic I sai."
+2104,tennis_forehand,left,61,1,True,True,5.1690673828125,5.6285400390625,6,29,26,1,0,M,False,False,False,True,"I tại f21–24,37–38; S ở đoạn khác, xem f61. Có xoay thân."
+2203,tennis_serve,right,91,1,True,True,1.8933563232421875,3.6781539916992183,1,59,31,2,0,M,False,False,False,True,"S chiếm ưu thế; I ngắn tại f29 (2 cặp), các cặp khác mơ hồ; không gọi là đổi toàn thân chắc chắn."
+2192,tennis_serve,back,68,1,False,False,-8.352035522460938,-8.04840087890625,0,38,30,2,0,S,False,True,False,True,"S trên cặp thấy rõ; lưng/nghiêng, heuristic I sai."

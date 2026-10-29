@@ -1,0 +1,16 @@
+{
+  "A": {
+    "reference": "C3",
+    "same_predictions": true,
+    "max_probability_difference": 0.0,
+    "top1_accuracy": 66.79841897233202,
+    "macro_f1": 67.38876984542908
+  },
+  "H": {
+    "reference": "C4",
+    "same_predictions": true,
+    "max_probability_difference": 0.0,
+    "top1_accuracy": 64.42687747035573,
+    "macro_f1": 64.7862733985664
+  }
+}

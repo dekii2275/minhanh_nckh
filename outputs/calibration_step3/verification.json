@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "videos": 253,
+  "frames": 17747,
+  "changed_prediction_videos": 42,
+  "changed_correctness_videos": 18,
+  "source_hashes_unchanged": true,
+  "A_C3_posteriors_identical": true,
+  "H_C4_posteriors_identical": true,
+  "all_eight_metrics_independently_verified": true,
+  "all_28_paired_CIs_and_7_interaction_CIs_recomputed": true,
+  "12_marginal_comparisons_verified": true,
+  "fixed_alignment_verified": true
+}

@@ -1,0 +1,307 @@
+{
+    "num_analyzed_sequences": 225,
+    "overall_metrics": {
+        "raw_aqa_score_mean": 51.12,
+        "calib_aqa_score_mean": 64.01,
+        "overall_aqa_gain": 12.89,
+        "stability_score_gain": 21.29,
+        "smoothness_score_gain": 18.31,
+        "integrity_score_gain": 7.25,
+        "symmetry_score_gain": -2.22,
+        "mean_jitter_reduction_pct": 58.49
+    },
+    "per_action_summary": {
+        "baseball_pitch": {
+            "num_sequences": 15,
+            "raw_aqa_score_mean": 50.49,
+            "calib_aqa_score_mean": 63.56,
+            "aqa_gain_mean": 13.07,
+            "stability_gain_mean": 22.18,
+            "smoothness_gain_mean": 12.92,
+            "integrity_gain_mean": 5.51,
+            "symmetry_gain_mean": -3.14,
+            "jitter_reduction_pct_mean": 53.72
+        },
+        "baseball_swing": {
+            "num_sequences": 15,
+            "raw_aqa_score_mean": 47.89,
+            "calib_aqa_score_mean": 60.24,
+            "aqa_gain_mean": 12.36,
+            "stability_gain_mean": 17.57,
+            "smoothness_gain_mean": 13.24,
+            "integrity_gain_mean": 8.78,
+            "symmetry_gain_mean": -1.83,
+            "jitter_reduction_pct_mean": 49.96
+        },
+        "bench_press": {
+            "num_sequences": 15,
+            "raw_aqa_score_mean": 41.16,
+            "calib_aqa_score_mean": 52.12,
+            "aqa_gain_mean": 10.96,
+            "stability_gain_mean": 19.53,
+            "smoothness_gain_mean": 20.83,
+            "integrity_gain_mean": 6.97,
+            "symmetry_gain_mean": -3.47,
+            "jitter_reduction_pct_mean": 56.01
+        },
+        "bowl": {
+            "num_sequences": 15,
+            "raw_aqa_score_mean": 41.98,
+            "calib_aqa_score_mean": 58.88,
+            "aqa_gain_mean": 16.9,
+            "stability_gain_mean": 25.98,
+            "smoothness_gain_mean": 16.96,
+            "integrity_gain_mean": 9.28,
+            "symmetry_gain_mean": 0.09,
+            "jitter_reduction_pct_mean": 57.4
+        },
+        "clean_and_jerk": {
+            "num_sequences": 15,
+            "raw_aqa_score_mean": 60.48,
+            "calib_aqa_score_mean": 71.91,
+            "aqa_gain_mean": 11.43,
+            "stability_gain_mean": 20.33,
+            "smoothness_gain_mean": 15.33,
+            "integrity_gain_mean": 9.28,
+            "symmetry_gain_mean": 0.77,
+            "jitter_reduction_pct_mean": 65.87
+        },
+        "golf_swing": {
+            "num_sequences": 15,
+            "raw_aqa_score_mean": 56.1,
+            "calib_aqa_score_mean": 70.92,
+            "aqa_gain_mean": 14.83,
+            "stability_gain_mean": 21.15,
+            "smoothness_gain_mean": 18.07,
+            "integrity_gain_mean": 6.31,
+            "symmetry_gain_mean": -1.64,
+            "jitter_reduction_pct_mean": 60.27
+        },
+        "jump_rope": {
+            "num_sequences": 15,
+            "raw_aqa_score_mean": 50.53,
+            "calib_aqa_score_mean": 61.95,
+            "aqa_gain_mean": 11.43,
+            "stability_gain_mean": 18.41,
+            "smoothness_gain_mean": 17.77,
+            "integrity_gain_mean": 9.64,
+            "symmetry_gain_mean": -0.11,
+            "jitter_reduction_pct_mean": 52.09
+        },
+        "jumping_jacks": {
+            "num_sequences": 15,
+            "raw_aqa_score_mean": 62.11,
+            "calib_aqa_score_mean": 72.25,
+            "aqa_gain_mean": 10.14,
+            "stability_gain_mean": 16.98,
+            "smoothness_gain_mean": 20.09,
+            "integrity_gain_mean": 3.62,
+            "symmetry_gain_mean": -0.11,
+            "jitter_reduction_pct_mean": 46.84
+        },
+        "pullup": {
+            "num_sequences": 15,
+            "raw_aqa_score_mean": 54.64,
+            "calib_aqa_score_mean": 67.02,
+            "aqa_gain_mean": 12.38,
+            "stability_gain_mean": 21.45,
+            "smoothness_gain_mean": 21.36,
+            "integrity_gain_mean": 6.82,
+            "symmetry_gain_mean": -0.09,
+            "jitter_reduction_pct_mean": 64.38
+        },
+        "pushup": {
+            "num_sequences": 15,
+            "raw_aqa_score_mean": 43.02,
+            "calib_aqa_score_mean": 55.76,
+            "aqa_gain_mean": 12.73,
+            "stability_gain_mean": 25.45,
+            "smoothness_gain_mean": 22.37,
+            "integrity_gain_mean": 7.04,
+            "symmetry_gain_mean": -3.94,
+            "jitter_reduction_pct_mean": 62.49
+        },
+        "situp": {
+            "num_sequences": 15,
+            "raw_aqa_score_mean": 48.96,
+            "calib_aqa_score_mean": 61.31,
+            "aqa_gain_mean": 12.35,
+            "stability_gain_mean": 25.33,
+            "smoothness_gain_mean": 17.66,
+            "integrity_gain_mean": 7.26,
+            "symmetry_gain_mean": -0.86,
+            "jitter_reduction_pct_mean": 63.19
+        },
+        "squat": {
+            "num_sequences": 15,
+            "raw_aqa_score_mean": 52.31,
+            "calib_aqa_score_mean": 62.3,
+            "aqa_gain_mean": 10.0,
+            "stability_gain_mean": 14.84,
+            "smoothness_gain_mean": 21.52,
+            "integrity_gain_mean": 6.47,
+            "symmetry_gain_mean": -2.84,
+            "jitter_reduction_pct_mean": 59.54
+        },
+        "strum_guitar": {
+            "num_sequences": 15,
+            "raw_aqa_score_mean": 46.27,
+            "calib_aqa_score_mean": 62.42,
+            "aqa_gain_mean": 16.15,
+            "stability_gain_mean": 26.42,
+            "smoothness_gain_mean": 22.1,
+            "integrity_gain_mean": 12.35,
+            "symmetry_gain_mean": -9.94,
+            "jitter_reduction_pct_mean": 66.59
+        },
+        "tennis_forehand": {
+            "num_sequences": 15,
+            "raw_aqa_score_mean": 55.95,
+            "calib_aqa_score_mean": 70.84,
+            "aqa_gain_mean": 14.9,
+            "stability_gain_mean": 20.71,
+            "smoothness_gain_mean": 19.32,
+            "integrity_gain_mean": 6.35,
+            "symmetry_gain_mean": -3.84,
+            "jitter_reduction_pct_mean": 61.55
+        },
+        "tennis_serve": {
+            "num_sequences": 15,
+            "raw_aqa_score_mean": 54.86,
+            "calib_aqa_score_mean": 68.61,
+            "aqa_gain_mean": 13.75,
+            "stability_gain_mean": 23.01,
+            "smoothness_gain_mean": 15.16,
+            "integrity_gain_mean": 3.11,
+            "symmetry_gain_mean": -2.36,
+            "jitter_reduction_pct_mean": 57.47
+        }
+    },
+    "case_studies": [
+        {
+            "seq_id": "0001",
+            "action": "baseball_pitch",
+            "raw_score": 58.47,
+            "calib_score": 72.17,
+            "gain": 13.7,
+            "formative_feedback": [
+                "Đánh giá Tổng thể: Tốt (Proficient Execution) (Điểm chất lượng: 72.2/100)",
+                "✓ Quỹ đạo chuyển động mượt mà, phân bố lực và vận tốc tối ưu.",
+                "✓ Độ ổn định quỹ đạo khớp rất tốt, kiểm soát thăng bằng chuẩn xác.",
+                "⚠️ Biến dạng tỉ lệ cơ thể: Phân đoạn xương 'left_forearm' có độ co dãn bất thường (31.0%). Thường xảy ra do gập xoay khớp sai góc giải phẫu hoặc che khuất tầm nhìn."
+            ],
+            "calib_sub_scores": {
+                "stability_score": 79.91,
+                "smoothness_score": 85.06,
+                "anatomical_integrity_score": 26.24,
+                "bilateral_symmetry_score": 91.82
+            },
+            "raw_sub_scores": {
+                "stability_score": 54.58,
+                "smoothness_score": 72.33,
+                "anatomical_integrity_score": 22.33,
+                "bilateral_symmetry_score": 95.8
+            }
+        },
+        {
+            "seq_id": "0010",
+            "action": "baseball_pitch",
+            "raw_score": 59.74,
+            "calib_score": 74.03,
+            "gain": 14.29,
+            "formative_feedback": [
+                "Đánh giá Tổng thể: Tốt (Proficient Execution) (Điểm chất lượng: 74.0/100)",
+                "✓ Quỹ đạo chuyển động mượt mà, phân bố lực và vận tốc tối ưu.",
+                "✓ Độ ổn định quỹ đạo khớp rất tốt, kiểm soát thăng bằng chuẩn xác.",
+                "⚠️ Biến dạng tỉ lệ cơ thể: Phân đoạn xương 'left_forearm' có độ co dãn bất thường (31.4%). Thường xảy ra do gập xoay khớp sai góc giải phẫu hoặc che khuất tầm nhìn."
+            ],
+            "calib_sub_scores": {
+                "stability_score": 82.95,
+                "smoothness_score": 84.74,
+                "anatomical_integrity_score": 30.44,
+                "bilateral_symmetry_score": 92.48
+            },
+            "raw_sub_scores": {
+                "stability_score": 61.62,
+                "smoothness_score": 70.58,
+                "anatomical_integrity_score": 21.87,
+                "bilateral_symmetry_score": 91.01
+            }
+        },
+        {
+            "seq_id": "0013",
+            "action": "baseball_pitch",
+            "raw_score": 31.22,
+            "calib_score": 43.76,
+            "gain": 12.54,
+            "formative_feedback": [
+                "Đánh giá Tổng thể: Kém (Sub-optimal - Nguy cơ Chấn thương / Lỗi Kỹ thuật) (Điểm chất lượng: 43.8/100)",
+                "✓ Quỹ đạo chuyển động mượt mà, phân bố lực và vận tốc tối ưu.",
+                "⚠️ Độ ổn định tư thế thấp: Khớp chi xa có hiện tượng rung lắc/mất thăng bằng. Cần gồng chắc nhóm cơ trọng tâm (Core stability) để cố định trục cơ thể.",
+                "⚠️ Biến dạng tỉ lệ cơ thể: Phân đoạn xương 'left_shin' có độ co dãn bất thường (56.9%). Thường xảy ra do gập xoay khớp sai góc giải phẫu hoặc che khuất tầm nhìn."
+            ],
+            "calib_sub_scores": {
+                "stability_score": 20.61,
+                "smoothness_score": 72.69,
+                "anatomical_integrity_score": 21.54,
+                "bilateral_symmetry_score": 67.95
+            },
+            "raw_sub_scores": {
+                "stability_score": 2.58,
+                "smoothness_score": 55.95,
+                "anatomical_integrity_score": 6.76,
+                "bilateral_symmetry_score": 93.87
+            }
+        },
+        {
+            "seq_id": "0014",
+            "action": "baseball_pitch",
+            "raw_score": 42.81,
+            "calib_score": 51.55,
+            "gain": 8.74,
+            "formative_feedback": [
+                "Đánh giá Tổng thể: Kém (Sub-optimal - Nguy cơ Chấn thương / Lỗi Kỹ thuật) (Điểm chất lượng: 51.6/100)",
+                "✓ Quỹ đạo chuyển động mượt mà, phân bố lực và vận tốc tối ưu.",
+                "⚠️ Độ ổn định tư thế thấp: Khớp chi xa có hiện tượng rung lắc/mất thăng bằng. Cần gồng chắc nhóm cơ trọng tâm (Core stability) để cố định trục cơ thể.",
+                "⚠️ Biến dạng tỉ lệ cơ thể: Phân đoạn xương 'left_forearm' có độ co dãn bất thường (28.4%). Thường xảy ra do gập xoay khớp sai góc giải phẫu hoặc che khuất tầm nhìn."
+            ],
+            "calib_sub_scores": {
+                "stability_score": 29.21,
+                "smoothness_score": 77.81,
+                "anatomical_integrity_score": 23.42,
+                "bilateral_symmetry_score": 94.11
+            },
+            "raw_sub_scores": {
+                "stability_score": 14.38,
+                "smoothness_score": 67.8,
+                "anatomical_integrity_score": 21.4,
+                "bilateral_symmetry_score": 97.68
+            }
+        },
+        {
+            "seq_id": "0025",
+            "action": "baseball_pitch",
+            "raw_score": 51.61,
+            "calib_score": 66.44,
+            "gain": 14.83,
+            "formative_feedback": [
+                "Đánh giá Tổng thể: Trung bình (Moderate - Cần Tinh chỉnh Kỹ thuật) (Điểm chất lượng: 66.4/100)",
+                "✓ Quỹ đạo chuyển động mượt mà, phân bố lực và vận tốc tối ưu.",
+                "✓ Độ ổn định quỹ đạo khớp rất tốt, kiểm soát thăng bằng chuẩn xác.",
+                "⚠️ Biến dạng tỉ lệ cơ thể: Phân đoạn xương 'right_forearm' có độ co dãn bất thường (29.1%). Thường xảy ra do gập xoay khớp sai góc giải phẫu hoặc che khuất tầm nhìn."
+            ],
+            "calib_sub_scores": {
+                "stability_score": 72.26,
+                "smoothness_score": 76.94,
+                "anatomical_integrity_score": 23.68,
+                "bilateral_symmetry_score": 94.87
+            },
+            "raw_sub_scores": {
+                "stability_score": 43.22,
+                "smoothness_score": 65.11,
+                "anatomical_integrity_score": 21.01,
+                "bilateral_symmetry_score": 94.94
+            }
+        }
+    ]
+}
