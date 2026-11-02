@@ -206,10 +206,22 @@ def evaluate(model, loader, device):
 
     acc, macro_f1, cm = compute_metrics(all_targets, all_preds)
     probs_arr = np.array(all_probs)
-    top3_preds = np.argsort(probs_arr, axis=1)[:, -3:]
+    num_cls = probs_arr.shape[1]
+    k3 = min(3, num_cls)
+    top3_preds = np.argsort(probs_arr, axis=1)[:, -k3:]
     top3_acc = float(np.mean([t in top3_preds[i] for i, t in enumerate(all_targets)])) * 100.0
 
-    return {"top1_acc": acc, "top3_acc": top3_acc, "macro_f1": macro_f1, "confusion_matrix": cm}
+    k5 = min(5, num_cls)
+    top5_preds = np.argsort(probs_arr, axis=1)[:, -k5:]
+    top5_acc = float(np.mean([t in top5_preds[i] for i, t in enumerate(all_targets)])) * 100.0
+
+    return {
+        "top1_acc": acc,
+        "top3_acc": top3_acc,
+        "top5_acc": top5_acc,
+        "macro_f1": macro_f1,
+        "confusion_matrix": cm,
+    }
 
 
 def run_experiment(
@@ -342,17 +354,25 @@ def run_experiment(
         "ground_truth_test": {
             "top1_acc": res_gt["top1_acc"],
             "top3_acc": res_gt["top3_acc"],
+            "top5_acc": res_gt["top5_acc"],
             "macro_f1": res_gt["macro_f1"],
         },
         "raw_yolo_test": {
             "top1_acc": res_raw["top1_acc"],
             "top3_acc": res_raw["top3_acc"],
+            "top5_acc": res_raw["top5_acc"],
             "macro_f1": res_raw["macro_f1"],
         },
         "calibrated_yolo_test": {
             "top1_acc": res_calib["top1_acc"],
             "top3_acc": res_calib["top3_acc"],
+            "top5_acc": res_calib["top5_acc"],
             "macro_f1": res_calib["macro_f1"],
+        },
+        "calibration_gain": {
+            "top1_acc_gain": res_calib["top1_acc"] - res_raw["top1_acc"],
+            "top5_acc_gain": res_calib["top5_acc"] - res_raw["top5_acc"],
+            "macro_f1_gain": res_calib["macro_f1"] - res_raw["macro_f1"],
         },
     }
 
@@ -362,13 +382,13 @@ def run_experiment(
 
     print(f"\n--- COMPLETED {exp_name.upper()} (Time: {duration:.1f}s) ---")
     print(
-        f"  * Ground Truth Test:     Top-1: {res_gt['top1_acc']:.2f}% | Macro-F1: {res_gt['macro_f1']:.2f}%"
+        f"  * Ground Truth Test:     Top-1: {res_gt['top1_acc']:.2f}% | Top-5: {res_gt['top5_acc']:.2f}% | Macro-F1: {res_gt['macro_f1']:.2f}%"
     )
     print(
-        f"  * Raw YOLO Test:         Top-1: {res_raw['top1_acc']:.2f}% | Macro-F1: {res_raw['macro_f1']:.2f}%"
+        f"  * Raw YOLO Test:         Top-1: {res_raw['top1_acc']:.2f}% | Top-5: {res_raw['top5_acc']:.2f}% | Macro-F1: {res_raw['macro_f1']:.2f}%"
     )
     print(
-        f"  * Calibrated YOLO Test:  Top-1: {res_calib['top1_acc']:.2f}% | Macro-F1: {res_calib['macro_f1']:.2f}%\n"
+        f"  * Calibrated YOLO Test:  Top-1: {res_calib['top1_acc']:.2f}% | Top-5: {res_calib['top5_acc']:.2f}% | Macro-F1: {res_calib['macro_f1']:.2f}%\n"
     )
     return result_dict
 

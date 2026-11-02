@@ -75,13 +75,15 @@ class ActionBiLSTMAttentionClassifier(nn.Module):
         lengths: Optional[Tensor] = None,
         padding_mask: Optional[Tensor] = None,
         return_attention: bool = False,
-    ) -> Union[Tensor, Tuple[Tensor, Tensor]]:
+        return_features: bool = False,
+    ) -> Union[Tensor, Tuple[Tensor, Tensor], Tuple[Tensor, Tensor, Tensor]]:
         """
         Args:
             inputs: [Batch, Time, input_size] or [Batch, Time, Joints, 2]
             lengths: [Batch] sequence lengths before padding
             padding_mask: [Batch, Time] boolean mask where True indicates padded/invalid frame
             return_attention: whether to return attention weights
+            return_features: whether to return pooled feature representation [Batch, output_size]
         """
         if inputs.ndim == 4:
             inputs = inputs.flatten(start_dim=2)
@@ -130,6 +132,10 @@ class ActionBiLSTMAttentionClassifier(nn.Module):
         # 4. Classification Logits
         logits = self.classifier(self.dropout(pooled))
 
+        if return_features and return_attention:
+            return logits, pooled, attention_weights
+        if return_features:
+            return logits, pooled
         if return_attention:
             return logits, attention_weights
         return logits

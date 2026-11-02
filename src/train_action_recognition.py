@@ -99,15 +99,22 @@ def evaluate_model(model, dataloader, criterion, device):
         all_targets, all_preds, num_classes=len(ACTION_CLASSES)
     )
 
-    # Top-3 accuracy
+    # Top-3 and Top-5 accuracy
     probs_arr = np.array(all_probs)
-    top3_preds = np.argsort(probs_arr, axis=1)[:, -3:]
+    num_cls = probs_arr.shape[1]
+    k3 = min(3, num_cls)
+    top3_preds = np.argsort(probs_arr, axis=1)[:, -k3:]
     top3_acc = float(np.mean([t in top3_preds[i] for i, t in enumerate(all_targets)])) * 100.0
+
+    k5 = min(5, num_cls)
+    top5_preds = np.argsort(probs_arr, axis=1)[:, -k5:]
+    top5_acc = float(np.mean([t in top5_preds[i] for i, t in enumerate(all_targets)])) * 100.0
 
     return {
         "loss": avg_loss,
         "top1_acc": acc,
         "top3_acc": top3_acc,
+        "top5_acc": top5_acc,
         "macro_f1": macro_f1,
         "weighted_f1": weighted_f1,
         "preds": all_preds,
@@ -362,18 +369,21 @@ def main():
     print("\n1. GROUND TRUTH SKELETON (Upper Bound):")
     print(f"   * Top-1 Accuracy:  {res_gt['top1_acc']:.2f}%")
     print(f"   * Top-3 Accuracy:  {res_gt['top3_acc']:.2f}%")
+    print(f"   * Top-5 Accuracy:  {res_gt['top5_acc']:.2f}%")
     print(f"   * Macro-F1:        {res_gt['macro_f1']:.2f}%")
     print(f"   * Weighted-F1:     {res_gt['weighted_f1']:.2f}%")
 
     print("\n2. RAW YOLO-POSE SKELETON (Before Calibration):")
     print(f"   * Top-1 Accuracy:  {res_raw['top1_acc']:.2f}%")
     print(f"   * Top-3 Accuracy:  {res_raw['top3_acc']:.2f}%")
+    print(f"   * Top-5 Accuracy:  {res_raw['top5_acc']:.2f}%")
     print(f"   * Macro-F1:        {res_raw['macro_f1']:.2f}%")
     print(f"   * Weighted-F1:     {res_raw['weighted_f1']:.2f}%")
 
     print("\n3. CALIBRATED YOLO-POSE SKELETON (After Calibration):")
     print(f"   * Top-1 Accuracy:  {res_calib['top1_acc']:.2f}%")
     print(f"   * Top-3 Accuracy:  {res_calib['top3_acc']:.2f}%")
+    print(f"   * Top-5 Accuracy:  {res_calib['top5_acc']:.2f}%")
     print(f"   * Macro-F1:        {res_calib['macro_f1']:.2f}%")
     print(f"   * Weighted-F1:     {res_calib['weighted_f1']:.2f}%")
 
@@ -409,23 +419,27 @@ def main():
         "ground_truth_test": {
             "top1_acc": res_gt["top1_acc"],
             "top3_acc": res_gt["top3_acc"],
+            "top5_acc": res_gt["top5_acc"],
             "macro_f1": res_gt["macro_f1"],
             "weighted_f1": res_gt["weighted_f1"],
         },
         "raw_yolo_test": {
             "top1_acc": res_raw["top1_acc"],
             "top3_acc": res_raw["top3_acc"],
+            "top5_acc": res_raw["top5_acc"],
             "macro_f1": res_raw["macro_f1"],
             "weighted_f1": res_raw["weighted_f1"],
         },
         "calibrated_yolo_test": {
             "top1_acc": res_calib["top1_acc"],
             "top3_acc": res_calib["top3_acc"],
+            "top5_acc": res_calib["top5_acc"],
             "macro_f1": res_calib["macro_f1"],
             "weighted_f1": res_calib["weighted_f1"],
         },
         "calibration_gain": {
             "top1_acc_gain": res_calib["top1_acc"] - res_raw["top1_acc"],
+            "top5_acc_gain": res_calib["top5_acc"] - res_raw["top5_acc"],
             "macro_f1_gain": res_calib["macro_f1"] - res_raw["macro_f1"],
         },
     }
