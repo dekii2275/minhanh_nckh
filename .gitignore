@@ -153,6 +153,7 @@ activemq-data/
 .env
 .envrc
 .venv
+.python310/
 env/
 venv/
 ENV/
@@ -228,6 +229,7 @@ __marimo__/
 *.pt
 *.pth
 /models/
+/third_party/
 
 # Exclude large evaluation prediction tables (>50MB)
 outputs/full_test/predictions/
