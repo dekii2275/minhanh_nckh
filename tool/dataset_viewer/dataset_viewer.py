@@ -1,4 +1,5 @@
 """View dataset videos and their ground-truth action labels and skeletons."""
+
 import argparse
 import sys
 from functools import lru_cache
@@ -10,9 +11,24 @@ from scipy.io import loadmat
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from inspect_dataset import PENN_SKELETON_EDGES, load_penn_annotation
-J_EDGES = [(0, 1), (0, 2), (0, 3), (0, 4), (1, 5), (1, 6),
-           (3, 7), (7, 11), (4, 8), (8, 12), (5, 9), (9, 13), (6, 10), (10, 14)]
+from inspect_dataset import PENN_SKELETON_EDGES, load_penn_annotation  # noqa: E402
+
+J_EDGES = [
+    (0, 1),
+    (0, 2),
+    (0, 3),
+    (0, 4),
+    (1, 5),
+    (1, 6),
+    (3, 7),
+    (7, 11),
+    (4, 8),
+    (8, 12),
+    (5, 9),
+    (9, 13),
+    (6, 10),
+    (10, 14),
+]
 
 
 def catalog(root):
@@ -26,14 +42,16 @@ def catalog(root):
             action = str(loadmat(label, variable_names=["action"])["action"].flat[0])
         except (KeyError, ValueError, OSError):
             continue
-        result["penn"].append({"id": label.stem, "action": action,
-                               "label": label, "source": folder})
+        result["penn"].append(
+            {"id": label.stem, "action": action, "label": label, "source": folder}
+        )
     jroot = root / "jhmdb"
     for video in sorted((jroot / "ReCompress_Videos").glob("*/*.avi")):
         label = jroot / "joint_positions" / video.parent.name / video.stem / "joint_positions.mat"
         if label.is_file():
-            result["jhmdb"].append({"id": video.stem, "action": video.parent.name,
-                                    "label": label, "source": video})
+            result["jhmdb"].append(
+                {"id": video.stem, "action": video.parent.name, "label": label, "source": video}
+            )
     return result
 
 
@@ -56,8 +74,9 @@ class Sequence:
         self.points, self.visible = annotation(dataset, str(item["label"]))
         self.cap = None
         if dataset == "penn":
-            self.frames = sorted(p for p in item["source"].iterdir()
-                                 if p.suffix.lower() in {".jpg", ".jpeg", ".png"})
+            self.frames = sorted(
+                p for p in item["source"].iterdir() if p.suffix.lower() in {".jpg", ".jpeg", ".png"}
+            )
             source_count = len(self.frames)
             self.fps = 15.0  # Penn distributes images without playback timing.
         else:
@@ -70,8 +89,10 @@ class Sequence:
                 self.fps = 15.0
         self.count = min(source_count, len(self.points))
         if source_count != len(self.points):
-            print(f"Canh bao: {source_count} frame video, {len(self.points)} frame nhan; "
-                  f"chi xem {self.count} frame chung.")
+            print(
+                f"Canh bao: {source_count} frame video, {len(self.points)} frame nhan; "
+                f"chi xem {self.count} frame chung."
+            )
         if not self.count:
             self.close()
             raise ValueError("Khong co frame de hien thi")
@@ -85,7 +106,9 @@ class Sequence:
             raise ValueError("Frame out of range")
         if self.dataset == "penn":
             # imdecode supports Windows paths containing non-ASCII characters.
-            image = cv2.imdecode(np.fromfile(str(self.frames[index]), dtype=np.uint8), cv2.IMREAD_COLOR)
+            image = cv2.imdecode(
+                np.fromfile(str(self.frames[index]), dtype=np.uint8), cv2.IMREAD_COLOR
+            )
             edges = PENN_SKELETON_EDGES
         else:
             self.cap.set(cv2.CAP_PROP_POS_FRAMES, index)
@@ -102,9 +125,18 @@ class Sequence:
             valid &= (xy[:, 0] >= 0) & (xy[:, 0] < width) & (xy[:, 1] >= 0) & (xy[:, 1] < height)
             for a, b in edges:
                 if valid[a] and valid[b]:
-                    cv2.line(image, tuple(np.rint(xy[a]).astype(int)), tuple(np.rint(xy[b]).astype(int)), (40, 225, 40), 2, cv2.LINE_AA)
+                    cv2.line(
+                        image,
+                        tuple(np.rint(xy[a]).astype(int)),
+                        tuple(np.rint(xy[b]).astype(int)),
+                        (40, 225, 40),
+                        2,
+                        cv2.LINE_AA,
+                    )
             for point in xy[valid]:
-                cv2.circle(image, tuple(np.rint(point).astype(int)), 4, (0, 255, 255), -1, cv2.LINE_AA)
+                cv2.circle(
+                    image, tuple(np.rint(point).astype(int)), 4, (0, 255, 255), -1, cv2.LINE_AA
+                )
         return image
 
 
@@ -113,7 +145,7 @@ def choose(prompt, options, display=str):
         print(f"{i:4}. {display(option)}")
     while True:
         value = input(f"{prompt} (1-{len(options)}, q de thoat): ").strip()
-        if value.lower() == 'q':
+        if value.lower() == "q":
             raise KeyboardInterrupt
         if value.isdigit() and 1 <= int(value) <= len(options):
             return options[int(value) - 1]
@@ -124,8 +156,13 @@ def play(dataset, item):
     seq = Sequence(dataset, item)
     window = "Dataset viewer - xem phim tat trong terminal"
     print(f"\n{dataset.upper()} | {item['action']} | {item['id']}")
-    print(f"{seq.count} frames | {seq.fps:.1f} FPS" + (" (gia dinh cho Penn)" if dataset == 'penn' else ""))
-    print("Phim: Space dung/phat | A/D lui/tien 1 frame | S bat/tat xuong | R ve dau | Q chon video khac")
+    print(
+        f"{seq.count} frames | {seq.fps:.1f} FPS"
+        + (" (gia dinh cho Penn)" if dataset == "penn" else "")
+    )
+    print(
+        "Phim: Space dung/phat | A/D lui/tien 1 frame | S bat/tat xuong | R ve dau | Q chon video khac"
+    )
     print("Xuong la annotation goc; mau xanh la canh, cham vang la khop.")
     index, paused, skeleton = 0, False, True
     try:
@@ -134,20 +171,29 @@ def play(dataset, item):
             image = seq.frame(index, skeleton)
             status = f"{item['action']} | frame {index + 1}/{seq.count} | {'PAUSE' if paused else 'PLAY'} | skeleton {'ON' if skeleton else 'OFF'}"
             cv2.rectangle(image, (0, 0), (image.shape[1], 31), (0, 0, 0), -1)
-            cv2.putText(image, status, (6, 21), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (255, 255, 255), 1, cv2.LINE_AA)
+            cv2.putText(
+                image,
+                status,
+                (6, 21),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.45,
+                (255, 255, 255),
+                1,
+                cv2.LINE_AA,
+            )
             cv2.imshow(window, image)
-            key = cv2.waitKey(50 if paused else max(1, int(1000 / seq.fps))) & 0xff
-            if key in (ord('q'), 27):
+            key = cv2.waitKey(50 if paused else max(1, int(1000 / seq.fps))) & 0xFF
+            if key in (ord("q"), 27):
                 break
-            if key == ord(' '):
+            if key == ord(" "):
                 paused = not paused
-            elif key == ord('s'):
+            elif key == ord("s"):
                 skeleton = not skeleton
-            elif key == ord('a'):
+            elif key == ord("a"):
                 index, paused = max(0, index - 1), True
-            elif key == ord('d'):
+            elif key == ord("d"):
                 index, paused = min(seq.count - 1, index + 1), True
-            elif key == ord('r'):
+            elif key == ord("r"):
                 index = 0
             elif not paused:
                 index = (index + 1) % seq.count
@@ -160,48 +206,49 @@ def play(dataset, item):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--data-root', type=Path, default=ROOT / 'data' / 'raw')
-    parser.add_argument('--dataset', choices=['penn', 'jhmdb'])
-    parser.add_argument('--action', help='Loc nhan hanh dong, vi du tennis_serve')
-    parser.add_argument('--sequence', help='ID cua chuoi/video')
+    parser.add_argument("--data-root", type=Path, default=ROOT / "data" / "raw")
+    parser.add_argument("--dataset", choices=["penn", "jhmdb"])
+    parser.add_argument("--action", help="Loc nhan hanh dong, vi du tennis_serve")
+    parser.add_argument("--sequence", help="ID cua chuoi/video")
     args = parser.parse_args()
-    print('Dang doc danh sach dataset...')
+    print("Dang doc danh sach dataset...")
     datasets = catalog(args.data_root)
     try:
         while True:
             available = [name for name, items in datasets.items() if items]
             if not available:
-                print(f'Khong tim thay video va nhan tai {args.data_root}')
+                print(f"Khong tim thay video va nhan tai {args.data_root}")
                 return
-            dataset = args.dataset or choose('Chon dataset', available, lambda x: f'{x} ({len(datasets[x])} video)')
+            dataset = args.dataset or choose(
+                "Chon dataset", available, lambda x: f"{x} ({len(datasets[x])} video)"
+            )
             items = datasets[dataset]
             if not items:
-                print(f'Khong co du lieu {dataset} tai {args.data_root}')
+                print(f"Khong co du lieu {dataset} tai {args.data_root}")
                 return
-            actions = sorted({item['action'] for item in items})
-            action = args.action or choose('Chon hanh dong', actions)
-            matches = [item for item in items if item['action'] == action]
+            actions = sorted({item["action"] for item in items})
+            action = args.action or choose("Chon hanh dong", actions)
+            matches = [item for item in items if item["action"] == action]
             if not matches:
-                print(f'Khong tim thay hanh dong: {action}')
+                print(f"Khong tim thay hanh dong: {action}")
                 return
             if args.sequence:
-                matches = [item for item in matches if item['id'] == args.sequence]
+                matches = [item for item in matches if item["id"] == args.sequence]
                 if not matches:
-                    print(f'Khong tim thay video: {args.sequence}')
+                    print(f"Khong tim thay video: {args.sequence}")
                     return
                 item = matches[0]
             else:
-                item = choose('Chon video', matches, lambda x: x['id'])
+                item = choose("Chon video", matches, lambda x: x["id"])
             try:
                 play(dataset, item)
             except (ValueError, OSError, cv2.error) as exc:
-                print(f'Khong the xem video: {exc}')
+                print(f"Khong the xem video: {exc}")
             if args.sequence:
                 return
     except (KeyboardInterrupt, EOFError):
-        print('\nDa thoat.')
+        print("\nDa thoat.")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
-

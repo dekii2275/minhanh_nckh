@@ -19,9 +19,15 @@ Khi dùng lại kết quả hoặc mã cũ, cần kiểm tra nguồn, protocol, 
 Tạo môi trường Python 3.10, cài `requirements-dev.txt`, sau đó chạy:
 
 ```bash
-ruff check src tests
-ruff format --check src tests
+ruff check src tests tool notebooks report/02112026_nckh
+ruff format --check src tests tool notebooks report/02112026_nckh
 python -m pytest -q
 ```
 
 Dữ liệu Penn Action, manifest thí nghiệm mới, checkpoint, cache pose, đặc trưng `.npz` và phần lớn hình/video không có trong Git. Một số kiểm thử tích hợp cần các artifact đó và sẽ bỏ qua khi chưa có. Phải chuẩn bị đúng dữ liệu/cache/checkpoint và GPU CUDA trước khi chạy lại pipeline. Kiểm tra protocol, hash và chọn thư mục output mới; các script thí nghiệm từ chối ghi đè kết quả hiện có.
+
+## Script và công cụ
+
+- Trên Windows, chạy `CHAY_E1_E2.bat` để chạy E1 và E2 với Python trong `.venv`. Nhật ký nằm ở `outputs/e2_pose_x_retrain_20261124/run_log.txt`. Xem cách chia dữ liệu và các artifact đầu vào trong [protocol Penn Action](report/13112026_nckh/PROTOCOL_THONG_NHAT_PENN_2026-11-15.md). Các bước dựng mô hình CascadeFormer cần mã tác giả ở `third_party/CascadeFormer`. [Hướng dẫn chuẩn bị CascadeFormer](report/02112026_nckh/CASCADEFORMER_DANH_GIA_VA_CHAY_THU.md)
+- `tool/` có các trình xem dữ liệu, pose và tracking. [Hướng dẫn công cụ gán nhãn lỗi](tool/error_label_tool/README.md)
+- `notebooks/` có sổ tay EDA và đối chiếu dự đoán. Cài `ipykernel` để chạy trong Jupyter. Sổ tay xem video cần thêm `ipywidgets`, FFmpeg trong `PATH` và các artifact được liệt kê trong sổ tay.

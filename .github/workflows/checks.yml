@@ -23,8 +23,8 @@ jobs:
       - name: Install development dependencies
         run: python -m pip install -r requirements-dev.txt
       - name: Lint
-        run: ruff check src tests
+        run: ruff check src tests tool notebooks report/02112026_nckh
       - name: Check formatting
-        run: ruff format --check src tests
+        run: ruff format --check src tests tool notebooks report/02112026_nckh
       - name: Run tests
         run: python -m pytest -q

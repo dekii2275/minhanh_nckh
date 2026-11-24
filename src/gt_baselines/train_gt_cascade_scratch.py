@@ -6,6 +6,7 @@ is an architecture adaptation, not a reproduction of the published method.
 
 import ast
 import json
+from functools import lru_cache
 from pathlib import Path
 
 import torch
@@ -20,6 +21,10 @@ SOURCE = (
 
 def load_classes(filename, names, namespace):
     path = SOURCE / filename
+    if not path.is_file():
+        raise FileNotFoundError(
+            f"Missing CascadeFormer source: {path}. See report/02112026_nckh/CASCADEFORMER_DANH_GIA_VA_CHAY_THU.md."
+        )
     tree = ast.parse(path.read_text(encoding="utf-8"))
     classes = [node for node in tree.body if isinstance(node, ast.ClassDef) and node.name in names]
     if {c.name for c in classes} != set(names):
@@ -27,14 +32,18 @@ def load_classes(filename, names, namespace):
     exec(compile(ast.Module(body=classes, type_ignores=[]), str(path), "exec"), namespace)
 
 
-namespace = {"torch": torch, "nn": nn, "POSITIONAL_UPPER_BOUND": 1000}
-load_classes("pretraining.py", ["BaseT1"], namespace)
-load_classes("finetuning.py", ["BaseT2", "CrossAttention", "GaitRecognitionHead"], namespace)
+@lru_cache(maxsize=1)
+def load_cascade_classes():
+    namespace = {"torch": torch, "nn": nn, "POSITIONAL_UPPER_BOUND": 1000}
+    load_classes("pretraining.py", ["BaseT1"], namespace)
+    load_classes("finetuning.py", ["BaseT2", "CrossAttention", "GaitRecognitionHead"], namespace)
+    return namespace
 
 
 class CascadeScratch(nn.Module):
     def __init__(self):
         super().__init__()
+        namespace = load_cascade_classes()
         self.t1 = namespace["BaseT1"](
             num_joints=12, three_d=False, d_model=256, nhead=8, num_layers=4
         )
